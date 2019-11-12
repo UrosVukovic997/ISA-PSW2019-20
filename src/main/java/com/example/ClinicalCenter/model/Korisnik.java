@@ -1,4 +1,4 @@
-package com.example.ClinicalCenter;
+package com.example.ClinicalCenter.model;
 
 
 import java.util.HashSet;
