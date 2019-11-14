@@ -19,13 +19,13 @@ public class Pacijent {
     @Column(name = "Prezime", nullable = false)
     private String PrezimePacijenta;
 
-    @Column(name = "E-mail", nullable = false)
+    @Column(name = "E_mail", nullable = false)
     private String E_mail;
 
     @Column(name = "Lozinka", nullable = false)
     private String Lozinka;
 
-    @Column(name = "Adresa prebivalista", nullable = false)
+    @Column(name = "AdresaPrebivalista", nullable = false)
     private String Adresa;
 
     @Column(name = "Grad", nullable = false)
@@ -34,11 +34,14 @@ public class Pacijent {
     @Column(name = "Drzava", nullable = false)
     private String Drzava;
 
-    @Column(name = "Broj telefona", nullable = false)
+    @Column(name = "BrojTelefona", nullable = false)
     private String BrojTelefona;
 
     @Column(name = "JBO", nullable = false)
-    private int JBO;
+    private Integer JBO;
+
+    @Column(name = "Odobren", nullable = false)
+    private Boolean Odobren;
 
     public Pacijent() {
         ImePacijenta = "";
@@ -50,6 +53,7 @@ public class Pacijent {
         Drzava = "";
         BrojTelefona = "";
         JBO = 0;
+        Odobren = false;
     }
 
     public Pacijent(Long id, String ImePacijenta, String PrezimePacijenta, String E_mail, String Lozinka, String Adresa, String Grad, String Drzava,String BrojTelefona, int JBO) {
@@ -65,9 +69,12 @@ public class Pacijent {
         this.JBO = JBO;
     }
 
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getImePacijenta() {
@@ -132,6 +139,18 @@ public class Pacijent {
 
     public void setBrojTelefona(String brojTelefona) {
         BrojTelefona = brojTelefona;
+    }
+
+    public void setJBO(Integer JBO) {
+        this.JBO = JBO;
+    }
+
+    public Boolean getOdobren() {
+        return Odobren;
+    }
+
+    public void setOdobren(Boolean odobren) {
+        Odobren = odobren;
     }
 
     public int getJBO() {
