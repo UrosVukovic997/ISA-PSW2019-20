@@ -10,7 +10,7 @@
     <title>Registracija</title>
 </head>
 <body>
-<form class="form-horizontal" action='' method="POST">
+<form class="form-horizontal" id="regWindow"  method="POST">
     <form>
         <div id="legend">
             <legend class="">Register</legend>
@@ -19,8 +19,9 @@
             <!-- Ime -->
             <label class="control-label" >Ime</label>
             <div class="controls">
-                <input type="text" id="ime" name="ime" placeholder="" class="input-xlarge">
-                <p class="help-block">Ime mora biti kraće od 20 karaktera</p>
+                <input pattern="([A-Z][a-z]{2,20})" title="3-20 karaktera" id="inputIme"
+                       class="input-group-field" type="text" placeholder="Ime">
+                <p class="help-block">Ime mora biti kraće između 3 i 20 karaktera</p>
             </div>
         </div>
 
@@ -28,16 +29,17 @@
             <!-- Prezime -->
             <label class="control-label" >Prezime</label>
             <div class="controls">
-                <input type="text" id="prezime" name="prezime" placeholder="" class="input-xlarge">
+                <input pattern="([A-Z][a-z]{2,20})" title="3-20 karaktera" id="inputPrezime"
+                       class="input-group-field" type="text" placeholder="Prezime">
                 <p class="help-block">Prezime mora biti kraće od 20 karaktera</p>
             </div>
         </div>
 
         <div class="control-group">
             <!-- E-mail -->
-            <label class="control-label" for="email">E-mail</label>
+            <label class="control-label" for="inputEmail">E-mail</label>
             <div class="controls">
-                <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+                <input type="text" id="inputEmail" name="inputEmail" placeholder="" class="input-xlarge">
                 <p class="help-block">Unesite validan E-mail</p>
             </div>
         </div>
@@ -46,7 +48,7 @@
             <!-- Šifra-->
             <label class="control-label">Lozinka</label>
             <div class="controls">
-                <input type="password" id="lozinka" name="lozinka" placeholder="" class="input-xlarge">
+                <input type="password" id="inputLozinka" placeholder="Lozinka" name="lozinka" class="input-xlarge">
                 <p class="help-block">Password should be at least 4 characters</p>
             </div>
         </div>
@@ -55,7 +57,7 @@
             <!-- Password -->
             <label class="control-label" >Potvrda lozinke</label>
             <div class="controls">
-                <input type="password" id="potvrda_lozinke" name="potvrda_lozinke" placeholder="" class="input-xlarge">
+                <input type="password" id="Inputpotvrda_lozinke" name="Inputpotvrda_lozinke" placeholder="Potvrda lozinke" class="input-xlarge">
                 <p class="help-block">Unesite ponovo svoju lozinku</p>
             </div>
         </div>
@@ -64,7 +66,7 @@
             <!-- JBO -->
             <label class="control-label" >JBO</label>
             <div class="controls">
-                <input type="text" id="jbo" name="jbo" placeholder="" class="input-xlarge">
+                <input type="text" id="inputJbo" name="inputJbo" placeholder="JBO" class="input-xlarge">
                 <p class="help-block">Unesite jedinstveni broj osiguranja</p>
             </div>
         </div>
@@ -73,7 +75,7 @@
             <!-- Adresa -->
             <label class="control-label" >Adresa</label>
             <div class="controls">
-                <input type="text" id="adresa" name="adresa" placeholder="" class="input-xlarge">
+                <input type="text" id="intputAdresa" name="intputAdresa" placeholder="Adresa" class="input-xlarge">
                 <p class="help-block">Unesite adresu stanovanja</p>
             </div>
         </div>
@@ -82,7 +84,7 @@
             <!-- Grad -->
             <label class="control-label" >Grad</label>
             <div class="controls">
-                <input type="text" id="grad" name="grad" placeholder="" class="input-xlarge">
+                <input type="text" id="inputGrad" name="inputGrad" placeholder="Grad" class="input-xlarge">
                 <p class="help-block">Unesite grad stanovanja</p>
             </div>
         </div>
@@ -91,7 +93,7 @@
             <!-- Država -->
             <label class="control-label" >Država</label>
             <div class="controls">
-                <input type="text" id="drzava" name="drzava" placeholder="" class="input-xlarge">
+                <input type="text" id="inputDrzava" name="inputDrzava" placeholder="Država" class="input-xlarge">
                 <p class="help-block">Unesite državu stanovanja</p>
             </div>
         </div>
@@ -100,7 +102,7 @@
             <!-- Broj telefona -->
             <label class="control-label" >Broj telefona</label>
             <div class="controls">
-                <input type="text" id="broj_telefona" name="broj_telefona" placeholder="" class="input-xlarge">
+                <input type="text" id="inputTelefon" name="inputTelefon" placeholder="Broj telefona" class="input-xlarge">
                 <p class="help-block">Unesite broj telefona</p>
             </div>
         </div>
@@ -108,9 +110,10 @@
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <button class="btn btn-success">Register</button>
+                <button class="btn btn-success" id="btnNapraviNalog">Registruj se</button>
             </div>
         </div>
-
+    </form>
+</form>
 </body>
 </html>
