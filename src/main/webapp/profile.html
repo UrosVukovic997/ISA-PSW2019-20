@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="../resources/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../../../js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="../../../js/sb-admin-2.min.js"></script>
+    <script type="text/javascript" src="../../../js/Chart.min.js"></script>
+    <script type="text/javascript" src="../resources/js/profile-adminkc.js"></script>
+
+
+
+    <link rel="stylesheet" href="../resources/css/bootstrap.css">
+    <link rel="stylesheet" href="../resources/fontawesome/all.css" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link  rel="stylesheet" href="../resources/css/sb-admin-2.min.css">
+
+
+    <title>Title</title>
+</head>
+<body>
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="profile.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+            </div>
+            <div class="sidebar-brand-text mx-3">Administrator kliničkog centra</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="profile.html">
+                <i class="far fa-user"></i>
+                <span>Početna</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Klinike
+        </div>
+
+        <li class="nav-item active">
+            <a class="nav-link" href='#'>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Registruj kliniku</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href='#'>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Registruj administratora</span></a>
+        </li>
+        <div class="sidebar-heading">
+            Zahtevi
+        </div>
+
+        <li class="nav-item active">
+            <a class="nav-link" href='#' id="zahteviRegBtn">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Zahtevi za registraciju</span></a>
+        </li>
+        <div class="sidebar-heading">
+            Šifarnik
+        </div>
+
+        <li class="nav-item active">
+            <a class="nav-link" href='#'>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Lekova</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href='#'>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dijagnoza</span></a>
+        </li>
+
+    </ul>
+
+
+    <!-- Begin Page Content -->
+    <div class=".d none container" style=" display: none;" id="pageZahtev">
+
+        <br>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Zahtevi korisnika za registraciju</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>E-mail</th>
+                            <th>JBZO</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
