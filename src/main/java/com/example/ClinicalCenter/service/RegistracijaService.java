@@ -12,5 +12,5 @@ public class RegistracijaService {
     private RegistracijaRepository registracijaRepository;
 
     public void odobriKorsnika(Long id) {registracijaRepository.odobriKorisnika(id);}
-    public void obrisiKorisnika(Long id) {registracijaRepository.odrisiKorisnika(id);}
+    public void obrisiKorisnika(Long id) {registracijaRepository.deleteById(id);}
 }

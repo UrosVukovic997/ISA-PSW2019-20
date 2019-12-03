@@ -15,12 +15,14 @@ public interface RegistracijaRepository extends JpaRepository<Pacijent, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Pacijent p SET p.Odobren = true WHERE p.id = id")
+    @Query("UPDATE Pacijent p SET p.odobren = true WHERE p.id = id")
     void odobriKorisnika(@Param("id") Long id);
 
-    @Transactional
+
+   /* @Transactional
     @Modifying
     @Query("DELETE from Pacijent p WHERE p.id = id")
     void odrisiKorisnika(@Param("id") Long id);
-
+*/
+    void deleteById(Long id);
 }

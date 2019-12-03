@@ -40,8 +40,11 @@ public class Pacijent {
     @Column(name = "JBO", nullable = false)
     private Integer JBO;
 
-    @Column(name = "Odobren", nullable = false)
-    private Boolean Odobren;
+    @Column(name = "odobren", nullable = false)
+    private Boolean odobren;
+
+    @Column(name = "Potvrdio", nullable = false)
+    private Boolean Potvrdio;
 
     public Pacijent() {
         ImePacijenta = "";
@@ -53,10 +56,11 @@ public class Pacijent {
         Drzava = "";
         BrojTelefona = "";
         JBO = 0;
-        Odobren = false;
+        odobren = false;
+        Potvrdio= false;
     }
 
-    public Pacijent(Long id, String ImePacijenta, String PrezimePacijenta, String E_mail, String Lozinka, String Adresa, String Grad, String Drzava,String BrojTelefona, int JBO) {
+    public Pacijent(Long id, String ImePacijenta, String PrezimePacijenta, String E_mail, String Lozinka, String Adresa, String Grad, String Drzava,String BrojTelefona, int JBO, boolean odobren, boolean potvrdio) {
         this.id = id;
         this.ImePacijenta = ImePacijenta;
         this.PrezimePacijenta = PrezimePacijenta;
@@ -67,6 +71,8 @@ public class Pacijent {
         this.Drzava = Drzava;
         this.BrojTelefona = BrojTelefona;
         this.JBO = JBO;
+        this.odobren= odobren;
+        this.Potvrdio=potvrdio;
     }
 
     public Long getId() {
@@ -146,11 +152,11 @@ public class Pacijent {
     }
 
     public Boolean getOdobren() {
-        return Odobren;
+        return odobren;
     }
 
     public void setOdobren(Boolean odobren) {
-        Odobren = odobren;
+         odobren = odobren;
     }
 
     public int getJBO() {

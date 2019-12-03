@@ -1,25 +1,26 @@
-package com.example.ClinicalCenter.model;
+package com.example.ClinicalCenter.dto;
 
-import javax.persistence.*;
+import com.example.ClinicalCenter.model.Dijagnoza;
 
-@Entity
-public class Dijagnoza {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+public class DijagnozaDTO {
+
     private Long id;
-
-    @Column(name = "nazivDijagnoze", nullable = false)
     private String nazivDijagnoze;
-
-    @Column(name = "opisDijagnoze", nullable = true)
     private String opisDijagnoze;
 
-    public Dijagnoza() {
+    public DijagnozaDTO() {
     }
 
-    public Dijagnoza(String nazivDijagnoze, String opisDijagnoze) {
+    public DijagnozaDTO(Long id, String nazivDijagnoze, String opisDijagnoze) {
+        this.id = id;
         this.nazivDijagnoze = nazivDijagnoze;
         this.opisDijagnoze = opisDijagnoze;
+    }
+
+    public DijagnozaDTO(Dijagnoza dijagnoza) {
+        this.id=dijagnoza.getId();
+        this.nazivDijagnoze=dijagnoza.getNazivDijagnoze();
+        this.opisDijagnoze=dijagnoza.getOpisDijagnoze();
     }
 
     public Long getId() {
@@ -46,4 +47,3 @@ public class Dijagnoza {
         this.opisDijagnoze = opisDijagnoze;
     }
 }
-

@@ -17,28 +17,8 @@ public class PacijentService {
 
 
     public List<Pacijent> pronadjiNeOdobrene() {
-        return pacijentRepository.pronadjiNeOdobrene();
+        return pacijentRepository.findAllByOdobrenFalse();
     }
 
-
-    public Pacijent findOne(Long id) {
-        return pacijentRepository.findById(id).orElseGet(null);
-    }
-
-    public Pacijent findOneByE_Mail(String e_mail) {
-        return pacijentRepository.findByE_mail(e_mail);
-    }
-
-    public List<Pacijent> findAll() {
-        return pacijentRepository.findAll();
-    }
-
-    public Page<Pacijent> findAll(Pageable page) {
-        return pacijentRepository.findAll(page);
-    }
-
-    public Pacijent save(Pacijent student) {
-        return pacijentRepository.save(student);
-    }
 
 }
