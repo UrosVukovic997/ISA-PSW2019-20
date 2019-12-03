@@ -1,11 +1,7 @@
 package com.example.ClinicalCenter.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Pacijent {
@@ -20,7 +16,7 @@ public class Pacijent {
     private String PrezimePacijenta;
 
     @Column(name = "E_mail", nullable = false)
-    private String E_mail;
+    private String email;
 
     @Column(name = "Lozinka", nullable = false)
     private String Lozinka;
@@ -43,10 +39,14 @@ public class Pacijent {
     @Column(name = "Odobren", nullable = false)
     private Boolean Odobren;
 
+    @Column(name = "Potvrdio", nullable = false)
+    private Boolean Potvrdio;
+
+
     public Pacijent() {
         ImePacijenta = "";
         PrezimePacijenta = "";
-        E_mail = "";
+        email = "";
         Lozinka= "";
         Adresa = "";
         Grad = "";
@@ -54,19 +54,22 @@ public class Pacijent {
         BrojTelefona = "";
         JBO = 0;
         Odobren = false;
+        Potvrdio = false;
     }
 
     public Pacijent(Long id, String ImePacijenta, String PrezimePacijenta, String E_mail, String Lozinka, String Adresa, String Grad, String Drzava,String BrojTelefona, int JBO) {
         this.id = id;
         this.ImePacijenta = ImePacijenta;
         this.PrezimePacijenta = PrezimePacijenta;
-        this.E_mail= E_mail;
+        this.email= E_mail;
         this.Lozinka = Lozinka;
         this.Adresa = Adresa;
         this.Grad = Grad;
         this.Drzava = Drzava;
         this.BrojTelefona = BrojTelefona;
         this.JBO = JBO;
+        this.Odobren = false;
+        this.Potvrdio = false;
     }
 
     public Long getId() {
@@ -93,12 +96,12 @@ public class Pacijent {
         PrezimePacijenta = prezimePacijenta;
     }
 
-    public String getE_mail() {
-        return E_mail;
+    public String getemail() {
+        return email;
     }
 
-    public void setE_mail(String e_mail) {
-        E_mail = e_mail;
+    public void setemail(String E_mail) {
+        email = E_mail;
     }
 
     public String getLozinka() {
@@ -160,4 +163,13 @@ public class Pacijent {
     public void setJBO(int JBO) {
         this.JBO = JBO;
     }
+
+    public Boolean getPotvrdio() {
+        return Potvrdio;
+    }
+
+    public void setPotvrdio(Boolean potvrdio) {
+        Potvrdio = potvrdio;
+    }
+
 }
