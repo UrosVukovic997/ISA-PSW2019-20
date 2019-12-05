@@ -21,4 +21,25 @@ public class PacijentService {
     }
 
 
+    public Pacijent findOne(Long id) {
+        return pacijentRepository.findById(id).orElseGet(null);
+    }
+
+    public Pacijent findOneByE_Mail(String Email) {
+        return pacijentRepository.findByEmail(Email);
+    }
+
+    public List<Pacijent> findAll() {
+        return pacijentRepository.findAll();
+    }
+
+    public Page<Pacijent> findAll(Pageable page) {
+        return pacijentRepository.findAll(page);
+    }
+
+    public Pacijent save(Pacijent student) {
+        return pacijentRepository.save(student);
+    }
+
+
 }

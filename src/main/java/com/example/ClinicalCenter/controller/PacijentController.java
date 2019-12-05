@@ -35,4 +35,34 @@ public class PacijentController {
     }
 
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PacijentDTO> getPacijent(@PathVariable Long id) {
+
+        Pacijent pacijent = pacijentService.findOne(id);
+
+        if (pacijent == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new PacijentDTO(pacijent), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PacijentDTO>> getPacijentPage(Pageable page) {
+
+        // page object holds data about pagination and sorting
+        // the object is created based on the url parameters "page", "size" and "sort"
+        Page<Pacijent> pacijenti = pacijentService.findAll(page);
+
+        // convert students to DTOs
+        List<PacijentDTO> pacijentiDTO = new ArrayList<>();
+        for (Pacijent p : pacijenti) {
+            pacijentiDTO.add(new PacijentDTO(p));
+        }
+
+        return new ResponseEntity<>(pacijentiDTO, HttpStatus.OK);
+    }
+
+
+
 }

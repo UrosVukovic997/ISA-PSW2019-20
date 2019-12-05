@@ -2,6 +2,7 @@ package com.example.ClinicalCenter.model;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Dijagnoza {
     @Id
