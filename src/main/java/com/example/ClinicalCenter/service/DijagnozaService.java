@@ -18,4 +18,6 @@ public class DijagnozaService {
     public Dijagnoza add(Dijagnoza dijagnoza){return dijagnozaRepository.save(dijagnoza);}
 
     public void deleteById(Long id){dijagnozaRepository.deleteById(id);}
+
+
 }

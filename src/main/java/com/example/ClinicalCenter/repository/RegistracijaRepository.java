@@ -19,10 +19,10 @@ public interface RegistracijaRepository extends JpaRepository<Pacijent, Long> {
     void odobriKorisnika(@Param("id") Long id);
 
 
-   /* @Transactional
+    @Transactional
     @Modifying
     @Query("DELETE from Pacijent p WHERE p.id = id")
     void odrisiKorisnika(@Param("id") Long id);
-*/
-    void deleteById(Long id);
+
+   // void deleteById(Long id);
 }

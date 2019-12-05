@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/api/dijagnoza")
 public class DijagnozaContoller {
 
@@ -21,7 +22,7 @@ public class DijagnozaContoller {
 
     @PostMapping(path = "/dodaj", consumes = "application/json")
     public ResponseEntity<Void> addDijagnoza(@RequestBody DijagnozaDTO dijagnozaDTO) {
-
+        System.out.print(dijagnozaDTO);
         Dijagnoza dijagnoza = new Dijagnoza(dijagnozaDTO.getNazivDijagnoze(), dijagnozaDTO.getOpisDijagnoze());
         Dijagnoza d=dijagnozaService.add(dijagnoza);
         if(d == null){
