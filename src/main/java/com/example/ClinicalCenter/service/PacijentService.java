@@ -17,7 +17,7 @@ public class PacijentService {
 
 
     public List<Pacijent> pronadjiNeOdobrene() {
-        return pacijentRepository.pronadjiNeOdobrene();
+        return pacijentRepository.findAllByOdobrenFalse();
     }
 
 
@@ -40,5 +40,6 @@ public class PacijentService {
     public Pacijent save(Pacijent student) {
         return pacijentRepository.save(student);
     }
+
 
 }

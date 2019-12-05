@@ -43,6 +43,12 @@ public class Pacijent {
     @Column(name = "odobren", nullable = false)
     private Boolean odobren;
 
+
+    @Column(name = "potvrdio", nullable = false)
+    private Boolean potvrdio;
+
+
+
     public Pacijent() {
         imePacijenta = "";
         prezimePacijenta = "";
@@ -68,6 +74,8 @@ public class Pacijent {
         this.brojTelefona = brojTelefona;
         this.jbo = jbo;
         this.odobren = odobren;
+        this.potvrdio = false;
+
     }
 
     public Long getId() {
@@ -146,8 +154,10 @@ public class Pacijent {
         return jbo;
     }
 
+
     public void setJbo(Integer jbo) {
         this.jbo = jbo;
+
     }
 
     public Boolean getOdobren() {

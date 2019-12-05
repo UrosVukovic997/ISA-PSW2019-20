@@ -2,31 +2,49 @@ package com.example.ClinicalCenter.model;
 
 import javax.persistence.*;
 
+
 @Entity
-
 public class Dijagnoza {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column
-    private int sifra;
+    @Column(name = "nazivDijagnoze", nullable = false)
+    private String nazivDijagnoze;
 
-    public long getId() {
+    @Column(name = "opisDijagnoze", nullable = true)
+    private String opisDijagnoze;
+
+    public Dijagnoza() {
+    }
+
+    public Dijagnoza(String nazivDijagnoze, String opisDijagnoze) {
+        this.nazivDijagnoze = nazivDijagnoze;
+        this.opisDijagnoze = opisDijagnoze;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getSifra() {
-        return sifra;
+    public String getNazivDijagnoze() {
+        return nazivDijagnoze;
     }
 
-    public void setSifra(int sifra) {
-        this.sifra = sifra;
+    public void setNazivDijagnoze(String nazivDijagnoze) {
+        this.nazivDijagnoze = nazivDijagnoze;
     }
 
+    public String getOpisDijagnoze() {
+        return opisDijagnoze;
+    }
+
+    public void setOpisDijagnoze(String opisDijagnoze) {
+        this.opisDijagnoze = opisDijagnoze;
+    }
 }
+
