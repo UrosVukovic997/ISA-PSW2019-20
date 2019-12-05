@@ -11,9 +11,9 @@ import java.util.List;
 public interface PacijentRepository extends JpaRepository<Pacijent, Long> {
 
 
-    @Query("select p from Pacijent p where p.Odobren = false")
+    @Query("select p from Pacijent p where p.odobren = false")
     List<Pacijent> pronadjiNeOdobrene();
 
-    Pacijent findByE_mail(String e_mail);
+    Pacijent findByEmail(String Email);
 
 }

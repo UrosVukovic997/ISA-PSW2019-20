@@ -13,60 +13,61 @@ public class Pacijent {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Ime", nullable = false)
-    private String ImePacijenta;
+    @Column(name = "ime", nullable = false)
+    private String imePacijenta;
 
-    @Column(name = "Prezime", nullable = false)
-    private String PrezimePacijenta;
+    @Column(name = "prezime", nullable = false)
+    private String prezimePacijenta;
 
-    @Column(name = "E_mail", nullable = false)
-    private String E_mail;
+    @Column(name = "email", nullable = false)
+    private String email;
 
-    @Column(name = "Lozinka", nullable = false)
-    private String Lozinka;
+    @Column(name = "lozinka", nullable = false)
+    private String lozinka;
 
-    @Column(name = "AdresaPrebivalista", nullable = false)
-    private String Adresa;
+    @Column(name = "adresaPrebivalista", nullable = false)
+    private String adresa;
 
-    @Column(name = "Grad", nullable = false)
-    private String Grad;
+    @Column(name = "grad", nullable = false)
+    private String grad;
 
-    @Column(name = "Drzava", nullable = false)
-    private String Drzava;
+    @Column(name = "drzava", nullable = false)
+    private String drzava;
 
-    @Column(name = "BrojTelefona", nullable = false)
-    private String BrojTelefona;
+    @Column(name = "brojTelefona", nullable = false)
+    private String brojTelefona;
 
-    @Column(name = "JBO", nullable = false)
-    private Integer JBO;
+    @Column(name = "jbo", nullable = false)
+    private Integer jbo;
 
-    @Column(name = "Odobren", nullable = false)
-    private Boolean Odobren;
+    @Column(name = "odobren", nullable = false)
+    private Boolean odobren;
 
     public Pacijent() {
-        ImePacijenta = "";
-        PrezimePacijenta = "";
-        E_mail = "";
-        Lozinka= "";
-        Adresa = "";
-        Grad = "";
-        Drzava = "";
-        BrojTelefona = "";
-        JBO = 0;
-        Odobren = false;
+        imePacijenta = "";
+        prezimePacijenta = "";
+        email = "";
+        lozinka= "";
+        adresa = "";
+        grad = "";
+        drzava = "";
+        brojTelefona = "";
+        jbo = 0;
+        odobren = false;
     }
 
-    public Pacijent(Long id, String ImePacijenta, String PrezimePacijenta, String E_mail, String Lozinka, String Adresa, String Grad, String Drzava,String BrojTelefona, int JBO) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren) {
         this.id = id;
-        this.ImePacijenta = ImePacijenta;
-        this.PrezimePacijenta = PrezimePacijenta;
-        this.E_mail= E_mail;
-        this.Lozinka = Lozinka;
-        this.Adresa = Adresa;
-        this.Grad = Grad;
-        this.Drzava = Drzava;
-        this.BrojTelefona = BrojTelefona;
-        this.JBO = JBO;
+        this.imePacijenta = imePacijenta;
+        this.prezimePacijenta = prezimePacijenta;
+        this.email = email;
+        this.lozinka = lozinka;
+        this.adresa = adresa;
+        this.grad = grad;
+        this.drzava = drzava;
+        this.brojTelefona = brojTelefona;
+        this.jbo = jbo;
+        this.odobren = odobren;
     }
 
     public Long getId() {
@@ -78,86 +79,82 @@ public class Pacijent {
     }
 
     public String getImePacijenta() {
-        return ImePacijenta;
+        return imePacijenta;
     }
 
     public void setImePacijenta(String imePacijenta) {
-        ImePacijenta = imePacijenta;
+        this.imePacijenta = imePacijenta;
     }
 
     public String getPrezimePacijenta() {
-        return PrezimePacijenta;
+        return prezimePacijenta;
     }
 
     public void setPrezimePacijenta(String prezimePacijenta) {
-        PrezimePacijenta = prezimePacijenta;
+        this.prezimePacijenta = prezimePacijenta;
     }
 
-    public String getE_mail() {
-        return E_mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setE_mail(String e_mail) {
-        E_mail = e_mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLozinka() {
-        return Lozinka;
+        return lozinka;
     }
 
     public void setLozinka(String lozinka) {
-        Lozinka = lozinka;
+        this.lozinka = lozinka;
     }
 
     public String getAdresa() {
-        return Adresa;
+        return adresa;
     }
 
     public void setAdresa(String adresa) {
-        Adresa = adresa;
+        this.adresa = adresa;
     }
 
     public String getGrad() {
-        return Grad;
+        return grad;
     }
 
     public void setGrad(String grad) {
-        Grad = grad;
+        this.grad = grad;
     }
 
     public String getDrzava() {
-        return Drzava;
+        return drzava;
     }
 
     public void setDrzava(String drzava) {
-        Drzava = drzava;
+        this.drzava = drzava;
     }
 
     public String getBrojTelefona() {
-        return BrojTelefona;
+        return brojTelefona;
     }
 
     public void setBrojTelefona(String brojTelefona) {
-        BrojTelefona = brojTelefona;
+        this.brojTelefona = brojTelefona;
     }
 
-    public void setJBO(Integer JBO) {
-        this.JBO = JBO;
+    public Integer getJbo() {
+        return jbo;
+    }
+
+    public void setJbo(Integer jbo) {
+        this.jbo = jbo;
     }
 
     public Boolean getOdobren() {
-        return Odobren;
+        return odobren;
     }
 
     public void setOdobren(Boolean odobren) {
-        Odobren = odobren;
-    }
-
-    public int getJBO() {
-        return JBO;
-    }
-
-    public void setJBO(int JBO) {
-        this.JBO = JBO;
+        this.odobren = odobren;
     }
 }

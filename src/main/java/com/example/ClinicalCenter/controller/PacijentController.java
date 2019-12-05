@@ -37,7 +37,7 @@ public class PacijentController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PacijentDTO> getStudent(@PathVariable Long id) {
+    public ResponseEntity<PacijentDTO> getPacijent(@PathVariable Long id) {
 
         Pacijent pacijent = pacijentService.findOne(id);
 
@@ -49,7 +49,7 @@ public class PacijentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PacijentDTO>> getStudentsPage(Pageable page) {
+    public ResponseEntity<List<PacijentDTO>> getPacijentPage(Pageable page) {
 
         // page object holds data about pagination and sorting
         // the object is created based on the url parameters "page", "size" and "sort"

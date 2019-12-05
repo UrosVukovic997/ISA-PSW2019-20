@@ -7,21 +7,21 @@ public class PacijentDTO {
     private Long id;
     private String ImePacijenta;
     private String PrezimePacijenta;
-    private String E_mail;
+    private String Email;
     private int JBO;
 
     public PacijentDTO() {
     }
 
     public PacijentDTO(Pacijent pacijent) {
-        this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getE_mail(), pacijent.getJBO() );
+        this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getEmail(), pacijent.getJbo() );
     }
 
-    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String e_mail, int JBO) {
+    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, int JBO) {
         this.id = id;
         ImePacijenta = imePacijenta;
         PrezimePacijenta = prezimePacijenta;
-        E_mail = e_mail;
+        Email = email;
         this.JBO = JBO;
     }
 
@@ -49,12 +49,12 @@ public class PacijentDTO {
         PrezimePacijenta = prezimePacijenta;
     }
 
-    public String getE_mail() {
-        return E_mail;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setE_mail(String e_mail) {
-        E_mail = e_mail;
+    public void setEmail(String email) {
+        Email = email;
     }
 
     public int getJBO() {
