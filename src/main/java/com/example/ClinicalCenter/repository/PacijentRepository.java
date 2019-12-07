@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PacijentRepository extends JpaRepository<Pacijent, Long> {
@@ -18,7 +19,14 @@ public interface PacijentRepository extends JpaRepository<Pacijent, Long> {
     @Query("select p from Pacijent p where p.odobren = false")
     List<Pacijent> pronadjiNeOdobrene();
 
-    Pacijent findByEmail(String Email);
+
+    Optional<Pacijent> findById(Long id);
+
+    List<Pacijent> findAll();
+    void removeById(Long id);
+    Pacijent save(Pacijent pacijent);
+
+    Pacijent findByEmail(String eMail);
 
 
 }

@@ -42,4 +42,12 @@ public class PacijentService {
     }
 
 
+
+    public void remove(Long id) {
+        pacijentRepository.deleteById(id);
+    }
+
+    public Pacijent findOneByEMail(String geteMail) {
+        return pacijentRepository.findByEmail(geteMail);
+    }
 }

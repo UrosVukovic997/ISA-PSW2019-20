@@ -63,6 +63,37 @@ public class PacijentController {
         return new ResponseEntity<>(pacijentiDTO, HttpStatus.OK);
     }
 
+    @PostMapping(path = "/registruj", consumes = "application/json")
+    public ResponseEntity<Void> signUp(@RequestBody PacijentDTO pacijentDTO)  {
+        System.out.println("USLO");
+
+        Pacijent p = pacijentService.findOneByEMail(pacijentDTO.getEmail());
+        if (p != null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        System.out.println("USLO1");
+
+        Pacijent pacijent = new Pacijent();
+        pacijent.setImePacijenta(pacijentDTO.getImePacijenta());
+        pacijent.setPrezimePacijenta(pacijentDTO.getPrezimePacijenta());
+        pacijent.setEmail(pacijentDTO.getEmail());
+        pacijent.setLozinka(pacijentDTO.getLozinka());
+        pacijent.setAdresa(pacijentDTO.getAdresa());
+        pacijent.setGrad(pacijentDTO.getGrad());
+        pacijent.setDrzava(pacijentDTO.getDrzava());
+        pacijent.setBrojTelefona(pacijentDTO.getBrojTelefona());
+        pacijent.setJbo(pacijentDTO.getJbo());
+        pacijent.setOdobren(false);
+        pacijent.setPotvrdio(false);
+        System.out.println("USLO2");
+
+
+        pacijent = pacijentService.save(pacijent);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 
 
 }

@@ -167,4 +167,12 @@ public class Pacijent {
     public void setOdobren(Boolean odobren) {
         this.odobren = odobren;
     }
+
+    public Boolean getPotvrdio() {
+        return potvrdio;
+    }
+
+    public void setPotvrdio(Boolean potvrdio) {
+        this.potvrdio = potvrdio;
+    }
 }
