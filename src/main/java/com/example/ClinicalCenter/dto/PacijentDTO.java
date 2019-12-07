@@ -5,24 +5,34 @@ import com.example.ClinicalCenter.model.Pacijent;
 public class PacijentDTO {
 
     private Long id;
-    private String ImePacijenta;
-    private String PrezimePacijenta;
-    private String E_mail;
-    private int JBO;
+    private String imePacijenta;
+    private String prezimePacijenta;
+    private String email;
+    private String lozinka;
+    private String adresa;
+    private String grad;
+    private String drzava;
+    private String brojTelefona;
+    private int jbo;
 
     public PacijentDTO() {
     }
 
     public PacijentDTO(Pacijent pacijent) {
-        this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getE_mail(), pacijent.getJBO() );
+        this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getEmail(), pacijent.getLozinka(), pacijent.getAdresa(), pacijent.getGrad(), pacijent.getGrad(), pacijent.getBrojTelefona(), pacijent.getJbo() );
     }
 
-    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String e_mail, int JBO) {
+    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo) {
         this.id = id;
-        ImePacijenta = imePacijenta;
-        PrezimePacijenta = prezimePacijenta;
-        E_mail = e_mail;
-        this.JBO = JBO;
+        this.imePacijenta = imePacijenta;
+        this.prezimePacijenta = prezimePacijenta;
+        this.email = email;
+        this.lozinka = lozinka;
+        this.adresa = adresa;
+        this.grad = grad;
+        this.drzava = drzava;
+        this.brojTelefona = brojTelefona;
+        this.jbo = jbo;
     }
 
     public Long getId() {
@@ -34,34 +44,74 @@ public class PacijentDTO {
     }
 
     public String getImePacijenta() {
-        return ImePacijenta;
+        return imePacijenta;
     }
 
     public void setImePacijenta(String imePacijenta) {
-        ImePacijenta = imePacijenta;
+        this.imePacijenta = imePacijenta;
     }
 
     public String getPrezimePacijenta() {
-        return PrezimePacijenta;
+        return prezimePacijenta;
     }
 
     public void setPrezimePacijenta(String prezimePacijenta) {
-        PrezimePacijenta = prezimePacijenta;
+        this.prezimePacijenta = prezimePacijenta;
     }
 
-    public String getE_mail() {
-        return E_mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setE_mail(String e_mail) {
-        E_mail = e_mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getJBO() {
-        return JBO;
+    public String getLozinka() {
+        return lozinka;
     }
 
-    public void setJBO(int JBO) {
-        this.JBO = JBO;
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public String getGrad() {
+        return grad;
+    }
+
+    public void setGrad(String grad) {
+        this.grad = grad;
+    }
+
+    public String getDrzava() {
+        return drzava;
+    }
+
+    public void setDrzava(String drzava) {
+        this.drzava = drzava;
+    }
+
+    public String getBrojTelefona() {
+        return brojTelefona;
+    }
+
+    public void setBrojTelefona(String brojTelefona) {
+        this.brojTelefona = brojTelefona;
+    }
+
+    public int getJbo() {
+        return jbo;
+    }
+
+    public void setJbo(int jbo) {
+        this.jbo = jbo;
     }
 }
