@@ -2,15 +2,19 @@ package com.example.ClinicalCenter.controller;
 
 
 import com.example.ClinicalCenter.dto.PacijentDTO;
+import com.example.ClinicalCenter.exception.ResourceConflictException;
 import com.example.ClinicalCenter.model.Pacijent;
 import com.example.ClinicalCenter.service.PacijentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,9 @@ public class PacijentController {
 
     @Autowired
     private PacijentService pacijentService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/zahtev", produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PacijentDTO>> pronadjiNeOdobrene() {
@@ -64,12 +71,14 @@ public class PacijentController {
     }
 
     @PostMapping(path = "/registruj", consumes = "application/json")
-    public ResponseEntity<Void> signUp(@RequestBody PacijentDTO pacijentDTO)  {
+    public ResponseEntity<Void> signUp(@RequestBody PacijentDTO pacijentDTO, UriComponentsBuilder ucBuilder)  {
         System.out.println("USLO");
 
         Pacijent p = pacijentService.findOneByEMail(pacijentDTO.getEmail());
         if (p != null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
+
+
         }
 
         System.out.println("USLO1");
@@ -78,18 +87,22 @@ public class PacijentController {
         pacijent.setImePacijenta(pacijentDTO.getImePacijenta());
         pacijent.setPrezimePacijenta(pacijentDTO.getPrezimePacijenta());
         pacijent.setEmail(pacijentDTO.getEmail());
-        pacijent.setLozinka(pacijentDTO.getLozinka());
+        pacijent.setPassword(passwordEncoder.encode(pacijentDTO.getPassword()));
         pacijent.setAdresa(pacijentDTO.getAdresa());
         pacijent.setGrad(pacijentDTO.getGrad());
         pacijent.setDrzava(pacijentDTO.getDrzava());
         pacijent.setBrojTelefona(pacijentDTO.getBrojTelefona());
         pacijent.setJbo(pacijentDTO.getJbo());
+        pacijent.setUsername(pacijentDTO.getUsername());
         pacijent.setOdobren(false);
         pacijent.setPotvrdio(false);
         System.out.println("USLO2");
 
 
         pacijent = pacijentService.save(pacijent);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/pacijent/registruj/{userId}").buildAndExpand(pacijent.getId()).toUri());
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
