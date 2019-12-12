@@ -22,6 +22,7 @@ public interface PacijentRepository extends JpaRepository<Pacijent, Long> {
 
     Optional<Pacijent> findById(Long id);
 
+
     List<Pacijent> findAll();
     void removeById(Long id);
     Pacijent save(Pacijent pacijent);
