@@ -33,13 +33,13 @@ public class UserController {
     }
 
     @RequestMapping(method = GET, value = "/user/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public List<Pacijent> loadAll() {
         return this.userService.findAll();
     }
 
     @RequestMapping("/whoami")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public Pacijent user(Principal user) {
         return this.userService.findOneByE_Mail(user.getName());
     }
