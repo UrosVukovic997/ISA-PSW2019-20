@@ -1,14 +1,17 @@
 package com.example.ClinicalCenter.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class Pacijent {
+public class Pacijent implements UserDetails {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +25,11 @@ public class Pacijent {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "lozinka", nullable = false)
-    private String lozinka;
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "adresaPrebivalista", nullable = false)
     private String adresa;
@@ -47,27 +53,37 @@ public class Pacijent {
     @Column(name = "potvrdio", nullable = false)
     private Boolean potvrdio;
 
+    @Column(name = "last_password_reset_date")
+    private Timestamp lastPasswordResetDate;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private List<Authority> authorities;
+
 
 
     public Pacijent() {
         imePacijenta = "";
         prezimePacijenta = "";
         email = "";
-        lozinka= "";
+        password= "";
         adresa = "";
         grad = "";
         drzava = "";
         brojTelefona = "";
         jbo = 0;
         odobren = false;
+        username="";
     }
 
-    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
         this.email = email;
-        this.lozinka = lozinka;
+        this.password = lozinka;
         this.adresa = adresa;
         this.grad = grad;
         this.drzava = drzava;
@@ -75,7 +91,7 @@ public class Pacijent {
         this.jbo = jbo;
         this.odobren = odobren;
         this.potvrdio = false;
-
+        this.username= username;
     }
 
     public Long getId() {
@@ -110,12 +126,9 @@ public class Pacijent {
         this.email = email;
     }
 
-    public String getLozinka() {
-        return lozinka;
-    }
 
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getAdresa() {
@@ -174,5 +187,58 @@ public class Pacijent {
 
     public void setPotvrdio(Boolean potvrdio) {
         this.potvrdio = potvrdio;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public Timestamp getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

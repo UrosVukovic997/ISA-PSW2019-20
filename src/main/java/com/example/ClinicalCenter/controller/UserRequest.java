@@ -1,46 +1,20 @@
-package com.example.ClinicalCenter.dto;
+package com.example.ClinicalCenter.controller;
 
-import com.example.ClinicalCenter.model.Pacijent;
 
-public class PacijentDTO {
-
+public class UserRequest {
     private Long id;
+
     private String imePacijenta;
     private String prezimePacijenta;
     private String email;
+    private String username;
     private String password;
     private String adresa;
     private String grad;
     private String drzava;
     private String brojTelefona;
-    private int jbo;
-    private String username;
-    private Boolean odobren = false;
-    private Boolean potvrdio = false;
+    private Integer jbo;
 
-    public PacijentDTO() {
-
-    }
-
-    public PacijentDTO(Pacijent pacijent) {
-        this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getEmail(), pacijent.getPassword(), pacijent.getAdresa(), pacijent.getGrad(), pacijent.getGrad(), pacijent.getBrojTelefona(), pacijent.getJbo(), pacijent.getPotvrdio(), pacijent.getOdobren(), pacijent.getUsername() );
-    }
-
-    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username) {
-        this.id = id;
-        this.imePacijenta = imePacijenta;
-        this.prezimePacijenta = prezimePacijenta;
-        this.email = email;
-        this.password = lozinka;
-        this.adresa = adresa;
-        this.grad = grad;
-        this.drzava = drzava;
-        this.brojTelefona = brojTelefona;
-        this.jbo = jbo;
-        this.potvrdio = potvrdio;
-        this.odobren = odobrio;
-        this.username = username;
-    }
 
     public Long getId() {
         return id;
@@ -78,8 +52,8 @@ public class PacijentDTO {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String lozinka) {
+        this.password = lozinka;
     }
 
     public String getAdresa() {
@@ -114,28 +88,12 @@ public class PacijentDTO {
         this.brojTelefona = brojTelefona;
     }
 
-    public int getJbo() {
+    public Integer getJbo() {
         return jbo;
     }
 
-    public void setJbo(int jbo) {
+    public void setJbo(Integer jbo) {
         this.jbo = jbo;
-    }
-
-    public Boolean getOdobren() {
-        return odobren;
-    }
-
-    public void setOdobren(Boolean odobren) {
-        this.odobren = odobren;
-    }
-
-    public Boolean getPotvrdio() {
-        return potvrdio;
-    }
-
-    public void setPotvrdio(Boolean potvrdio) {
-        this.potvrdio = potvrdio;
     }
 
     public String getUsername() {
