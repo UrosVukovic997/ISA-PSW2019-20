@@ -20,7 +20,7 @@ public class AdministratorController {
     private AdministratorService administratorService;
 
     @PostMapping(path = "/dodaj", consumes = "application/json")
-    public ResponseEntity<Void> addKlinika(@RequestBody AdministratorDTO administratorDTO) {
+    public ResponseEntity<Void> addAdmin(@RequestBody AdministratorDTO administratorDTO) {
 
         Administrator administrator = new Administrator(administratorDTO);
         Administrator a=administratorService.add(administrator);
