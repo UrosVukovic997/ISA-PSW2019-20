@@ -1,40 +1,37 @@
-package com.example.ClinicalCenter.model;
+package com.example.ClinicalCenter.dto;
 
-import javax.persistence.*;
+import com.example.ClinicalCenter.model.Pregled;
+import com.example.ClinicalCenter.model.Termin;
+
 import java.util.Date;
 
-@Entity
-public class Termin {
+public class TerminDTO {
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "startTime", nullable = false)
+    private long id;
     private Date pocetak;
-
-    @Column(name = "endTime", nullable = false)
     private Date kraj;
-
-    @OneToOne
     private Pregled pregled;
 
-
-    public Termin() {
+    public TerminDTO() {
     }
 
-    public Termin(Long id, Date pocetak, Date kraj) {
+    public TerminDTO(Termin termin) {
+        this(termin.getId(),termin.getPocetak(),termin.getKraj(),termin.getPregled());
+    }
+
+    public TerminDTO(long id, Date pocetak, Date kraj, Pregled pregled) {
         this.id = id;
         this.pocetak = pocetak;
         this.kraj = kraj;
+        this.pregled = pregled;
     }
 
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
