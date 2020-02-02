@@ -1,9 +1,9 @@
 package com.example.ClinicalCenter.controller;
 
 import com.example.ClinicalCenter.dto.DijagnozaDTO;
-import com.example.ClinicalCenter.dto.LekDTO;
 import com.example.ClinicalCenter.model.Dijagnoza;
 import com.example.ClinicalCenter.model.Lek;
+import com.example.ClinicalCenter.dto.LekDTO;
 import com.example.ClinicalCenter.service.LekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

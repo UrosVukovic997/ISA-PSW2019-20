@@ -1,5 +1,7 @@
 package com.example.ClinicalCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,9 +22,11 @@ public class Klinika {
     @Column(name = "ocena", nullable = false)
     private double ocena=0.0;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "klinika", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Administrator> administrators;
 
+    @OneToMany(mappedBy = "klinika", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Lekar> lekari;
 
     public Klinika() {
     }
@@ -63,5 +67,21 @@ public class Klinika {
 
     public void setOcena(double ocena) {
         this.ocena = ocena;
+    }
+
+    public Set<Administrator> getAdministrators() {
+        return administrators;
+    }
+
+    public void setAdministrators(Set<Administrator> administrators) {
+        this.administrators = administrators;
+    }
+
+    public Set<Lekar> getLekari() {
+        return lekari;
+    }
+
+    public void setLekari(Set<Lekar> lekari) {
+        this.lekari = lekari;
     }
 }

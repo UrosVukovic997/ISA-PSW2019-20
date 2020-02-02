@@ -49,7 +49,6 @@ public class Pacijent implements UserDetails {
     @Column(name = "odobren", nullable = false)
     private Boolean odobren;
 
-
     @Column(name = "potvrdio", nullable = false)
     private Boolean potvrdio;
 
@@ -62,6 +61,9 @@ public class Pacijent implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Lekar lekar;
 
 
     public Pacijent() {
@@ -76,9 +78,10 @@ public class Pacijent implements UserDetails {
         jbo = 0;
         odobren = false;
         username="";
+        lekar = null;
     }
 
-    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -92,7 +95,12 @@ public class Pacijent implements UserDetails {
         this.odobren = odobren;
         this.potvrdio = false;
         this.username= username;
+        this.lekar = lekar;
     }
+
+    public Lekar getLekar() { return lekar; }
+
+    public void setLekar(Lekar lekar) { this.lekar = lekar; }
 
     public Long getId() {
         return id;
@@ -241,4 +249,5 @@ public class Pacijent implements UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }
