@@ -1,53 +1,39 @@
-package com.example.ClinicalCenter.model;
+package com.example.ClinicalCenter.dto;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import com.example.ClinicalCenter.model.Pregled;
+import com.example.ClinicalCenter.model.Termin;
 
-import javax.persistence.*;
+public class PregledDTO {
 
-
-@Entity
-public class Pregled {
-
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "firstName", nullable = false)
+    private long id;
     private String ime_pacijenta;
-
-    @Column(name = "lastName", nullable = false)
     private String prezime_pacijenta;
-
-    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "jbo", nullable = false)
     private String jbo;
-
-    @OneToOne
     private Termin termin;
 
-
-    public Pregled() {
+    public PregledDTO() {
     }
 
-    public Pregled(Long id, String ime_pacijenta, String prezime_pacijenta, String email, String jbo) {
+    public PregledDTO(Pregled pregled) {
+        this(pregled.getId(),pregled.getIme_pacijenta(),pregled.getPrezime_pacijenta(),pregled.getEmail(),pregled.getJbo(),pregled.getTermin());
+    }
+
+    public PregledDTO(long id, String ime_pacijenta, String prezime_pacijenta, String email, String jbo, Termin termin) {
         this.id = id;
         this.ime_pacijenta = ime_pacijenta;
         this.prezime_pacijenta = prezime_pacijenta;
         this.email = email;
         this.jbo = jbo;
+        this.termin = termin;
     }
 
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
