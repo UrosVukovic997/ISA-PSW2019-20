@@ -11,7 +11,11 @@ public interface KlinikaRepository extends JpaRepository<Klinika, Long> {
 
     Klinika save(Klinika klinika);
 
+    Klinika findByNazivKlinike(String naziv);
+
+
     void deleteById(Long id);
     void deleteKlinikaById(Long id);
+
 
 }

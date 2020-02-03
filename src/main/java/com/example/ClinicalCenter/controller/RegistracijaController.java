@@ -24,7 +24,7 @@ public class RegistracijaController {
     private Environment env;
 
     @PostMapping (value = "/odobri{id}")
-    public ResponseEntity<Void> odobriStudenta(@PathVariable Long id){
+    public ResponseEntity<Void> odobri(@PathVariable Long id){
         Pacijent p=registracijaService.odobriKorsnika(id);
 
         if(p != null) {
@@ -33,7 +33,7 @@ public class RegistracijaController {
             mail.setFrom(env.getProperty("spring.mail.username"));
             mail.setSubject("Potvdite nalog");
             mail.setText("Pozdrav " + p.getImePacijenta() + ",\n\nhvala Vam što ste se registrovali na našoj klinici." +
-                    "Administrator je odobrio Vaš yahtrv. Molimo vas da aktivirate nalog pritiskom na sledeci link" +
+                    "Administrator je odobrio Vaš zahtrv. Molimo vas da aktivirate nalog pritiskom na sledeci link" +
                     "\n\n http://localhost:4200/aktivirajNalog/"+p.getId());
             javaMailSender.send(mail);
         }
