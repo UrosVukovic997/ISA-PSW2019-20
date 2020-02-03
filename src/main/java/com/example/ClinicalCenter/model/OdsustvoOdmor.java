@@ -18,10 +18,10 @@ public class OdsustvoOdmor {
     @Column(name = "end", nullable = false)
     private Date kraj;
 
-    @Column(name = "vacation1", nullable = false)
+    @Column(name = "vacation", nullable = false)
     private Boolean godisnji;
 
-    @Column(name = "vacation2", nullable = false)
+    @Column(name = "absence", nullable = false)
     private Boolean odsustvo;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
