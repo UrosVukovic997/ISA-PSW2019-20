@@ -6,12 +6,14 @@ import com.example.ClinicalCenter.model.Lekar;
 import com.example.ClinicalCenter.model.OdsustvoOdmor;
 import com.example.ClinicalCenter.repository.LekarRepository;
 import com.example.ClinicalCenter.repository.OdsustvoOdmorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OdsustvoOdmorService {
-
+    @Autowired
     private LekarRepository lekarRepository;
+    @Autowired
     private OdsustvoOdmorRepository odsustvoOdmorRepositiry;
 
     public OdsustvoOdmor zahtev(OdsustvoOdmorDTO odsustvoOdmorDTO, Lekar lekar) {

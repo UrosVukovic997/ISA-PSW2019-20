@@ -13,14 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/api/lekar")
 public class OdsustvoOdmorController {
-
-
     @Autowired
     private OdsustvoOdmorService odsustvoOdmorService;
 
@@ -28,13 +24,16 @@ public class OdsustvoOdmorController {
     private LekarService lekarService;
 
     @PostMapping(path = "/zahtevOdsGod/{id}")
-    public ResponseEntity<OdsustvoOdmorDTO> zahtevOdsustvo(@PathVariable Long id, @RequestBody List<OdsustvoOdmorDTO> odsustvoOdmorDTO) {
-        //System.out.println(odsustvoOdmorDTO.get(0));
+    public ResponseEntity<OdsustvoOdmorDTO> zahtevOdsustvo(@PathVariable Long id, @RequestBody OdsustvoOdmorDTO odsustvoOdmorDTO) {
+
+        System.out.println(odsustvoOdmorDTO.getPocetak());
+        System.out.println(odsustvoOdmorDTO.getKraj());
+
         Lekar lekar = lekarService.findOne(id);
 
-        // OdsustvoOdmor odsustvoOdmor = odsustvoOdmorService.zahtev(odsustvoOdmorDTO, lekar);
+        OdsustvoOdmor odsustvoOdmor = odsustvoOdmorService.zahtev(odsustvoOdmorDTO, lekar);
 
-        return new ResponseEntity<>(new OdsustvoOdmorDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(new OdsustvoOdmorDTO(odsustvoOdmor), HttpStatus.OK);
     }
 
 }

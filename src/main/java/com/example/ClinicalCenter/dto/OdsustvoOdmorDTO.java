@@ -9,8 +9,8 @@ public class OdsustvoOdmorDTO {
     private Long id;
     private Date pocetak;
     private Date kraj;
-    private Boolean godisnji;
-    private Boolean odsustvo;
+    private boolean godisnji;
+    private boolean odsustvo;
 
     public OdsustvoOdmorDTO() {
     }
@@ -51,19 +51,19 @@ public class OdsustvoOdmorDTO {
         this.kraj = kraj;
     }
 
-    public Boolean getGodisnji() {
+    public boolean getGodisnji() {
         return godisnji;
     }
 
-    public void setGodisnji(Boolean godisnji) {
+    public void setGodisnji(boolean godisnji) {
         this.godisnji = godisnji;
     }
 
-    public Boolean getOdsustvo() {
+    public boolean getOdsustvo() {
         return odsustvo;
     }
 
-    public void setOdsustvo(Boolean odsustvo) {
+    public void setOdsustvo(boolean odsustvo) {
         this.odsustvo = odsustvo;
     }
 }
