@@ -42,6 +42,11 @@ public class Lekar {
     @JsonIgnore
     private Set<Pacijent> pacijenti = new HashSet<Pacijent>();
 
+    @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<OdsustvoOdmor> odsustvoOdmori = new HashSet<OdsustvoOdmor>();
+
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Klinika klinika;
 
@@ -123,4 +128,8 @@ public class Lekar {
     public String getOpis() { return opis; }
 
     public void setOpis(String opis) { this.opis = opis; }
+
+    public Set<OdsustvoOdmor> getOdsustvoOdmori() { return odsustvoOdmori; }
+
+    public void setOdsustvoOdmori(Set<OdsustvoOdmor> odsustvoOdmori) { this.odsustvoOdmori = odsustvoOdmori; }
 }

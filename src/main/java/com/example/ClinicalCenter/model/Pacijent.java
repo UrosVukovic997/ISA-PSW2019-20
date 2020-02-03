@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -49,6 +50,9 @@ public class Pacijent implements UserDetails {
     @Column(name = "odobren", nullable = false)
     private Boolean odobren;
 
+    @Column(name = "datum_rodj", nullable = false)
+    private Date rodjen;
+
     @Column(name = "potvrdio", nullable = false)
     private Boolean potvrdio;
 
@@ -79,9 +83,10 @@ public class Pacijent implements UserDetails {
         odobren = false;
         username="";
         lekar = null;
+        rodjen = null;
     }
 
-    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, Date rodjen) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -96,6 +101,7 @@ public class Pacijent implements UserDetails {
         this.potvrdio = false;
         this.username= username;
         this.lekar = lekar;
+        this.rodjen = rodjen;
     }
 
     public Lekar getLekar() { return lekar; }
@@ -200,6 +206,10 @@ public class Pacijent implements UserDetails {
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
+
+    public Date getRodjen() { return rodjen; }
+
+    public void setRodjen(Date rodjen) { this.rodjen = rodjen; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
