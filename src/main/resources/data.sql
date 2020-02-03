@@ -16,3 +16,22 @@ VALUES ('Bulevar Evrope 6.', '066543189', 'Srbija', 'gara.nikola@gmail.com', 'No
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo, last_password_reset_date, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
 VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220', '1991-10-06 18:57:58', 1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
 
+
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Pregled Glave', 0, 1650);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('ORL', 0, 842);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Ginekologija', 0, 2600);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Urologija', 0, 1400);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Zubar', 0, 650);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Plucni', 0, 805);

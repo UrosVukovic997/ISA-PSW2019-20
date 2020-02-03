@@ -24,6 +24,9 @@ public class OdsustvoOdmor {
     @Column(name = "absence", nullable = false)
     private Boolean odsustvo;
 
+    @Column(name = "reason", nullable = false)
+    private String obrazlozenje;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Lekar lekar;
@@ -31,19 +34,21 @@ public class OdsustvoOdmor {
     public OdsustvoOdmor() {
     }
 
-    public OdsustvoOdmor(long id, Date pocetak, Date kraj, Boolean godisnji, Boolean odsustvo) {
+    public OdsustvoOdmor(long id, Date pocetak, Date kraj, Boolean godisnji, Boolean odsustvo, String obrazlozenje) {
         this.id = id;
         this.pocetak = pocetak;
         this.kraj = kraj;
         this.godisnji = godisnji;
         this.odsustvo = odsustvo;
+        this.obrazlozenje = obrazlozenje;
     }
 
-    public OdsustvoOdmor(Date pocetak, Date kraj, Boolean godisnji, Boolean odsustvo) {
+    public OdsustvoOdmor(Date pocetak, Date kraj, Boolean godisnji, Boolean odsustvo, String obrazlozenje) {
         this.pocetak = pocetak;
         this.kraj = kraj;
         this.godisnji = godisnji;
         this.odsustvo = odsustvo;
+        this.obrazlozenje = obrazlozenje;
     }
 
     public long getId() {
@@ -86,11 +91,11 @@ public class OdsustvoOdmor {
         this.odsustvo = odsustvo;
     }
 
-    public Lekar getLekar() {
-        return lekar;
-    }
+    public Lekar getLekar() { return lekar; }
 
-    public void setLekar(Lekar lekar) {
-        this.lekar = lekar;
-    }
+    public void setLekar(Lekar lekar) { this.lekar = lekar; }
+
+    public String getObrazlozenje() { return obrazlozenje; }
+
+    public void setObrazlozenje(String obrazlozenje) { this.obrazlozenje = obrazlozenje; }
 }
