@@ -23,14 +23,31 @@ public class Klinika {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Administrator> administrators;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Lekar> lekari;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Sestra> sestre;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Pacijent> pacijents;
+
+
 
     public Klinika() {
+        this.administrators = new HashSet<>();
+        this.lekari = new HashSet<>();
+        this.sestre = new HashSet<>();
+        this.pacijents = new HashSet<>();
     }
 
     public Klinika(String nazivKlinike, String grad) {
         this.nazivKlinike = nazivKlinike;
         this.grad = grad;
         this.administrators = new HashSet<>();
+        this.lekari = new HashSet<>();
+        this.sestre = new HashSet<>();
+        this.pacijents = new HashSet<>();
     }
 
     public Long getId() {
@@ -63,5 +80,41 @@ public class Klinika {
 
     public void setOcena(double ocena) {
         this.ocena = ocena;
+    }
+
+    public Set<Administrator> getAdministrators() {
+        return administrators;
+    }
+
+    public void setAdministrators(Set<Administrator> administrators) {
+        this.administrators = administrators;
+    }
+
+    public Set<Lekar> getLekari() {
+        return lekari;
+    }
+
+    public void setLekari(Set<Lekar> lekari) {
+        this.lekari = lekari;
+    }
+
+    public Set<Sestra> getSestre() {
+        return sestre;
+    }
+
+    public void setSestre(Set<Sestra> sestre) {
+        this.sestre = sestre;
+    }
+
+    public Set<Pacijent> getPacijents() {
+        return pacijents;
+    }
+
+    public void setPacijents(Set<Pacijent> pacijents) {
+        this.pacijents = pacijents;
+    }
+
+    public void addAdministrator(Administrator administrator){
+        this.administrators.add(administrator);
     }
 }

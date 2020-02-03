@@ -53,7 +53,7 @@ public class LogovanjeController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }*/
         System.out.print("-----");
-        System.out.print(authenticationRequest);
+        System.out.print(authenticationRequest.toString());
         System.out.print("-----");
 
 
@@ -70,7 +70,7 @@ public class LogovanjeController {
         int expiresIn = tokenUtils.getExpiredIn();
 
         // Vrati token kao odgovor na uspesno autentifikaciju
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+        return  ResponseEntity.ok(new UserTokenState(jwt, expiresIn, user.getUsername()));
     }
 
     @RequestMapping(value = "/refresh", method = RequestMethod.POST)
