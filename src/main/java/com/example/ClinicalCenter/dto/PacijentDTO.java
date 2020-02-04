@@ -3,6 +3,7 @@ package com.example.ClinicalCenter.dto;
 import com.example.ClinicalCenter.model.Pacijent;
 
 import java.util.Date;
+import java.util.List;
 
 public class PacijentDTO {
 
@@ -19,7 +20,8 @@ public class PacijentDTO {
     private String username;
     private Boolean odobren = false;
     private Boolean potvrdio = false;
-    private Date rodjen;
+    private String rodjen;
+
 
     public PacijentDTO() {
 
@@ -29,7 +31,7 @@ public class PacijentDTO {
         this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getEmail(), pacijent.getPassword(), pacijent.getAdresa(), pacijent.getGrad(), pacijent.getGrad(), pacijent.getBrojTelefona(), pacijent.getJbo(), pacijent.getPotvrdio(), pacijent.getOdobren(), pacijent.getUsername(), pacijent.getRodjen() );
     }
 
-    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username, Date rodjen) {
+    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username, String rodjen) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -45,6 +47,8 @@ public class PacijentDTO {
         this.username = username;
         this.rodjen = rodjen;
     }
+
+
 
     public Long getId() {
         return id;
@@ -150,7 +154,9 @@ public class PacijentDTO {
         this.username = username;
     }
 
-    public Date getRodjen() { return rodjen; }
+    public String getRodjen() { return rodjen; }
 
-    public void setRodjen(Date rodjen) { this.rodjen = rodjen; }
+    public void setRodjen(String rodjen) { this.rodjen = rodjen; }
+
+
 }

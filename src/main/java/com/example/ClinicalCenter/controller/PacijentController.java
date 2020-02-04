@@ -2,7 +2,7 @@ package com.example.ClinicalCenter.controller;
 
 
 import com.example.ClinicalCenter.dto.PacijentDTO;
-import com.example.ClinicalCenter.exception.ResourceConflictException;
+
 import com.example.ClinicalCenter.model.Pacijent;
 import com.example.ClinicalCenter.service.PacijentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,8 +26,7 @@ public class PacijentController {
     @Autowired
     private PacijentService pacijentService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     @GetMapping(value = "/zahtev", produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PacijentDTO>> pronadjiNeOdobrene() {
@@ -76,7 +74,7 @@ public class PacijentController {
 
         Pacijent p = pacijentService.findOneByEMail(pacijentDTO.getEmail());
         if (p != null) {
-            throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
+           // throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
 
 
         }
@@ -87,13 +85,14 @@ public class PacijentController {
         pacijent.setImePacijenta(pacijentDTO.getImePacijenta());
         pacijent.setPrezimePacijenta(pacijentDTO.getPrezimePacijenta());
         pacijent.setEmail(pacijentDTO.getEmail());
-        pacijent.setPassword(passwordEncoder.encode(pacijentDTO.getPassword()));
+        pacijent.setPassword(pacijentDTO.getPassword());
         pacijent.setAdresa(pacijentDTO.getAdresa());
         pacijent.setGrad(pacijentDTO.getGrad());
         pacijent.setDrzava(pacijentDTO.getDrzava());
         pacijent.setBrojTelefona(pacijentDTO.getBrojTelefona());
         pacijent.setJbo(pacijentDTO.getJbo());
         pacijent.setUsername(pacijentDTO.getUsername());
+        pacijent.setRodjen(pacijentDTO.getRodjen());
         pacijent.setOdobren(false);
         pacijent.setPotvrdio(false);
         System.out.println("USLO2");

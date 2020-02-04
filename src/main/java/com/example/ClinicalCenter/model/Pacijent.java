@@ -2,8 +2,8 @@ package com.example.ClinicalCenter.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
+
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Pacijent implements UserDetails {
+public class Pacijent {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
@@ -51,19 +51,14 @@ public class Pacijent implements UserDetails {
     private Boolean odobren;
 
     @Column(name = "datum_rodj", nullable = false)
-    private Date rodjen;
+    private String rodjen;
 
     @Column(name = "potvrdio", nullable = false)
     private Boolean potvrdio;
 
-    @Column(name = "last_password_reset_date")
-    private Timestamp lastPasswordResetDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities;
+
+
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -83,10 +78,10 @@ public class Pacijent implements UserDetails {
         odobren = false;
         username="";
         lekar = null;
-        rodjen = null;
+        rodjen = "1988-10-06";
     }
 
-    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, Date rodjen) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, String rodjen) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -203,57 +198,19 @@ public class Pacijent implements UserDetails {
         this.potvrdio = potvrdio;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-    }
 
-    public Date getRodjen() { return rodjen; }
 
-    public void setRodjen(Date rodjen) { this.rodjen = rodjen; }
+    public String getRodjen() { return rodjen; }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
-    }
+    public void setRodjen(String rodjen) { this.rodjen = rodjen; }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
-    @Override
     public String getUsername() {
         return username;
     }
 
-    public Timestamp getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
-
-    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
-    }
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public String getPassword() {
+        return password;
     }
 
     public void setUsername(String username) {
