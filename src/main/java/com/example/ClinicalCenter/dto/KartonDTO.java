@@ -13,22 +13,21 @@ public class KartonDTO {
     private Integer broj;    /*zbog baze*/
     private Set<Dijagnoza> dijagnoze;
     private Set<Pregled> pregledi;
-    private Pacijent pacijent;
 
 
     public KartonDTO() {
     }
 
     public KartonDTO(Karton karton){
-        this(karton.getId(),karton.getBroj(),karton.getDijagnoze(),karton.getPregledi(),karton.getPacijent());
+        this(karton.getId(),karton.getBroj(),karton.getDijagnoze(),karton.getPregledi());
     }
 
-    public KartonDTO(long id, Integer broj, Set<Dijagnoza> dijagnoze, Set<Pregled> pregledi, Pacijent pacijent) {
+    public KartonDTO(long id, Integer broj, Set<Dijagnoza> dijagnoze, Set<Pregled> pregledi) {
         this.id = id;
         this.broj = broj;
         this.dijagnoze = dijagnoze;
         this.pregledi = pregledi;
-        this.pacijent = pacijent;
+
     }
 
 
@@ -65,13 +64,7 @@ public class KartonDTO {
         this.pregledi = pregledi;
     }
 
-    public Pacijent getPacijent() {
-        return pacijent;
-    }
 
-    public void setPacijent(Pacijent pacijent) {
-        this.pacijent = pacijent;
-    }
 
 
 }
