@@ -1,108 +1,203 @@
 package com.example.ClinicalCenter.controller;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.example.ClinicalCenter.dto.PacijentDTO;
-import com.example.ClinicalCenter.model.Pacijent;
-import com.example.ClinicalCenter.security.TokenUtils;
-import com.example.ClinicalCenter.security.auth.JwtAuthenticationRequest;
-import com.example.ClinicalCenter.service.CustomUserDetailsService;
-import com.example.ClinicalCenter.service.PacijentService;
+import com.example.ClinicalCenter.dto.LoginDTO;
+import com.example.ClinicalCenter.model.*;
+
+import com.example.ClinicalCenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(value = "/api/logovanje", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LogovanjeController {
-    @Autowired
-    TokenUtils tokenUtils;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private PacijentService pacijentService;
+    @Autowired
+    private LekarService lekarService;
+    @Autowired
+    private AdministratorService administratorService;
+    @Autowired
+    private AdminKcService adminKcService;
+    @Autowired
+    private SestraService sestraService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
-                                                       HttpServletResponse response) throws AuthenticationException, IOException {
-        /*Pacijent pacijent = pacijentService.findOneByEMail(authenticationRequest.getUsername());
-        if(pacijent == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }*/
-        System.out.print("-----");
-        System.out.print(authenticationRequest.toString());
-        System.out.print("-----");
-
-
-        final Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
-                        authenticationRequest.getPassword()));
-
-        // Ubaci username + password u kontext
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // Kreiraj token
-        Pacijent user = (Pacijent) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername());
-        int expiresIn = tokenUtils.getExpiredIn();
-
-        // Vrati token kao odgovor na uspesno autentifikaciju
-        return  ResponseEntity.ok(new UserTokenState(jwt, expiresIn, user.getUsername()));
-    }
-
-    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
-    public ResponseEntity<?> refreshAuthenticationToken(HttpServletRequest request) {
-
-        String token = tokenUtils.getToken(request);
-        String username = this.tokenUtils.getUsernameFromToken(token);
-        Pacijent user = (Pacijent) this.userDetailsService.loadUserByUsername(username);
-
-        if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
-            String refreshedToken = tokenUtils.refreshToken(token);
-            int expiresIn = tokenUtils.getExpiredIn();
-
-            return ResponseEntity.ok(new UserTokenState(refreshedToken, expiresIn));
-        } else {
-            UserTokenState userTokenState = new UserTokenState();
-            return ResponseEntity.badRequest().body(userTokenState);
+    @PostMapping(value = "/logovanje", consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> login(@RequestBody LoginDTO logindto)
+    {
+        //System.out.println("Sifra je " + logindto.getPassword());
+        //System.out.println("Username je " + logindto.getUsername());
+        Pacijent user = pacijentService.findOneByE_Mail(logindto.getEmail());
+        //System.out.println(user.getEmail());
+        if(user != null)
+        {
+            if(logindto.getPassword().equals(user.getPassword()))
+            {
+                //System.out.println(user.getPassword());
+                ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attributes.getRequest().getSession(true);
+                session.setAttribute("user", user.getEmail());
+                // System.out.println(user.getPassword());
+                //request.getSession().setAttribute("user", user.getEmail());
+                List<String> returnValue = new ArrayList<>();
+                returnValue.add(user.getEmail());
+                returnValue.add(user.getUsername());
+                return new ResponseEntity<>(returnValue, HttpStatus.OK);
+            }
         }
+        else
+        {
+            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+        }
+
+        return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
-        userDetailsService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
 
-        Map<String, String> result = new HashMap<>();
-        result.put("result", "success");
-        return ResponseEntity.accepted().body(result);
+    @PostMapping(value = "/logovanje/lekar", consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> loginlekara(@RequestBody LoginDTO logindto)
+    {
+        //System.out.println("Sifra je " + logindto.getPassword());
+        //System.out.println("Username je " + logindto.getUsername());
+        Lekar user = lekarService.findByEmail(logindto.getEmail());
+        //System.out.println(user.getEmail());
+        if(user != null)
+        {
+            if(logindto.getPassword().equals(user.getLozinka()))
+            {
+                //System.out.println(user.getPassword());
+                ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attributes.getRequest().getSession(true);
+                session.setAttribute("user", user.getEmail());
+                // System.out.println(user.getPassword());
+                //request.getSession().setAttribute("user", user.getEmail());
+                List<String> returnValue = new ArrayList<>();
+                returnValue.add(user.getEmail());
+                returnValue.add(user.getKorIme());
+
+                return new ResponseEntity<>(returnValue, HttpStatus.OK);
+            }
+        }
+        else
+        {
+            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+        }
+
+        return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
     }
 
-    static class PasswordChanger {
-        public String oldPassword;
-        public String newPassword;
+    @PostMapping(value = "/logovanje/mst", consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> loginmst(@RequestBody LoginDTO logindto)
+    {
+        //System.out.println( logindto.getEmail());
+        //System.out.println("Username je " + logindto.getUsername());
+        Sestra user = sestraService.FindByEmail(logindto.getEmail());
+        if (user == null) { System.out.println("jeste");}
+        //System.out.println(user.getEmail());
+        if(user != null)
+        {      //System.out.println("nije");
+            if(logindto.getPassword().equals(user.getLozinka()))
+            {
+                //System.out.println(user.getPassword());
+                ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attributes.getRequest().getSession(true);
+                session.setAttribute("user", user.getEmail());
+                // System.out.println(user.getPassword());
+                //request.getSession().setAttribute("user", user.getEmail());
+                List<String> returnValue = new ArrayList<>();
+                returnValue.add(user.getEmail());
+                returnValue.add(user.getUsername());
+
+                return new ResponseEntity<>(returnValue, HttpStatus.OK);
+            }
+        }
+        else
+        {
+            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+        }
+
+        return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @PostMapping(value = "/logovanje/admin", consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> loginadmin(@RequestBody LoginDTO logindto)
+    {
+        //System.out.println("Sifra je " + logindto.getPassword());
+        //System.out.println("Username je " + logindto.getUsername());
+        Administrator user = administratorService.FindByEmail(logindto.getEmail());
+        //System.out.println(user.getEmail());
+        if(user != null)
+        {
+            if(logindto.getPassword().equals(user.getLozinka()))
+            {
+                //System.out.println(user.getPassword());
+                ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attributes.getRequest().getSession(true);
+                session.setAttribute("user", user.getEmail());
+                // System.out.println(user.getPassword());
+                //request.getSession().setAttribute("user", user.getEmail());
+                List<String> returnValue = new ArrayList<>();
+                returnValue.add(user.getEmail());
+                returnValue.add(user.getUsername());
+
+                return new ResponseEntity<>(returnValue, HttpStatus.OK);
+            }
+        }
+        else
+        {
+            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+        }
+
+        return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @PostMapping(value = "/logovanje/adminkc", consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> loginadminkc(@RequestBody LoginDTO logindto)
+    {
+        //System.out.println("Sifra je " + logindto.getPassword());
+        //System.out.println("Username je " + logindto.getUsername());
+        AdminKC user = adminKcService.getByEmail(logindto.getEmail());
+        //System.out.println(user.getEmail());
+        if(user != null)
+        {
+            if(logindto.getPassword().equals(user.getLozinka()))
+            {
+                //System.out.println(user.getPassword());
+                ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attributes.getRequest().getSession(true);
+                session.setAttribute("user", user.getEmail());
+                // System.out.println(user.getPassword());
+                //request.getSession().setAttribute("user", user.getEmail());
+                List<String> returnValue = new ArrayList<>();
+                returnValue.add(user.getEmail());
+                returnValue.add(user.getUsername());
+
+                return new ResponseEntity<>(returnValue, HttpStatus.OK);
+            }
+        }
+        else
+        {
+            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+        }
+
+        return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
     }
 }

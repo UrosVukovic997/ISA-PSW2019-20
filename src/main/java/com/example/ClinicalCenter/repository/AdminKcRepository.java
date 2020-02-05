@@ -29,5 +29,6 @@ public interface AdminKcRepository extends JpaRepository<AdminKC, Long> {
     AdminKC save(AdminKC adminKC);
 
     AdminKC getAdminKCByUsername(String username);
+    AdminKC getAdminKCByEmail(String email);
 
 }
