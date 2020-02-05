@@ -10,4 +10,5 @@ import java.util.List;
 public interface SestraRepository extends JpaRepository<Sestra, Long> {
 
     Sestra findByUsername(String username);
+    Sestra findByEmail(String email);
 }

@@ -31,6 +31,8 @@ public class PacijentDTO {
         this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getEmail(), pacijent.getPassword(), pacijent.getAdresa(), pacijent.getGrad(), pacijent.getGrad(), pacijent.getBrojTelefona(), pacijent.getJbo(), pacijent.getPotvrdio(), pacijent.getOdobren(), pacijent.getUsername(), pacijent.getRodjen() );
     }
 
+
+
     public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username, String rodjen) {
         this.id = id;
         this.imePacijenta = imePacijenta;

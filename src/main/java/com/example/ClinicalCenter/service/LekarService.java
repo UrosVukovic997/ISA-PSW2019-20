@@ -36,4 +36,14 @@ public class LekarService {
     public Lekar findOne(Long id) {
         return lekarRepository.findById(id).orElseGet(null );
     }
+
+    public Lekar findByUsername(String Username) {
+        return lekarRepository.findByKorIme(Username);
+    }
+
+    public Lekar findByEmail(String email) {
+        return lekarRepository.findByEmail(email);
+    }
+
+
 }

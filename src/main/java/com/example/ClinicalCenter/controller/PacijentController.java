@@ -3,6 +3,7 @@ package com.example.ClinicalCenter.controller;
 
 import com.example.ClinicalCenter.dto.PacijentDTO;
 
+import com.example.ClinicalCenter.dto.PacijentEditDTO;
 import com.example.ClinicalCenter.model.Pacijent;
 import com.example.ClinicalCenter.service.PacijentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +41,16 @@ public class PacijentController {
     }
 
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<PacijentDTO> getPacijent(@PathVariable Long id) {
+    @GetMapping(value = "/nadji/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PacijentEditDTO> getPacijent(@PathVariable String username) {
 
-        Pacijent pacijent = pacijentService.findOne(id);
+        Pacijent pacijent = pacijentService.findOneByE_Mail(username);
 
         if (pacijent == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(new PacijentDTO(pacijent), HttpStatus.OK);
+        return new ResponseEntity<>(new PacijentEditDTO(pacijent), HttpStatus.OK);
     }
 
     @GetMapping
@@ -70,16 +71,16 @@ public class PacijentController {
 
     @PostMapping(path = "/registruj", consumes = "application/json")
     public ResponseEntity<Void> signUp(@RequestBody PacijentDTO pacijentDTO, UriComponentsBuilder ucBuilder)  {
-        System.out.println("USLO");
+        //System.out.println("USLO");
 
         Pacijent p = pacijentService.findOneByEMail(pacijentDTO.getEmail());
         if (p != null) {
-           // throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
+           //throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
 
 
         }
 
-        System.out.println("USLO1");
+        //System.out.println("USLO1");
 
         Pacijent pacijent = new Pacijent();
         pacijent.setImePacijenta(pacijentDTO.getImePacijenta());
@@ -95,7 +96,7 @@ public class PacijentController {
         pacijent.setRodjen(pacijentDTO.getRodjen());
         pacijent.setOdobren(false);
         pacijent.setPotvrdio(false);
-        System.out.println("USLO2");
+        //System.out.println("USLO2");
 
 
         pacijent = pacijentService.save(pacijent);
@@ -104,6 +105,38 @@ public class PacijentController {
         headers.setLocation(ucBuilder.path("/api/pacijent/registruj/{userId}").buildAndExpand(pacijent.getId()).toUri());
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/zamena", consumes = "application/json")
+    public ResponseEntity<Void> changePac(@RequestBody PacijentEditDTO pacijentEditDTO)  {
+        //System.out.println("USLO");
+
+        System.out.println(pacijentEditDTO.getEmail());
+        Pacijent p = pacijentService.findOneByEMail(pacijentEditDTO.getEmail());
+        if (p == null) {
+            // throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
+
+            System.out.println("jeste");
+        }
+
+
+        //System.out.println("USLO1");
+
+        //Pacijent pacijent = new Pacijent();
+        p.setImePacijenta(pacijentEditDTO.getImePacijenta() );
+        p.setPrezimePacijenta( pacijentEditDTO.getPrezimePacijenta());
+        p.setUsername( pacijentEditDTO.getUsername());
+        p.setDrzava( pacijentEditDTO.getDrzava());
+        p.setAdresa( pacijentEditDTO.getAdresa());
+        p.setGrad( pacijentEditDTO.getGrad());
+        p.setBrojTelefona( pacijentEditDTO.getBrojTelefona());
+        p.setRodjen( pacijentEditDTO.getRodjen());
+        //System.out.println("USLO2");
+
+
+        p = pacijentService.save(p);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

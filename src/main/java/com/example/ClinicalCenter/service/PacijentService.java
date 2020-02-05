@@ -25,8 +25,8 @@ public class PacijentService {
         return pacijentRepository.findById(id).orElseGet(null);
     }
 
-    public Pacijent findOneByE_Mail(String Username) {
-        return pacijentRepository.findByUsername(Username);
+    public Pacijent findOneByE_Mail(String email) {
+        return pacijentRepository.findByEmail(email);
     }
 
     public List<Pacijent> findAll() {
