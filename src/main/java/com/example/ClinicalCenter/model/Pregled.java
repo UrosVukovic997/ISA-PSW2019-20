@@ -25,22 +25,26 @@ public class Pregled {
     private String email;
 
     @Column(name = "jbo", nullable = false)
-    private String jbo;
+    private int jbo;
 
     @OneToOne
     private Termin termin;
+
+    @OneToOne
+    private Lekar lekar;
 
 
     public Pregled() {
     }
 
-    public Pregled(Long id, String ime_pacijenta, String prezime_pacijenta, String email, String jbo) {
+    public Pregled(Long id, String ime_pacijenta, String prezime_pacijenta, String email, int jbo) {
         this.id = id;
         this.ime_pacijenta = ime_pacijenta;
         this.prezime_pacijenta = prezime_pacijenta;
         this.email = email;
         this.jbo = jbo;
     }
+
 
 
     public Long getId() {
@@ -75,11 +79,11 @@ public class Pregled {
         this.email = email;
     }
 
-    public String getJbo() {
+    public int getJbo() {
         return jbo;
     }
 
-    public void setJbo(String jbo) {
+    public void setJbo(int jbo) {
         this.jbo = jbo;
     }
 
@@ -89,5 +93,13 @@ public class Pregled {
 
     public void setTermin(Termin termin) {
         this.termin = termin;
+    }
+
+    public Lekar getLekar() {
+        return lekar;
+    }
+
+    public void setLekar(Lekar lekar) {
+        this.lekar = lekar;
     }
 }
