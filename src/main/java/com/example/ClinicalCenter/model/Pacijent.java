@@ -51,7 +51,7 @@ public class Pacijent {
     private Boolean odobren;
 
     @Column(name = "datum_rodj", nullable = false)
-    private String rodjen;
+    private Date rodjen;
 
     @Column(name = "potvrdio", nullable = false)
     private Boolean potvrdio;
@@ -59,12 +59,6 @@ public class Pacijent {
     @Column(name = "deleted")
     private boolean obrisan;
 
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -205,7 +199,11 @@ public class Pacijent {
 
 
 
-    public String getRodjen() { return rodjen; }
+    public Date getRodjen() { return rodjen; }
+
+    public void setRodjen(Date rodjen) {
+        this.rodjen = rodjen;
+    }
 
     public boolean isObrisan() { return obrisan; }
 

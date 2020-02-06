@@ -20,7 +20,7 @@ public class PacijentDTO {
     private String username;
     private Boolean odobren = false;
     private Boolean potvrdio = false;
-    private String rodjen;
+    private Date rodjen;
 
 
     public PacijentDTO() {
@@ -33,7 +33,7 @@ public class PacijentDTO {
 
 
 
-    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username, String rodjen) {
+    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username, Date rodjen) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -156,9 +156,9 @@ public class PacijentDTO {
         this.username = username;
     }
 
-    public String getRodjen() { return rodjen; }
+    public Date getRodjen() { return rodjen; }
 
-    public void setRodjen(String rodjen) { this.rodjen = rodjen; }
+    public void setRodjen(Date rodjen) { this.rodjen = rodjen; }
 
 
 }
