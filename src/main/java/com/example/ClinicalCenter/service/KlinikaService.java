@@ -28,4 +28,6 @@ public class KlinikaService {
         }
         return  names;
     }
+
+    public Klinika findByNazivKlinike (String naziv){return klinikaRepository.findByNazivKlinike(naziv);}
 }

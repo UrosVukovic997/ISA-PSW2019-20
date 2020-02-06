@@ -25,8 +25,12 @@ public class PacijentService {
         return pacijentRepository.findById(id).orElseGet(null);
     }
 
-    public Pacijent findOneByE_Mail(String Email) {
-        return pacijentRepository.findByEmail(Email);
+    public Pacijent findOneByE_Mail(String email) {
+        return pacijentRepository.findByEmail(email);
+    }
+
+    public Pacijent findByUsername(String username) {
+        return pacijentRepository.findByUsername(username);
     }
 
     public List<Pacijent> findAll() {
@@ -42,6 +46,8 @@ public class PacijentService {
     }
 
     public void delete(Pacijent pacijent) { pacijent.setObrisan(true); }
+    public Pacijent findByJbo(Integer jbo) {return pacijentRepository.findByJbo(jbo);}
+
 
     public void remove(Long id) {
         pacijentRepository.deleteById(id);

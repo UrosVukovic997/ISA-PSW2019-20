@@ -20,4 +20,11 @@ public class AdministratorService {
     public Administrator add(Administrator administrator){return administratorRepository.save(administrator);}
 
     public void deleteById(Long id){administratorRepository.deleteById(id);}
+
+    public Administrator findByUsername(String Username) {
+        return administratorRepository.findByUsername(Username);
+    }
+    public Administrator FindByEmail(String email) {
+        return administratorRepository.findByEmail(email);
+    }
 }

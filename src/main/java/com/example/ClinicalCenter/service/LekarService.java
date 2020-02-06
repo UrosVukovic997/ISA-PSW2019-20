@@ -39,4 +39,13 @@ public class LekarService {
 
     public void deleteById(Long id){ lekarRepository.deleteById(id); }
 
+    public Lekar findByUsername(String Username) {
+        return lekarRepository.findByKorIme(Username);
+    }
+
+    public Lekar findByEmail(String email) {
+        return lekarRepository.findByEmail(email);
+    }
+
+
 }

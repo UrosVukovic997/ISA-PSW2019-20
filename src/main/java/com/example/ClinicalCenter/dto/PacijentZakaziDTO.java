@@ -1,63 +1,40 @@
 package com.example.ClinicalCenter.dto;
 
-import com.example.ClinicalCenter.model.Pacijent;
+import com.example.ClinicalCenter.model.Lekar;
 
 import java.util.Date;
-import java.util.List;
 
-public class PacijentDTO {
-
-    private Long id;
+public class PacijentZakaziDTO {
     private String imePacijenta;
     private String prezimePacijenta;
     private String email;
-    private String password;
     private String adresa;
     private String grad;
     private String drzava;
     private String brojTelefona;
-    private int jbo;
     private String username;
-    private Boolean odobren = false;
-    private Boolean potvrdio = false;
     private String rodjen;
+    private int jbo;
+    private Lekar lekar;
+    private Date pocetak;
+    private Date kraj;
+    private String emailLekara;
 
-
-    public PacijentDTO() {
-
-    }
-
-    public PacijentDTO(Pacijent pacijent) {
-        this(pacijent.getId(), pacijent.getImePacijenta(), pacijent.getPrezimePacijenta(), pacijent.getEmail(), pacijent.getPassword(), pacijent.getAdresa(), pacijent.getGrad(), pacijent.getGrad(), pacijent.getBrojTelefona(), pacijent.getJbo(), pacijent.getPotvrdio(), pacijent.getOdobren(), pacijent.getUsername(), pacijent.getRodjen() );
-    }
-
-
-
-    public PacijentDTO(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, int jbo, Boolean potvrdio, Boolean odobrio, String username, String rodjen) {
-        this.id = id;
+    public PacijentZakaziDTO(String imePacijenta, String prezimePacijenta, String email, String adresa, String grad, String drzava, String brojTelefona, String username, String rodjen, int jbo, Lekar lekar, Date pocetak, Date kraj, String emailLekara) {
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
         this.email = email;
-        this.password = lozinka;
         this.adresa = adresa;
         this.grad = grad;
         this.drzava = drzava;
         this.brojTelefona = brojTelefona;
-        this.jbo = jbo;
-        this.potvrdio = potvrdio;
-        this.odobren = odobrio;
         this.username = username;
         this.rodjen = rodjen;
-    }
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.jbo = jbo;
+        this.lekar = lekar;
+        this.pocetak = pocetak;
+        this.kraj = kraj;
+        this.emailLekara = emailLekara;
     }
 
     public String getImePacijenta() {
@@ -82,14 +59,6 @@ public class PacijentDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getAdresa() {
@@ -124,30 +93,6 @@ public class PacijentDTO {
         this.brojTelefona = brojTelefona;
     }
 
-    public int getJbo() {
-        return jbo;
-    }
-
-    public void setJbo(int jbo) {
-        this.jbo = jbo;
-    }
-
-    public Boolean getOdobren() {
-        return odobren;
-    }
-
-    public void setOdobren(Boolean odobren) {
-        this.odobren = odobren;
-    }
-
-    public Boolean getPotvrdio() {
-        return potvrdio;
-    }
-
-    public void setPotvrdio(Boolean potvrdio) {
-        this.potvrdio = potvrdio;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -156,9 +101,51 @@ public class PacijentDTO {
         this.username = username;
     }
 
-    public String getRodjen() { return rodjen; }
+    public String getRodjen() {
+        return rodjen;
+    }
 
-    public void setRodjen(String rodjen) { this.rodjen = rodjen; }
+    public void setRodjen(String rodjen) {
+        this.rodjen = rodjen;
+    }
 
+    public int getJbo() {
+        return jbo;
+    }
 
+    public void setJbo(int jbo) {
+        this.jbo = jbo;
+    }
+
+    public Lekar getLekar() {
+        return lekar;
+    }
+
+    public void setLekar(Lekar lekar) {
+        this.lekar = lekar;
+    }
+
+    public Date getPocetak() {
+        return pocetak;
+    }
+
+    public void setPocetak(Date pocetak) {
+        this.pocetak = pocetak;
+    }
+
+    public Date getKraj() {
+        return kraj;
+    }
+
+    public void setKraj(Date kraj) {
+        this.kraj = kraj;
+    }
+
+    public String getEmailLekara() {
+        return emailLekara;
+    }
+
+    public void setEmailLekara(String emailLekara) {
+        this.emailLekara = emailLekara;
+    }
 }

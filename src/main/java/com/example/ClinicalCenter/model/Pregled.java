@@ -15,9 +15,6 @@ public class Pregled {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "jbo", nullable = false)
-    private String jbo;
-
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -50,11 +47,14 @@ public class Pregled {
 
     private Date pocetak;
     private  Date kraj;
+    @Column(name = "jbo", nullable = false)
+    private int jbo;
 
     @OneToOne
     private Termin termin;
 
     @OneToOne
+
     private TipPregleda tipPregleda;
 
     @OneToOne
@@ -66,7 +66,8 @@ public class Pregled {
     public Pregled() {
     }
 
-    public Pregled(Long id, String jbo, String email, String ime_pacijenta, String prezime_pacijenta, String grad, String drzavljanstvo, String hitnost, boolean obavljen, boolean obrisan, boolean pregled, boolean operacija) {
+    public Pregled(Long id, int jbo, String email, String ime_pacijenta, String prezime_pacijenta, String grad, String drzavljanstvo, 
+                   String hitnost, boolean obavljen, boolean obrisan, boolean pregled, boolean operacija) {
         this.id = id;
         this.jbo = jbo;
         this.email = email;
@@ -80,6 +81,7 @@ public class Pregled {
         this.pregled = pregled;
         this.operacija = operacija;
     }
+
 
     public Long getId() {
         return id;
@@ -113,11 +115,11 @@ public class Pregled {
         this.email = email;
     }
 
-    public String getJbo() {
+    public int getJbo() {
         return jbo;
     }
 
-    public void setJbo(String jbo) {
+    public void setJbo(int jbo) {
         this.jbo = jbo;
     }
 
@@ -224,4 +226,5 @@ public class Pregled {
     public void setKraj(Date kraj) {
         this.kraj = kraj;
     }
+
 }

@@ -1,6 +1,4 @@
 package com.example.ClinicalCenter.service;
-
-
 import com.example.ClinicalCenter.dto.PregledDTO;
 import com.example.ClinicalCenter.model.*;
 import com.example.ClinicalCenter.repository.LekRepository;

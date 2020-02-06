@@ -1,37 +1,45 @@
-package com.example.ClinicalCenter.dto;
+package com.example.ClinicalCenter.model;
 
-import com.example.ClinicalCenter.model.Sestra;
+import javax.persistence.*;
 
-public class SestraDTO {
+@Entity
+public class Sestra {
 
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "ime", nullable = false)
     private String ime;
+
+    @Column(name = "prezime", nullable = false)
     private String prezime;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "adresa", nullable = false)
     private String adresa;
+
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "lozinka", nullable = false)
+    private String lozinka;
+
+    @Column(name = "klinika", nullable = false)
     private String klinika;
 
-    public SestraDTO() {
+    public Sestra() {
     }
 
-    public SestraDTO(Long id, String ime, String prezime, String email, String adresa, String username, String klinika) {
-        this.id = id;
+    public Sestra(String ime, String prezime, String email, String username, String lozinka, String klinika) {
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
-        this.adresa = adresa;
         this.username = username;
+        this.lozinka = lozinka;
         this.klinika = klinika;
-    }
-    public SestraDTO(Sestra s) {
-        this.id = s.getId();
-        this.ime = s.getIme();
-        this.prezime = s.getPrezime();
-        this.email = s.getEmail();
-        this.adresa = s.getAdresa();
-        this.username = s.getUsername();
-        this.klinika = s.getKlinika();
     }
 
     public Long getId() {
@@ -72,6 +80,14 @@ public class SestraDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getLozinka() {
+        return lozinka;
+    }
+
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
     }
 
     public String getKlinika() {

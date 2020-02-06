@@ -11,7 +11,6 @@ public class PregledDTO {
     private String tipPregledaStr;
     private String prezimePacijenta;
     private String email;
-    private String jbo;
     private String grad;
     private String drzavljanstvo;
     private String hitnost;
@@ -22,6 +21,7 @@ public class PregledDTO {
     private Pacijent pacijent;
     private TipPregleda tipPregleda;
     private Lekar lekar;
+    private int jbo;
     private Termin termin;
     private Date pocetak;
     private Date kraj;
@@ -48,7 +48,8 @@ public class PregledDTO {
         this.termin = pregled.getTermin();
     }
 
-    public PregledDTO(long id, String imePacijenta, String tipPregledaStr, String prezimePacijenta, String email, String jbo, String grad, String drzavljanstvo, String hitnost, boolean obavljen, boolean obrisan, boolean pregled, boolean operacija, Date pocetak, Date kraj) {
+    public PregledDTO(long id, String imePacijenta, String tipPregledaStr, String prezimePacijenta, String email, int jbo, String grad, String drzavljanstvo, String hitnost, boolean obavljen,
+                      boolean obrisan, boolean pregled, boolean operacija, Date pocetak, Date kraj) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.tipPregledaStr = tipPregledaStr;
@@ -98,11 +99,11 @@ public class PregledDTO {
         this.email = email;
     }
 
-    public String getJbo() {
+    public int getJbo() {
         return jbo;
     }
 
-    public void setJbo(String jbo) {
+    public void setJbo(int jbo) {
         this.jbo = jbo;
     }
 
