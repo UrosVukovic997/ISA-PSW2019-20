@@ -29,6 +29,10 @@ public class PacijentService {
         return pacijentRepository.findByEmail(email);
     }
 
+    public Pacijent findByUsername(String username) {
+        return pacijentRepository.findByUsername(username);
+    }
+
     public List<Pacijent> findAll() {
         return pacijentRepository.findAll();
     }

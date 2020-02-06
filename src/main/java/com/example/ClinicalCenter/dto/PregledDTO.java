@@ -9,7 +9,7 @@ public class PregledDTO {
     private String ime_pacijenta;
     private String prezime_pacijenta;
     private String email;
-    private String jbo;
+    private int jbo;
     private Termin termin;
 
     public PregledDTO() {
@@ -19,7 +19,7 @@ public class PregledDTO {
         this(pregled.getId(),pregled.getIme_pacijenta(),pregled.getPrezime_pacijenta(),pregled.getEmail(),pregled.getJbo(),pregled.getTermin());
     }
 
-    public PregledDTO(long id, String ime_pacijenta, String prezime_pacijenta, String email, String jbo, Termin termin) {
+    public PregledDTO(long id, String ime_pacijenta, String prezime_pacijenta, String email, int jbo, Termin termin) {
         this.id = id;
         this.ime_pacijenta = ime_pacijenta;
         this.prezime_pacijenta = prezime_pacijenta;
@@ -61,11 +61,11 @@ public class PregledDTO {
         this.email = email;
     }
 
-    public String getJbo() {
+    public int getJbo() {
         return jbo;
     }
 
-    public void setJbo(String jbo) {
+    public void setJbo(int jbo) {
         this.jbo = jbo;
     }
 

@@ -4,8 +4,14 @@ package com.example.ClinicalCenter.controller;
 import com.example.ClinicalCenter.dto.PacijentDTO;
 
 import com.example.ClinicalCenter.dto.PacijentEditDTO;
+import com.example.ClinicalCenter.dto.PacijentZakaziDTO;
+import com.example.ClinicalCenter.model.Lekar;
 import com.example.ClinicalCenter.model.Pacijent;
+import com.example.ClinicalCenter.model.Pregled;
+import com.example.ClinicalCenter.model.Termin;
 import com.example.ClinicalCenter.service.PacijentService;
+import com.example.ClinicalCenter.service.PregledService;
+import com.example.ClinicalCenter.service.TerminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +33,12 @@ public class PacijentController {
     @Autowired
     private PacijentService pacijentService;
 
+    @Autowired
+    private TerminService terminService;
+
+    @Autowired
+    private PregledService pregledService;
+
 
 
     @GetMapping(value = "/zahtev", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +56,7 @@ public class PacijentController {
     @GetMapping(value = "/nadji/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PacijentEditDTO> getPacijent(@PathVariable String username) {
 
-        Pacijent pacijent = pacijentService.findOneByE_Mail(username);
+        Pacijent pacijent = pacijentService.findByUsername(username);
 
         if (pacijent == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -107,6 +119,9 @@ public class PacijentController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
+
+
     @PostMapping(path = "/zamena", consumes = "application/json")
     public ResponseEntity<Void> changePac(@RequestBody PacijentEditDTO pacijentEditDTO)  {
         //System.out.println("USLO");
@@ -139,6 +154,49 @@ public class PacijentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
+    @GetMapping(value = "/nadjiKliniku/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PacijentEditDTO> getKlinika(@PathVariable String email) {
+
+        Pacijent pacijent = pacijentService.findOneByE_Mail(email);
+
+        if (pacijent == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new PacijentEditDTO(pacijent), HttpStatus.OK);
+    }
+
+
+    @PostMapping(path = "/zakazivanje", consumes = "application/json")
+    public ResponseEntity<Void> Zakazi(@RequestBody PacijentZakaziDTO pacijentZakaziDTO)  {
+
+        Pacijent p = pacijentService.findOneByEMail(pacijentZakaziDTO.getEmail());
+        if (p == null) {
+            System.out.println("jeste");
+        }
+        Termin t = new Termin();
+        Pregled pregled= new Pregled();
+        Lekar lekar = new Lekar();
+
+        pregled.setEmail(pacijentZakaziDTO.getEmail());
+        pregled.setIme_pacijenta(pacijentZakaziDTO.getImePacijenta());
+        pregled.setJbo(pacijentZakaziDTO.getJbo());
+        pregled.setPrezime_pacijenta(pacijentZakaziDTO.getPrezimePacijenta());
+        pregled.setLekar(pacijentZakaziDTO.getLekar());
+
+        t.setPocetak(pacijentZakaziDTO.getPocetak());
+        t.setKraj(pacijentZakaziDTO.getKraj());
+
+
+
+        // fali i pronalazak lekara preko emaila i njegovo setovanje za ovaj pregled
+
+        // p = pregledService.save(pregled);
+        // t= terminService.save(t);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

@@ -24,3 +24,4 @@ VALUES ('pera@uns.ac.rs', 'Pera', 'Kamenica', '123456', 'Garava', 'admin');
 
 INSERT INTO adminkc (email, ime, lozinka, prezime, prvo_prijavljivanje, username)
 VALUES ('perakc@uns.ac.rs', 'Pera', '123456', 'Gargarin', 1, 'adminkc');
+
