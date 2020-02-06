@@ -1,6 +1,7 @@
 package com.example.ClinicalCenter.service;
 
 import com.example.ClinicalCenter.model.Dijagnoza;
+import com.example.ClinicalCenter.model.Pacijent;
 import com.example.ClinicalCenter.repository.DijagnozaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

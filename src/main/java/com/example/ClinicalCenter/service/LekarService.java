@@ -36,4 +36,7 @@ public class LekarService {
     public Lekar findOne(Long id) {
         return lekarRepository.findById(id).orElseGet(null );
     }
+
+    public void deleteById(Long id){ lekarRepository.deleteById(id); }
+
 }

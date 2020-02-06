@@ -59,6 +59,10 @@ public class Pacijent implements UserDetails {
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 
+    @Column(name = "deleted")
+    private boolean obrisan;
+
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -69,6 +73,9 @@ public class Pacijent implements UserDetails {
     @JsonIgnore
     private Lekar lekar;
 
+    @OneToMany(mappedBy = "pacijent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Dijagnoza dijagnoza;
 
     public Pacijent() {
         imePacijenta = "";
@@ -84,9 +91,10 @@ public class Pacijent implements UserDetails {
         username="";
         lekar = null;
         rodjen = null;
+        obrisan = false;
     }
 
-    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, Date rodjen) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, Date rodjen, boolean obrisan) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -102,6 +110,7 @@ public class Pacijent implements UserDetails {
         this.username= username;
         this.lekar = lekar;
         this.rodjen = rodjen;
+        this.obrisan = obrisan;
     }
 
     public Lekar getLekar() { return lekar; }
@@ -182,10 +191,7 @@ public class Pacijent implements UserDetails {
     }
 
 
-    public void setJbo(Integer jbo) {
-        this.jbo = jbo;
-
-    }
+    public void setJbo(Integer jbo) { this.jbo = jbo; }
 
     public Boolean getOdobren() {
         return odobren;
@@ -210,6 +216,10 @@ public class Pacijent implements UserDetails {
     public Date getRodjen() { return rodjen; }
 
     public void setRodjen(Date rodjen) { this.rodjen = rodjen; }
+
+    public boolean isObrisan() { return obrisan; }
+
+    public void setObrisan(boolean obrisan) { this.obrisan = obrisan; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -27,7 +27,7 @@ public class Pregled {
     @Column(name = "lastName", nullable = false)
     private String prezime_pacijenta;
 
-    @Column(name = "town", nullable = false)
+    @Column(name = "town", nullable = true)
     private String grad;
 
     @Column(name = "nationality", nullable = false)
@@ -36,8 +36,20 @@ public class Pregled {
     @Column(name = "emergency", nullable = false)
     private String hitnost;
 
-    @Column(name = "type", nullable = false)
-    private String tip;
+    @Column(name = "done", nullable = false)
+    private boolean obavljen;
+
+    @Column(name = "deleted", nullable = false)
+    private boolean obrisan;
+
+    @Column(name = "visit", nullable = false)
+    private boolean pregled;
+
+    @Column(name = "operation", nullable = false)
+    private boolean operacija;
+
+    private Date pocetak;
+    private  Date kraj;
 
     @OneToOne
     private Termin termin;
@@ -54,14 +66,20 @@ public class Pregled {
     public Pregled() {
     }
 
-    public Pregled(Long id, String ime_pacijenta, String prezime_pacijenta, String email, String jbo) {
+    public Pregled(Long id, String jbo, String email, String ime_pacijenta, String prezime_pacijenta, String grad, String drzavljanstvo, String hitnost, boolean obavljen, boolean obrisan, boolean pregled, boolean operacija) {
         this.id = id;
+        this.jbo = jbo;
+        this.email = email;
         this.ime_pacijenta = ime_pacijenta;
         this.prezime_pacijenta = prezime_pacijenta;
-        this.email = email;
-        this.jbo = jbo;
+        this.grad = grad;
+        this.drzavljanstvo = drzavljanstvo;
+        this.hitnost = hitnost;
+        this.obavljen = obavljen;
+        this.obrisan = obrisan;
+        this.pregled = pregled;
+        this.operacija = operacija;
     }
-
 
     public Long getId() {
         return id;
@@ -109,5 +127,101 @@ public class Pregled {
 
     public void setTermin(Termin termin) {
         this.termin = termin;
+    }
+
+    public String getGrad() {
+        return grad;
+    }
+
+    public void setGrad(String grad) {
+        this.grad = grad;
+    }
+
+    public String getDrzavljanstvo() {
+        return drzavljanstvo;
+    }
+
+    public void setDrzavljanstvo(String drzavljanstvo) {
+        this.drzavljanstvo = drzavljanstvo;
+    }
+
+    public String getHitnost() {
+        return hitnost;
+    }
+
+    public void setHitnost(String hitnost) {
+        this.hitnost = hitnost;
+    }
+
+    public boolean isObavljen() {
+        return obavljen;
+    }
+
+    public void setObavljen(boolean obavljen) {
+        this.obavljen = obavljen;
+    }
+
+    public boolean isObrisan() {
+        return obrisan;
+    }
+
+    public void setObrisan(boolean obrisan) {
+        this.obrisan = obrisan;
+    }
+
+    public TipPregleda getTipPregleda() {
+        return tipPregleda;
+    }
+
+    public void setTipPregleda(TipPregleda tipPregleda) {
+        this.tipPregleda = tipPregleda;
+    }
+
+    public Lekar getLekar() {
+        return lekar;
+    }
+
+    public void setLekar(Lekar lekar) {
+        this.lekar = lekar;
+    }
+
+    public Pacijent getPacijent() {
+        return pacijent;
+    }
+
+    public void setPacijent(Pacijent pacijent) {
+        this.pacijent = pacijent;
+    }
+
+    public boolean isPregled() {
+        return pregled;
+    }
+
+    public void setPregled(boolean pregled) {
+        this.pregled = pregled;
+    }
+
+    public boolean isOperacija() {
+        return operacija;
+    }
+
+    public void setOperacija(boolean operacija) {
+        this.operacija = operacija;
+    }
+
+    public Date getPocetak() {
+        return pocetak;
+    }
+
+    public void setPocetak(Date pocetak) {
+        this.pocetak = pocetak;
+    }
+
+    public Date getKraj() {
+        return kraj;
+    }
+
+    public void setKraj(Date kraj) {
+        this.kraj = kraj;
     }
 }
