@@ -21,8 +21,8 @@ VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad
 INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
 VALUES (2,1);
 
-INSERT INTO karton (broj, pacijent_id)
-VALUES (1549,1);
+INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
+VALUES (1549,'AB+','+0.5',1);
 
 INSERT INTO dijagnoza (id, naziv_dijagnoze, opis_dijagnoze)
 VALUES (1, 'Tahikardija', 'Nepravilan rad srca');

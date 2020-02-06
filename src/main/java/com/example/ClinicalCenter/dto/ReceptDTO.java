@@ -15,11 +15,8 @@ public class ReceptDTO {
     private String imeLekara;
     private String klinika;
     private Set<Lek> lekovi;
-    private boolean overen;
 
     public ReceptDTO() {
-        this.lekovi = new HashSet<>();
-        this.overen = false;
     }
 
     public ReceptDTO(Long id, String imePacijenta, String jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {
@@ -29,7 +26,6 @@ public class ReceptDTO {
         this.imeLekara = imeLekara;
         this.klinika = klinika;
         this.lekovi = lekovi;
-        this.overen = overen;
     }
     public ReceptDTO(Recept recept) {
         this.id = recept.getId();
@@ -38,7 +34,6 @@ public class ReceptDTO {
         this.imeLekara = recept.getImeLekara();
         this.klinika = recept.getKlinika();
         this.lekovi = recept.getLekovi();
-        this.overen = recept.isOveren();
     }
 
     public Long getId() {
@@ -89,11 +84,4 @@ public class ReceptDTO {
         this.lekovi = lekovi;
     }
 
-    public boolean isOveren() {
-        return overen;
-    }
-
-    public void setOveren(boolean overen) {
-        this.overen = overen;
-    }
 }

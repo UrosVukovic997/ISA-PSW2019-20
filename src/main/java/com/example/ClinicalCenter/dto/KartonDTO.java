@@ -10,7 +10,9 @@ import java.util.Set;
 public class KartonDTO {
 
     private long id;
-    private Integer broj;    /*zbog baze*/
+    private Integer broj;
+    private  String krvnaGrupa;
+    private  String dioptrija;
     private Set<Dijagnoza> dijagnoze;
     private Set<Pregled> pregledi;
     private Integer jbo;
@@ -24,6 +26,8 @@ public class KartonDTO {
     public KartonDTO(Karton karton) {
         this.id = karton.getId();
         this.broj = karton.getBroj();
+        this.krvnaGrupa = karton.getKrvnaGrupa();
+        this.dioptrija = karton.getDioptrija();
         this.dijagnoze = karton.getDijagnoze();
         this.pregledi = karton.getPregledi();
         this.jbo = karton.getPacijent().getJbo();
@@ -31,9 +35,12 @@ public class KartonDTO {
         this.prezime = karton.getPacijent().getPrezimePacijenta();
     }
 
-    public KartonDTO(long id, Integer broj, Set<Dijagnoza> dijagnoze, Set<Pregled> pregledi, Integer jbo, String ime, String prezime) {
+    public KartonDTO(long id, Integer broj, String krvnaGrupa, String dioptrija, Set<Dijagnoza> dijagnoze,
+                     Set<Pregled> pregledi, Integer jbo, String ime, String prezime) {
         this.id = id;
         this.broj = broj;
+        this.krvnaGrupa = krvnaGrupa;
+        this.dioptrija = dioptrija;
         this.dijagnoze = dijagnoze;
         this.pregledi = pregledi;
         this.jbo = jbo;
@@ -95,5 +102,21 @@ public class KartonDTO {
 
     public void setPrezime(String prezime) {
         this.prezime = prezime;
+    }
+
+    public String getKrvnaGrupa() {
+        return krvnaGrupa;
+    }
+
+    public void setKrvnaGrupa(String krvnaGrupa) {
+        this.krvnaGrupa = krvnaGrupa;
+    }
+
+    public String getDioptrija() {
+        return dioptrija;
+    }
+
+    public void setDioptrija(String dioptrija) {
+        this.dioptrija = dioptrija;
     }
 }

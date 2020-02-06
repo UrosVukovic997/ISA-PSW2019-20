@@ -104,8 +104,9 @@ public class SestraController {
 
     }
 
-    @GetMapping(path = "/recepti/{klinika}")
-    public ResponseEntity<List<ReceptDTO>> getRecepte(@PathVariable String klinika){
+    @GetMapping(path = "/recepti/{username}")
+    public ResponseEntity<List<ReceptDTO>> getRecepte(@PathVariable String username){
+        String klinika = sestraService.FindByUsername(username).getKlinika();
         List<Recept> recepts = receptService.findByKlinika(klinika);
         if(recepts == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

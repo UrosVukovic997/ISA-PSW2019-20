@@ -48,7 +48,6 @@ public class Recept {
         this.imeLekara = recept.getImeLekara();
         this.klinika = recept.getKlinika();
         this.lekovi = recept.getLekovi();
-        this.overen = recept.isOveren();
     }
 
     public Recept() {
