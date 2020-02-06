@@ -11,4 +11,5 @@ public class PacijentPrikazDTO {
     private String brojTelefona;
     private int jbo;
     private String username;
+
 }

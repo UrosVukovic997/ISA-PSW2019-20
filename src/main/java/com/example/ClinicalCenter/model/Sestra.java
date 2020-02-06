@@ -18,6 +18,9 @@ public class Sestra {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "adresa", nullable = false)
+    private String adresa;
+
     @Column(name = "username", nullable = false)
     private String username;
 
@@ -93,5 +96,13 @@ public class Sestra {
 
     public void setKlinika(String klinika) {
         this.klinika = klinika;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
     }
 }
