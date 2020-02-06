@@ -29,6 +29,7 @@ public interface PacijentRepository extends JpaRepository<Pacijent, Long> {
 
     Pacijent findByEmail(String eMail);
     Pacijent findByJbo(Integer jbo);
+    Pacijent findByUsername(String Username);
 
 
 }

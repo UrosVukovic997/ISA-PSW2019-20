@@ -16,4 +16,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, Lo
     Administrator save(Administrator administrator);
 
     void deleteById(Long id);
+
+    Administrator findByUsername(String Username);
+    Administrator findByEmail(String email);
 }

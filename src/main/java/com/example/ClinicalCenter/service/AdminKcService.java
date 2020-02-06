@@ -18,4 +18,5 @@ public class AdminKcService {
     public int updateAdmin(Long id, String ime, String prezime, String email){return adminKcRepository.updateAdmin(id,ime,prezime,email);}
 
     public AdminKC getByUsername(String username){return adminKcRepository.getAdminKCByUsername(username);}
+    public AdminKC getByEmail(String email){return adminKcRepository.getAdminKCByEmail(email);}
 }
