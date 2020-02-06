@@ -13,24 +13,33 @@ public class KartonDTO {
     private Integer broj;    /*zbog baze*/
     private Set<Dijagnoza> dijagnoze;
     private Set<Pregled> pregledi;
+    private Integer jbo;
+    private String ime;
+    private String prezime;
 
 
     public KartonDTO() {
     }
 
-    public KartonDTO(Karton karton){
-        this(karton.getId(),karton.getBroj(),karton.getDijagnoze(),karton.getPregledi());
+    public KartonDTO(Karton karton) {
+        this.id = karton.getId();
+        this.broj = karton.getBroj();
+        this.dijagnoze = karton.getDijagnoze();
+        this.pregledi = karton.getPregledi();
+        this.jbo = karton.getPacijent().getJbo();
+        this.ime = karton.getPacijent().getImePacijenta();
+        this.prezime = karton.getPacijent().getPrezimePacijenta();
     }
 
-    public KartonDTO(long id, Integer broj, Set<Dijagnoza> dijagnoze, Set<Pregled> pregledi) {
+    public KartonDTO(long id, Integer broj, Set<Dijagnoza> dijagnoze, Set<Pregled> pregledi, Integer jbo, String ime, String prezime) {
         this.id = id;
         this.broj = broj;
         this.dijagnoze = dijagnoze;
         this.pregledi = pregledi;
-
+        this.jbo = jbo;
+        this.ime = ime;
+        this.prezime = prezime;
     }
-
-
 
     public long getId() {
         return id;
@@ -64,7 +73,27 @@ public class KartonDTO {
         this.pregledi = pregledi;
     }
 
+    public Integer getJbo() {
+        return jbo;
+    }
 
+    public void setJbo(Integer jbo) {
+        this.jbo = jbo;
+    }
 
+    public String getIme() {
+        return ime;
+    }
 
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public String getPrezime() {
+        return prezime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
 }

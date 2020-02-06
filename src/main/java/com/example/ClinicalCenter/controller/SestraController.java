@@ -9,6 +9,7 @@ import com.example.ClinicalCenter.service.KartonService;
 import com.example.ClinicalCenter.service.KlinikaService;
 import com.example.ClinicalCenter.service.PacijentService;
 import com.example.ClinicalCenter.service.SestraService;
+import org.hibernate.mapping.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -59,12 +60,12 @@ public class SestraController {
         return ResponseEntity.ok(kalendarDTO);
     }
 
-    @GetMapping(path = "/getKarton/{pacijent}")
-    public ResponseEntity<KartonDTO> getKarton(@PathVariable Long pacijent){
-        Pacijent p = pacijentService.findOne(pacijent);
+    @GetMapping(path = "/getKarton/{jbo}")
+    public ResponseEntity<KartonDTO> getKarton(@PathVariable Integer jbo){
+        Pacijent p = pacijentService.findByJbo(jbo);
         Karton karton = kartonService.findByPacijent(p);
         KartonDTO kartonDTO = new KartonDTO(karton);
-        return new ResponseEntity<>(kartonDTO, HttpStatus.FOUND);
+        return new ResponseEntity<>(kartonDTO, HttpStatus.OK);
     }
 
     @GetMapping(path = "/getprofil/{username}")
@@ -76,10 +77,9 @@ public class SestraController {
 
     @PostMapping(path = "/editprofil", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> editProfil(@RequestBody SestraDTO sestraDTO){
-        System.out.println(sestraDTO.getAdresa());
-        Sestra sestra = sestraService.FindByUsername(sestraDTO.getUsername());
+        Sestra sestra = sestraService.FindByEmail(sestraDTO.getEmail());
         sestra.setAdresa(sestraDTO.getAdresa());
-        sestra.setEmail(sestraDTO.getEmail());
+        sestra.setUsername(sestraDTO.getUsername());
         sestra.setIme(sestraDTO.getIme());
         sestra.setPrezime(sestraDTO.getPrezime());
         Sestra s = sestraService.save(sestra);
@@ -87,5 +87,23 @@ public class SestraController {
             return new ResponseEntity<>(HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @PostMapping(path = "/changepassword", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> changePassword(@RequestBody  ChangepasswordDTO changepasswordDTO){
+        Sestra sestra = sestraService.FindByUsername(changepasswordDTO.getUsername());
+        if(sestra.getLozinka().equals(changepasswordDTO.getOldPassword())){
+            sestra.setLozinka(changepasswordDTO.getNewPassword());
+            Sestra s = sestraService.save(sestra);
+            if(s != null){
+                return  new ResponseEntity<>(HttpStatus.ACCEPTED);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            }
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 }

@@ -41,6 +41,7 @@ public class PacijentService {
         return pacijentRepository.save(student);
     }
 
+    public Pacijent findByJbo(Integer jbo) {return pacijentRepository.findByJbo(jbo);}
 
 
     public void remove(Long id) {
