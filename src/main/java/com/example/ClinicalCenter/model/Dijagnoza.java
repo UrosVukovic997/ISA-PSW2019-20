@@ -1,5 +1,7 @@
 package com.example.ClinicalCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -14,6 +16,7 @@ public class Dijagnoza {
 
     @Column(name = "opisDijagnoze", nullable = true)
     private String opisDijagnoze;
+
 
     public Dijagnoza() {
     }

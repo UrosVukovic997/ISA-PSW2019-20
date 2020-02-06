@@ -34,6 +34,31 @@ VALUES (4, 'Konjuktivitis', 'Bolest ociju');
 INSERT INTO karton_dijagnoze (karton_id, dijagnoze_id)
 VALUES (1,1);
 
+
+INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo, last_password_reset_date, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj, deleted)
+VALUES ('Maksima Gorkog 55.', '066246619', 'Srbija', 'gonjo@gmail.com', 'Novi Sad', 'Zivorad', '226220', '1961-09-06 18:57:58', 1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Kasapinovic', 'Slovak', 1, '1990-10-06', 0);
+
+
+
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Pregled Glave', 0, 1650);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('ORL', 0, 842);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Ginekologija', 0, 2600);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Urologija', 0, 1400);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Zubar', 0, 650);
+
+INSERT INTO tip_pregleda (name, deleted, price)
+VALUES ('Plucni', 0, 805);
+
 INSERT INTO karton_dijagnoze (karton_id, dijagnoze_id)
 VALUES (1,4);
 

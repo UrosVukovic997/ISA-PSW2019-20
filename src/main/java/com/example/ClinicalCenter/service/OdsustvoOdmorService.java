@@ -18,7 +18,7 @@ public class OdsustvoOdmorService {
 
     public OdsustvoOdmor zahtev(OdsustvoOdmorDTO odsustvoOdmorDTO, Lekar lekar) {
 
-        OdsustvoOdmor odsustvoOdmor = new OdsustvoOdmor(odsustvoOdmorDTO.getPocetak(),odsustvoOdmorDTO.getKraj(),odsustvoOdmorDTO.getGodisnji(),odsustvoOdmorDTO.getOdsustvo());
+        OdsustvoOdmor odsustvoOdmor = new OdsustvoOdmor(odsustvoOdmorDTO.getPocetak(),odsustvoOdmorDTO.getKraj(),odsustvoOdmorDTO.isGodisnji(),odsustvoOdmorDTO.isOdsustvo(),odsustvoOdmorDTO.getObrazlozenje());
         odsustvoOdmor.setLekar(lekar);
         lekar.getOdsustvoOdmori().add(odsustvoOdmor);
 

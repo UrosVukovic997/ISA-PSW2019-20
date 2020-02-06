@@ -1,19 +1,12 @@
 package com.example.ClinicalCenter.controller;
 
-import com.example.ClinicalCenter.dto.LekDTO;
-import com.example.ClinicalCenter.dto.LekarDTO;
-import com.example.ClinicalCenter.model.Klinika;
-import com.example.ClinicalCenter.model.Lek;
-import com.example.ClinicalCenter.model.Lekar;
-import com.example.ClinicalCenter.service.LekService;
-import com.example.ClinicalCenter.service.PacijentService;
-import com.example.ClinicalCenter.service.LekarService;
+import com.example.ClinicalCenter.dto.*;
+import com.example.ClinicalCenter.model.*;
+import com.example.ClinicalCenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.ClinicalCenter.model.Pacijent;
-import com.example.ClinicalCenter.dto.PacijentDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +20,12 @@ public class LekarController {
 
     @Autowired
     private PacijentService pacijentService;
+
+    @Autowired
+    private PregledService pregledService;
+
+    @Autowired
+    private DijagnozaService dijagnozaService;
 
 
     @GetMapping(value = "/all")
@@ -61,8 +60,10 @@ public class LekarController {
         List<Pacijent> pacijenti=pacijentService.findAll();
         List<PacijentDTO> pacijentDTOS= new ArrayList<>();
         for (Pacijent p: pacijenti) {
-            System.out.println(p.getEmail());
-            pacijentDTOS.add(new PacijentDTO(p));
+            if (p.isObrisan() == false) {
+                System.out.println(p.getEmail());
+                pacijentDTOS.add(new PacijentDTO(p));
+            }
         }
         return new ResponseEntity<>(pacijentDTOS, HttpStatus.OK);
     }
@@ -76,4 +77,35 @@ public class LekarController {
 
         return new ResponseEntity<>(new LekarDTO(lekar), HttpStatus.OK);
     }
+
+    @PostMapping(path = "/zakaziPregled/{id}")
+    public ResponseEntity<?> zakaziPregled(@RequestBody PregledDTO pregledDTO, @PathVariable Long id) {
+        this.pregledService.zakaziPregled(pregledDTO, id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/obrisi{id}")
+    public ResponseEntity<Void> deletePacijent(@PathVariable Long id) {
+        Pacijent pacijent = pacijentService.findOne(id);
+        pacijentService.delete(pacijent);
+        pacijentService.save(pacijent);
+
+        return new ResponseEntity<>((HttpStatus.OK));
+
+    }
+
+    @GetMapping(value = "/getPacijent{id}")
+    public Pacijent getPacijent(@PathVariable Long id) {
+
+        return this.pacijentService.findOne(id);
+    }
+    /*
+    @GetMapping(value = "/getDijagPacijent{id}")
+    public List<Dijagnoza> getDijagnoze(@PathVariable Long id) {
+
+        return this.dijagnozaService.dijagnozePacijenta(pacijentService.findOne(id));
+    }
+
+    */
 }

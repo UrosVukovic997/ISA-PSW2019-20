@@ -11,20 +11,22 @@ public class OdsustvoOdmorDTO {
     private Date kraj;
     private boolean godisnji;
     private boolean odsustvo;
+    private String obrazlozenje;
 
     public OdsustvoOdmorDTO() {
     }
 
     public OdsustvoOdmorDTO(OdsustvoOdmor odsustvoOdmor) {
-        this(odsustvoOdmor.getId(), odsustvoOdmor.getPocetak(), odsustvoOdmor.getKraj(), odsustvoOdmor.getGodisnji(), odsustvoOdmor.getOdsustvo());
+        this(odsustvoOdmor.getId(), odsustvoOdmor.getPocetak(), odsustvoOdmor.getKraj(), odsustvoOdmor.getGodisnji(), odsustvoOdmor.getOdsustvo(), odsustvoOdmor.getObrazlozenje());
     }
 
-    public OdsustvoOdmorDTO(Long id, Date pocetak, Date kraj, Boolean godisnji, Boolean odsustvo) {
+    public OdsustvoOdmorDTO(Long id, Date pocetak, Date kraj, Boolean godisnji, Boolean odsustvo, String obrazlozenje) {
         this.id = id;
         this.pocetak = pocetak;
         this.kraj = kraj;
         this.godisnji = godisnji;
         this.odsustvo = odsustvo;
+        this.obrazlozenje = obrazlozenje;
     }
 
     public Long getId() {
@@ -51,19 +53,15 @@ public class OdsustvoOdmorDTO {
         this.kraj = kraj;
     }
 
-    public boolean getGodisnji() {
-        return godisnji;
-    }
+    public boolean isGodisnji() { return godisnji; }
 
-    public void setGodisnji(boolean godisnji) {
-        this.godisnji = godisnji;
-    }
+    public void setGodisnji(boolean godisnji) { this.godisnji = godisnji; }
 
-    public boolean getOdsustvo() {
-        return odsustvo;
-    }
+    public boolean isOdsustvo() { return odsustvo; }
 
-    public void setOdsustvo(boolean odsustvo) {
-        this.odsustvo = odsustvo;
-    }
+    public void setOdsustvo(boolean odsustvo) { this.odsustvo = odsustvo; }
+
+    public String getObrazlozenje() { return obrazlozenje; }
+
+    public void setObrazlozenje(String obrazlozenje) { this.obrazlozenje = obrazlozenje; }
 }

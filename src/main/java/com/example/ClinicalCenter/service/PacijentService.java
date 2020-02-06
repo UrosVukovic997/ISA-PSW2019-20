@@ -41,10 +41,11 @@ public class PacijentService {
         return pacijentRepository.findAll(page);
     }
 
-    public Pacijent save(Pacijent student) {
-        return pacijentRepository.save(student);
+    public Pacijent save(Pacijent pacijent) {
+        return pacijentRepository.save(pacijent);
     }
 
+    public void delete(Pacijent pacijent) { pacijent.setObrisan(true); }
     public Pacijent findByJbo(Integer jbo) {return pacijentRepository.findByJbo(jbo);}
 
 

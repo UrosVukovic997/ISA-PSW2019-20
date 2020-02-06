@@ -56,9 +56,15 @@ public class Pacijent {
     @Column(name = "potvrdio", nullable = false)
     private Boolean potvrdio;
 
+    @Column(name = "deleted")
+    private boolean obrisan;
 
 
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private List<Authority> authorities;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -78,10 +84,11 @@ public class Pacijent {
         odobren = false;
         username="";
         lekar = null;
-        rodjen = "1988-10-06";
+        rodjen = null;
+        obrisan = false;
     }
 
-    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, String rodjen) {
+    public Pacijent(Long id, String imePacijenta, String prezimePacijenta, String email, String lozinka, String adresa, String grad, String drzava, String brojTelefona, Integer jbo, Boolean odobren, String username, Lekar lekar, Date rodjen, boolean obrisan) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
@@ -97,6 +104,7 @@ public class Pacijent {
         this.username= username;
         this.lekar = lekar;
         this.rodjen = rodjen;
+        this.obrisan = obrisan;
     }
 
     public Lekar getLekar() { return lekar; }
@@ -177,10 +185,7 @@ public class Pacijent {
     }
 
 
-    public void setJbo(Integer jbo) {
-        this.jbo = jbo;
-
-    }
+    public void setJbo(Integer jbo) { this.jbo = jbo; }
 
     public Boolean getOdobren() {
         return odobren;
@@ -202,7 +207,10 @@ public class Pacijent {
 
     public String getRodjen() { return rodjen; }
 
-    public void setRodjen(String rodjen) { this.rodjen = rodjen; }
+    public boolean isObrisan() { return obrisan; }
+
+    public void setObrisan(boolean obrisan) { this.obrisan = obrisan; }
+
 
 
     public String getUsername() {
