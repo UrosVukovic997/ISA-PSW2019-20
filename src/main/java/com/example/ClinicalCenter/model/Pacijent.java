@@ -73,9 +73,6 @@ public class Pacijent implements UserDetails {
     @JsonIgnore
     private Lekar lekar;
 
-    @OneToMany(mappedBy = "pacijent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Dijagnoza dijagnoza;
 
     public Pacijent() {
         imePacijenta = "";

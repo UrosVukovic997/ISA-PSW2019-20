@@ -17,9 +17,6 @@ public class Dijagnoza {
     @Column(name = "opisDijagnoze", nullable = true)
     private String opisDijagnoze;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Pacijent pacijent;
 
     public Dijagnoza() {
     }
