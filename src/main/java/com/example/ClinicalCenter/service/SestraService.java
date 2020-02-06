@@ -12,5 +12,9 @@ public class SestraService {
     private SestraRepository sestraRepository;
 
     public Sestra FindByUsername(String username){return sestraRepository.findByUsername(username);}
-    public Sestra FindByEmail(String email){return sestraRepository.findByEmail(email);}
+
+    public Sestra save(Sestra sestra) {return  sestraRepository.save(sestra);}
+
+    public Sestra FindByEmail(String email){return  sestraRepository.findByEmail(email);}
+
 }
