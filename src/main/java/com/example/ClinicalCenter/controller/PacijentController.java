@@ -2,7 +2,6 @@ package com.example.ClinicalCenter.controller;
 
 
 import com.example.ClinicalCenter.dto.PacijentDTO;
-
 import com.example.ClinicalCenter.dto.PacijentEditDTO;
 import com.example.ClinicalCenter.dto.PacijentZakaziDTO;
 import com.example.ClinicalCenter.model.Lekar;

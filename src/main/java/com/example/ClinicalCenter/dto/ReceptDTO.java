@@ -1,0 +1,99 @@
+package com.example.ClinicalCenter.dto;
+
+import com.example.ClinicalCenter.model.Lek;
+import com.example.ClinicalCenter.model.Recept;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+public class ReceptDTO {
+
+    private Long id;
+    private String imePacijenta;
+    private String jboPacijenta;
+    private String imeLekara;
+    private String klinika;
+    private Set<Lek> lekovi;
+    private boolean overen;
+
+    public ReceptDTO() {
+        this.lekovi = new HashSet<>();
+        this.overen = false;
+    }
+
+    public ReceptDTO(Long id, String imePacijenta, String jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {
+        this.id = id;
+        this.imePacijenta = imePacijenta;
+        this.jboPacijenta = jboPacijenta;
+        this.imeLekara = imeLekara;
+        this.klinika = klinika;
+        this.lekovi = lekovi;
+        this.overen = overen;
+    }
+    public ReceptDTO(Recept recept) {
+        this.id = recept.getId();
+        this.imePacijenta = recept.getImePacijenta();
+        this.jboPacijenta = recept.getJboPacijenta();
+        this.imeLekara = recept.getImeLekara();
+        this.klinika = recept.getKlinika();
+        this.lekovi = recept.getLekovi();
+        this.overen = recept.isOveren();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImePacijenta() {
+        return imePacijenta;
+    }
+
+    public void setImePacijenta(String imePacijenta) {
+        this.imePacijenta = imePacijenta;
+    }
+
+    public String getJboPacijenta() {
+        return jboPacijenta;
+    }
+
+    public void setJboPacijenta(String jboPacijenta) {
+        this.jboPacijenta = jboPacijenta;
+    }
+
+    public String getImeLekara() {
+        return imeLekara;
+    }
+
+    public void setImeLekara(String imeLekara) {
+        this.imeLekara = imeLekara;
+    }
+
+    public String getKlinika() {
+        return klinika;
+    }
+
+    public void setKlinika(String klinika) {
+        this.klinika = klinika;
+    }
+
+    public Set<Lek> getLekovi() {
+        return lekovi;
+    }
+
+    public void setLekovi(Set<Lek> lekovi) {
+        this.lekovi = lekovi;
+    }
+
+    public boolean isOveren() {
+        return overen;
+    }
+
+    public void setOveren(boolean overen) {
+        this.overen = overen;
+    }
+}
