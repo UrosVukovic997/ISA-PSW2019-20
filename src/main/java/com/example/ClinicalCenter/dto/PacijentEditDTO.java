@@ -2,6 +2,8 @@ package com.example.ClinicalCenter.dto;
 
 import com.example.ClinicalCenter.model.Pacijent;
 
+import java.util.Date;
+
 public class PacijentEditDTO {
     private String imePacijenta;
     private String prezimePacijenta;
@@ -11,10 +13,10 @@ public class PacijentEditDTO {
     private String drzava;
     private String brojTelefona;
     private String username;
-    private String rodjen;
+    private Date rodjen;
     private int jbo;
 
-    public PacijentEditDTO(String imePacijenta, String prezimePacijenta, String email, String adresa, String grad, String drzava, String brojTelefona, String username,  String rodjen) {
+    public PacijentEditDTO(String imePacijenta, String prezimePacijenta, String email, String adresa, String grad, String drzava, String brojTelefona, String username,  Date rodjen) {
         this.imePacijenta = imePacijenta;
         this.prezimePacijenta = prezimePacijenta;
         this.email = email;
@@ -103,11 +105,11 @@ public class PacijentEditDTO {
         this.username = username;
     }
 
-    public String getRodjen() {
+    public Date getRodjen() {
         return rodjen;
     }
 
-    public void setRodjen(String rodjen) {
+    public void setRodjen(Date rodjen) {
         this.rodjen = rodjen;
     }
 
