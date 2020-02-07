@@ -5,6 +5,18 @@ import com.example.ClinicalCenter.dto.*;
 
 import com.example.ClinicalCenter.model.*;
 import com.example.ClinicalCenter.service.*;
+
+import com.example.ClinicalCenter.dto.PacijentDTO;
+import com.example.ClinicalCenter.dto.PacijentEditDTO;
+import com.example.ClinicalCenter.dto.PacijentZakaziDTO;
+import com.example.ClinicalCenter.model.Lekar;
+import com.example.ClinicalCenter.model.Pacijent;
+import com.example.ClinicalCenter.model.Pregled;
+import com.example.ClinicalCenter.model.Termin;
+import com.example.ClinicalCenter.service.PacijentService;
+import com.example.ClinicalCenter.service.PregledService;
+import com.example.ClinicalCenter.service.TerminService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
