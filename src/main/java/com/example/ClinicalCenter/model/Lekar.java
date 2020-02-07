@@ -37,6 +37,9 @@ public class Lekar {
     @Column(name = "description", nullable = false)
     private String opis;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Termin> termin;
+
 
     @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -45,6 +48,8 @@ public class Lekar {
     @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<OdsustvoOdmor> odsustvoOdmori = new HashSet<OdsustvoOdmor>();
+
+
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -132,4 +137,12 @@ public class Lekar {
     public Set<OdsustvoOdmor> getOdsustvoOdmori() { return odsustvoOdmori; }
 
     public void setOdsustvoOdmori(Set<OdsustvoOdmor> odsustvoOdmori) { this.odsustvoOdmori = odsustvoOdmori; }
+
+    public Set<Termin> getTermin() {
+        return termin;
+    }
+
+    public void setTermin(Set<Termin> termin) {
+        this.termin = termin;
+    }
 }

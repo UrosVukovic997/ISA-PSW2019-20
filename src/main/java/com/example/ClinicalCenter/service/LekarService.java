@@ -47,5 +47,7 @@ public class LekarService {
         return lekarRepository.findByEmail(email);
     }
 
-
+    public Lekar findByKlinika(String email) {
+        return lekarRepository.findByEmail(email);
+    }
 }

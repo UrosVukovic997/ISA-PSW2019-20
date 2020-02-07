@@ -1,17 +1,10 @@
 package com.example.ClinicalCenter.controller;
 
 
-import com.example.ClinicalCenter.dto.PacijentDTO;
+import com.example.ClinicalCenter.dto.*;
 
-import com.example.ClinicalCenter.dto.PacijentEditDTO;
-import com.example.ClinicalCenter.dto.PacijentZakaziDTO;
-import com.example.ClinicalCenter.model.Lekar;
-import com.example.ClinicalCenter.model.Pacijent;
-import com.example.ClinicalCenter.model.Pregled;
-import com.example.ClinicalCenter.model.Termin;
-import com.example.ClinicalCenter.service.PacijentService;
-import com.example.ClinicalCenter.service.PregledService;
-import com.example.ClinicalCenter.service.TerminService;
+import com.example.ClinicalCenter.model.*;
+import com.example.ClinicalCenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -38,6 +34,15 @@ public class PacijentController {
 
     @Autowired
     private PregledService pregledService;
+
+    @Autowired
+    private KlinikaService klinikaService;
+
+    @Autowired
+    private LekarService lekarService;
+
+    @Autowired
+    private TipPregledaService tipPregledaService;
 
 
 
@@ -108,6 +113,7 @@ public class PacijentController {
         pacijent.setRodjen(pacijentDTO.getRodjen());
         pacijent.setOdobren(false);
         pacijent.setPotvrdio(false);
+        pacijent.setObrisan(false);
         //System.out.println("USLO2");
 
 
@@ -199,4 +205,113 @@ public class PacijentController {
     }
 
 
+    @GetMapping(path = "/getKlinPac")
+    public ResponseEntity<List<KlinikaTipDTO>> getTipPregledaKlinika(){
+        List<Klinika> klinike=klinikaService.findAll();
+        List<KlinikaTipDTO> klinikaTipDTOs = new ArrayList<>();
+        for( Klinika k : klinike) {
+            Set<TipPregleda> tp = k.getTipPregleda();
+            List<TipPregledaDTO> tipPregledaDTOs = new ArrayList();
+            for (TipPregleda tipP : tp) {
+                tipPregledaDTOs.add(new TipPregledaDTO(tipP));
+            }
+            klinikaTipDTOs.add(new KlinikaTipDTO(tipPregledaDTOs, k));
+        }
+        return new ResponseEntity<>(klinikaTipDTOs, HttpStatus.OK);
+    }
+    @GetMapping(value = "/getLekarOdTipa/{nazivTipa}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<LekarDTO>> getLekarOdTipa(@PathVariable String nazivTipa) {
+
+        TipPregleda tp = tipPregledaService.findByNaziv(nazivTipa);
+        Set<Lekar> lekari = tp.getLekari();
+        List<LekarDTO> lekarDTOs =new ArrayList<>();
+        for (Lekar lekar : lekari){
+            lekarDTOs.add(new LekarDTO(lekar));
+        }
+
+        return new ResponseEntity<>(lekarDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/vremeLekaraFTDatum/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminPacDTO>> getVremeOdLekaraFTDatuma(@PathVariable String spojeno) {
+
+        String[] parsirano = spojeno.split(",");
+        String vreme = parsirano[0];
+        String emailLekara = parsirano[1];
+
+        System.out.println(vreme + " " + emailLekara);
+
+        Lekar lekar = lekarService.findByEmail(emailLekara);
+        Set<Termin> termins = lekar.getTermin();
+        List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
+        //System.out.println("1");
+        for (Termin t : termins) {
+           /* System.out.println(t);
+            System.out.println(t.isSlobodan());
+            System.out.println(t.getDatum());
+            System.out.println(vreme);*/
+
+            if(t.isSlobodan() && t.getDatum().equals(vreme))
+            {
+                //System.out.println("usao");
+                String[] parsirano1 = t.getPocetak().toString().split(" ");
+                System.out.println(parsirano1[1]);
+                terminPacDTOs.add(new TerminPacDTO(parsirano1[1]));
+
+            }
+        }
+        //System.out.println(terminPacDTOs);
+
+
+        return new ResponseEntity<>(terminPacDTOs, HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/zakaziPregledPac/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminPacDTO>> getZakaziPregledPac(@PathVariable String spojeno) {
+
+        String[] parsirano = spojeno.split(",");
+        String sat = parsirano[0];
+        String datum = parsirano[1];
+        String emailLekara = parsirano[2];
+
+        System.out.println(sat + " " + datum + " " + emailLekara);
+
+        Lekar lekar = lekarService.findByEmail(emailLekara);
+        Set<Termin> termins = lekar.getTermin();
+        List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
+        //System.out.println("1");
+        for (Termin t : termins) {
+            if(t.isSlobodan())
+            {
+
+                String[] parsirano1 = t.getPocetak().toString().split(" ");
+                if(parsirano1[0].equals(datum) && parsirano1[1].equals(sat))
+                {
+                    t.setSlobodan(false);
+                    System.out.println(t.isSlobodan());
+                    terminService.save(t);
+                }
+
+            }
+        }
+        //System.out.println(terminPacDTOs);
+
+
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
 }
+
+
+
+
+/*
+Set<Lekar> l = k.getLekari();
+        List<LekarKlinikaDTO> lekarKlinikaDTOs = new ArrayList<>();
+        for(Lekar lekar : l)
+        {
+            lekarKlinikaDTOs.add(new LekarKlinikaDTO(lekar));
+        }
+ */
