@@ -34,6 +34,9 @@ public class Klinika {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Pacijent> pacijents;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<TipPregleda> tipPregleda;
+
 
 
     public Klinika() {
@@ -118,5 +121,13 @@ public class Klinika {
 
     public void addAdministrator(Administrator administrator){
         this.administrators.add(administrator);
+    }
+
+    public Set<TipPregleda> getTipPregleda() {
+        return tipPregleda;
+    }
+
+    public void setTipPregleda(Set<TipPregleda> tipPregleda) {
+        this.tipPregleda = tipPregleda;
     }
 }

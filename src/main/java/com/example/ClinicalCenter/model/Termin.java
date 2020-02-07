@@ -16,6 +16,12 @@ public class Termin {
     @Column(name = "endTime", nullable = false)
     private Date kraj;
 
+    @Column(name = "Datum", nullable = false)
+    private String datum;
+
+    @Column(name = "Slobodan", nullable = false)
+    private boolean slobodan=true;
+
     @OneToOne
     private Pregled pregled;
 
@@ -61,4 +67,21 @@ public class Termin {
     public void setPregled(Pregled pregled) {
         this.pregled = pregled;
     }
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public boolean isSlobodan() {
+        return slobodan;
+    }
+
+    public void setSlobodan(boolean slobodan) {
+        this.slobodan = slobodan;
+    }
+
 }
