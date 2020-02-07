@@ -132,4 +132,13 @@ public class SestraController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping(path = "/editKarton")
+    public ResponseEntity<Void> izmeniKarton(@RequestBody KartonDTO kartonDTO) {
+        Karton karton = kartonService.findByBroj(kartonDTO.getBroj());
+        karton.setKrvnaGrupa(kartonDTO.getKrvnaGrupa());
+        karton.setDioptrija(kartonDTO.getDioptrija());
+        kartonService.save(karton);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
