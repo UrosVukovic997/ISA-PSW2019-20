@@ -5,6 +5,8 @@ import com.example.ClinicalCenter.repository.AdminKcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminKcService {
 
@@ -19,4 +21,6 @@ public class AdminKcService {
 
     public AdminKC getByUsername(String username){return adminKcRepository.getAdminKCByUsername(username);}
     public AdminKC getByEmail(String email){return adminKcRepository.getAdminKCByEmail(email);}
+    public List<AdminKC> getAll() {return adminKcRepository.findAll();}
+    public void delete(Long id) {adminKcRepository.deleteById(id);}
 }
