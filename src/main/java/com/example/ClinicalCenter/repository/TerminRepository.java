@@ -4,7 +4,9 @@ import com.example.ClinicalCenter.model.Lekar;
 import com.example.ClinicalCenter.model.Termin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TerminRepository extends JpaRepository<Lekar, Long> {
+import java.util.Optional;
+
+public interface TerminRepository extends JpaRepository<Termin, Long> {
 
     Termin save(Termin termin);
 }
