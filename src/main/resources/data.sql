@@ -115,14 +115,14 @@ VALUES (2,3);
 INSERT INTO tip_pregleda_lekari (tip_pregleda_id, lekari_id)
 VALUES (3,4);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id)
-VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',1,1);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
+VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',0,1,0);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id)
-VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 08:00:00',1,1);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
+VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 08:00:00',0,1,0);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id)
-VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
+VALUES ('2020-02-08','2020-02-28 19:00:00','2020-02-08 17:30:00',0,2,1);
 
 
 INSERT INTO lekar_termin (lekar_id, termin_id)
@@ -138,10 +138,10 @@ INSERT INTO izvestaj (id, text, recept_id)
 VALUES (1,'',1);
 */
 INSERT INTO pregled (nationality, email,town,emergency, first_name,jbo,kraj,done,deleted,operation,pocetak,visit,last_name,lekar_id,pacijent_id,termin_id,tip_pregleda_id)
-VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-02-08 13:20:00',0,0,0,'2020-02-08 13:20:00',0,'intelidzeja',1,1,1,1);
+VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-02-08 13:20:00',0,0,0,'2020-02-08 13:20:00',1,'intelidzeja',1,1,1,1);
 
 INSERT INTO pregled (nationality, email,town,emergency, first_name,jbo,kraj,done,deleted,operation,pocetak,visit,last_name,lekar_id,pacijent_id,termin_id,tip_pregleda_id)
-VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-03-08 16:20:00',0,0,0,'2020-03-08 16:00:00',0,'intelidzeja',1,1,1,1);
+VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-03-08 16:20:00',0,0,1,'2020-03-08 16:00:00',0,'intelidzeja',1,1,1,1);
 
 /*
 INSERT INTO recept (ime_pacijenta, jbo_pacijenta, ime_lekara, klinika, overen)

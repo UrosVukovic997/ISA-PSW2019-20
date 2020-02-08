@@ -22,6 +22,9 @@ public class Termin {
     @Column(name = "Slobodan", nullable = false)
     private boolean slobodan=true;
 
+    @Column(name = "odsustvo", nullable = false)
+    private boolean odsustvo=false;
+
     @OneToOne
     private Pregled pregled;
 
@@ -35,6 +38,12 @@ public class Termin {
         this.kraj = kraj;
     }
 
+    public Termin(String datum, boolean slobodan, boolean odsustvo, Pregled pregled) {
+        this.datum = datum;
+        this.slobodan = slobodan;
+        this.odsustvo = odsustvo;
+        this.pregled = pregled;
+    }
 
     public Long getId() {
         return id;
@@ -84,4 +93,11 @@ public class Termin {
         this.slobodan = slobodan;
     }
 
+    public boolean isOdsustvo() {
+        return odsustvo;
+    }
+
+    public void setOdsustvo(boolean odsustvo) {
+        this.odsustvo = odsustvo;
+    }
 }
