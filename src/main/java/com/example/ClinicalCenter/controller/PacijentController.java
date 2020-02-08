@@ -234,7 +234,8 @@ public class PacijentController {
     @GetMapping(value = "/getLekarOdTipa/{nazivTipa}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LekarDTO>> getLekarOdTipa(@PathVariable String nazivTipa) {
 
-        TipPregleda tp = tipPregledaService.findByNaziv(nazivTipa);
+        String[] parsirano = nazivTipa.split(",");
+        TipPregleda tp = tipPregledaService.findByNaziv(parsirano[0]);
         Set<Lekar> lekari = tp.getLekari();
         List<LekarDTO> lekarDTOs =new ArrayList<>();
         for (Lekar lekar : lekari){
@@ -311,6 +312,94 @@ public class PacijentController {
 
 
         return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/getSelectedKlinPac/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<SearchKlinPacDTO>> getSelectedKlinPac(@PathVariable String spojeno) {
+
+        String[] parsirano = spojeno.split(",");
+        String grad = parsirano[0];
+        String tipPregleda = parsirano[1];
+        String cena = parsirano[2];
+        String datum = parsirano[3];
+
+        List<Klinika> klinike = klinikaService.findAll();
+        List<SearchKlinPacDTO> searchKlinPacDTOS = new ArrayList<>();
+
+        for (Klinika klinika : klinike)
+        {
+            if(klinika.getGrad() != null && klinika.getGrad().equals(grad))
+            {
+                Set<TipPregleda> tipoviPregleda =klinika.getTipPregleda();
+                for( TipPregleda tp : tipoviPregleda)
+                {
+                    if(tp.getNaziv() != null && tp.getNaziv().equals(tipPregleda))
+                    {
+                        Set<Lekar> lekari = tp.getLekari();
+                        for(Lekar lekar : lekari)
+                        {
+                            Set<Termin> termini = lekar.getTermin();
+                            for (Termin termin :termini)
+                            {
+                                if(termin.getDatum() != null && termin.getDatum().equals(datum))
+                                {
+                                    searchKlinPacDTOS.add(new SearchKlinPacDTO(klinika.getNazivKlinike(),klinika.getOcena(),klinika.getGrad(),tp.getCena()));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return new ResponseEntity<>(searchKlinPacDTOS, HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/getSearchLekarPac/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<SearchLekarPacDTO>> getSearchLekarPac(@PathVariable String spojeno) {
+
+        String[] parsirano = spojeno.split(",");
+        String grad = parsirano[0];
+        String tipPregleda = parsirano[1];
+        String cena = parsirano[2];
+        String datum = parsirano[3];
+        String nazivKlinike = parsirano[4];
+
+        Klinika klinika = klinikaService.findByNazivKlinike(nazivKlinike);
+        List<SearchLekarPacDTO> searchLekarPacDTOS = new ArrayList<>();
+
+
+        if(klinika.getGrad() != null && klinika.getGrad().equals(grad))
+        {
+            Set<TipPregleda> tipoviPregleda =klinika.getTipPregleda();
+            for( TipPregleda tp : tipoviPregleda)
+            {
+                if(tp.getNaziv() != null && tp.getNaziv().equals(tipPregleda))
+                {
+                    Set<Lekar> lekari = tp.getLekari();
+                    for(Lekar lekar : lekari)
+                    {
+                        Set<Termin> termini = lekar.getTermin();
+                        for (Termin termin :termini)
+                        {
+                            String[] pars = termin.getPocetak().toString().split(" ");
+                            String satnica = pars[1];
+                            if(termin.getDatum() != null && termin.getDatum().equals(datum))
+                            {
+                                searchLekarPacDTOS.add(new SearchLekarPacDTO(lekar.getIme(),lekar.getPrezime(),lekar.getProsecna_ocena(),satnica));
+                            }
+                        }
+                    }
+
+            }
+        }
+    }
+
+
+        return new ResponseEntity<>(searchLekarPacDTOS, HttpStatus.OK);
     }
 
 

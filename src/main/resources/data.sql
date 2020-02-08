@@ -6,21 +6,21 @@ INSERT INTO klinika (naziv, grad, ocena)
 VALUES ('KBC', 'Beograd', '9');
 
 
-INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description)
+INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description,prosecna_ocena)
 VALUES ('Jovan', 'Jovanovic', 'marko@gmail.com', 'hirurg', 'lekar', '123456', 1, 'Maksima Gorkog',
-'Specijalista za kario hirurgiju. Hiruski staz od 24 godine rada. Kao hirurg prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji');
+'Specijalista za kario hirurgiju. Hiruski staz od 24 godine rada. Kao hirurg prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji',5.6);
 
-INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description)
+INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description,prosecna_ocena)
 VALUES ('Borislav', 'Borovic', 'bokimajstor@gmail.com', 'infektolog', 'infektologlekar', '123456', 1, 'Maksima Gorkog',
-'Specijalista za infektologiju. Infektoloski staz od 24 godine rada. Kao infektolog prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji');
+'Specijalista za infektologiju. Infektoloski staz od 24 godine rada. Kao infektolog prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji',7.7);
 
-INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description)
+INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description,prosecna_ocena)
 VALUES ('Djordje', 'Djordjevic', 'djoka@gmail.com', 'urolog', 'urologlekar', '123456', 2, 'Maksima Gorkog',
-'Specijalista za urologiju. Uroloski staz od 24 godine rada. Kao urolog prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji');
+'Specijalista za urologiju. Uroloski staz od 24 godine rada. Kao urolog prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji',6.6);
 
-INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description)
+INSERT INTO lekar (first_name, last_name, email, spec, username, password, klinika_id, home_adress, description,prosecna_ocena)
 VALUES ('Igor', 'Igorevic', 'igy@gmail.com', 'otorinolaringolog', 'otorinolaringolog', '123456', 2, 'Maksima Gorkog',
-'Specijalista za otorinolaringologiju. Otorinolaringolog staz od 24 godine rada. Kao otorinolaringolog prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji');
+'Specijalista za otorinolaringologiju. Otorinolaringolog staz od 24 godine rada. Kao otorinolaringolog prosao sam ratista 90-tih. Diplomirao i specijalizirao na Vojno medicinskoj akademiji',10.0);
 
 
 INSERT INTO sestra (ime, prezime, email, username, lozinka, klinika, adresa)
