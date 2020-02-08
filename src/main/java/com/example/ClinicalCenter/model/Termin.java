@@ -38,7 +38,10 @@ public class Termin {
         this.kraj = kraj;
     }
 
-    public Termin(String datum, boolean slobodan, boolean odsustvo, Pregled pregled) {
+
+    public Termin(Date pocetak, Date kraj, String datum, boolean slobodan, boolean odsustvo, Pregled pregled) {
+        this.pocetak = pocetak;
+        this.kraj = kraj;
         this.datum = datum;
         this.slobodan = slobodan;
         this.odsustvo = odsustvo;
