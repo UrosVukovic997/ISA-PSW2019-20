@@ -295,7 +295,7 @@ public class PacijentController {
         List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
         //System.out.println("1");
         for (Termin t : termins) {
-            if(t.isSlobodan())
+            if(t.isSlobodan() && !t.isOdsustvo())
             {
 
                 String[] parsirano1 = t.getPocetak().toString().split(" ");

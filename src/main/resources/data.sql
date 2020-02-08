@@ -115,11 +115,11 @@ VALUES (2,3);
 INSERT INTO tip_pregleda_lekari (tip_pregleda_id, lekari_id)
 VALUES (3,4);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id)
-VALUES ('2020-02-13','2020-02-13','2020-02-13 07:00:00',1,1);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo)
+VALUES ('2020-02-13','2020-02-13','2020-02-13 07:00:00',1,1,0);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id)
-VALUES ('2020-02-13','2020-02-13','2020-02-13 08:00:00',1,1);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo)
+VALUES ('2020-02-13','2020-02-13','2020-02-13 08:00:00',1,1,0);
 
 INSERT INTO lekar_termin (lekar_id, termin_id)
 VALUES (1,1);
