@@ -11,7 +11,7 @@ public class ReceptDTO {
 
     private Long id;
     private String imePacijenta;
-    private String jboPacijenta;
+    private Integer jboPacijenta;
     private String imeLekara;
     private String klinika;
     private Set<Lek> lekovi;
@@ -19,7 +19,7 @@ public class ReceptDTO {
     public ReceptDTO() {
     }
 
-    public ReceptDTO(Long id, String imePacijenta, String jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {
+    public ReceptDTO(Long id, String imePacijenta, Integer jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {
         this.id = id;
         this.imePacijenta = imePacijenta;
         this.jboPacijenta = jboPacijenta;
@@ -52,11 +52,11 @@ public class ReceptDTO {
         this.imePacijenta = imePacijenta;
     }
 
-    public String getJboPacijenta() {
+    public Integer getJboPacijenta() {
         return jboPacijenta;
     }
 
-    public void setJboPacijenta(String jboPacijenta) {
+    public void setJboPacijenta(Integer jboPacijenta) {
         this.jboPacijenta = jboPacijenta;
     }
 
