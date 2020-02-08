@@ -17,7 +17,7 @@ public class Recept {
     private String imePacijenta;
 
     @Column(name = "JboPacijenta", nullable = false)
-    private String jboPacijenta;
+    private Integer jboPacijenta;
 
     @Column(name = "imeLekara", nullable = false)
     private String imeLekara;
@@ -28,11 +28,10 @@ public class Recept {
     @Column(name = "overen", nullable = false)
     private boolean overen;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Lek> lekovi;
 
-    public Recept(Long id, String imePacijenta, String jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {
-        this.id = id;
+    public Recept(String imePacijenta, Integer jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {
         this.imePacijenta = imePacijenta;
         this.jboPacijenta = jboPacijenta;
         this.imeLekara = imeLekara;
@@ -42,7 +41,6 @@ public class Recept {
     }
 
     public Recept(ReceptDTO recept) {
-        this.id = recept.getId();
         this.imePacijenta = recept.getImePacijenta();
         this.jboPacijenta = recept.getJboPacijenta();
         this.imeLekara = recept.getImeLekara();
@@ -71,11 +69,11 @@ public class Recept {
         this.imePacijenta = imePacijenta;
     }
 
-    public String getJboPacijenta() {
+    public Integer getJboPacijenta() {
         return jboPacijenta;
     }
 
-    public void setJboPacijenta(String jboPacijenta) {
+    public void setJboPacijenta(Integer jboPacijenta) {
         this.jboPacijenta = jboPacijenta;
     }
 

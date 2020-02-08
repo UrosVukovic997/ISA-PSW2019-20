@@ -63,13 +63,15 @@ public class Pregled {
     @OneToOne
     private Pacijent pacijent;
 
+    @OneToOne
+    private Izvestaj izvestaj;
+
     public Pregled() {
     }
 
-    public Pregled(Long id, int jbo, String email, String ime_pacijenta, String prezime_pacijenta, String grad, String drzavljanstvo, 
-                   String hitnost, boolean obavljen, boolean obrisan, boolean pregled, boolean operacija) {
-        this.id = id;
-        this.jbo = jbo;
+    public Pregled(String email, String ime_pacijenta, String prezime_pacijenta, String grad, String drzavljanstvo,
+                   String hitnost, boolean obavljen, boolean obrisan, boolean pregled, boolean operacija, Date pocetak, Date kraj, int jbo,
+                   Termin termin, TipPregleda tipPregleda, Lekar lekar, Pacijent pacijent, Izvestaj izvestaj) {
         this.email = email;
         this.ime_pacijenta = ime_pacijenta;
         this.prezime_pacijenta = prezime_pacijenta;
@@ -80,7 +82,16 @@ public class Pregled {
         this.obrisan = obrisan;
         this.pregled = pregled;
         this.operacija = operacija;
+        this.pocetak = pocetak;
+        this.kraj = kraj;
+        this.jbo = jbo;
+        this.termin = termin;
+        this.tipPregleda = tipPregleda;
+        this.lekar = lekar;
+        this.pacijent = pacijent;
+        this.izvestaj = izvestaj;
     }
+
 
 
     public Long getId() {
@@ -227,4 +238,11 @@ public class Pregled {
         this.kraj = kraj;
     }
 
+    public Izvestaj getIzvestaj() {
+        return izvestaj;
+    }
+
+    public void setIzvestaj(Izvestaj izvestaj) {
+        this.izvestaj = izvestaj;
+    }
 }
