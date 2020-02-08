@@ -38,6 +38,7 @@ public class Termin {
         this.kraj = kraj;
     }
 
+
     public Termin(Date pocetak, Date kraj, String datum, boolean slobodan, boolean odsustvo, Pregled pregled) {
         this.pocetak = pocetak;
         this.kraj = kraj;

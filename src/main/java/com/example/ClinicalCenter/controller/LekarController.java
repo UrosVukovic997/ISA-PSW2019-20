@@ -180,4 +180,36 @@ public class LekarController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(path = "/getKalendar/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<KalendarDTO>> getKalendar(@PathVariable String username) {
+        Lekar lekar = lekarService.findByUsername(username);
+        List<KalendarDTO> kalendarDTOS = new ArrayList<>();
+        Set<Termin> termins = lekar.getTermin();
+        for(Termin t : termins){
+            if(!t.isSlobodan()){
+                String naslov="";
+                String jbo="";
+                if(t.isOdsustvo()){
+                    naslov ="Odsustvo-odmor";
+                }else {
+                    Pregled p = t.getPregled();
+                    jbo=Integer.toString(p.getJbo());
+                    if (p.isPregled()) {
+                        naslov = "Pregled";
+                    }else if (p.isOperacija()) {
+                        naslov = "Operacija";
+                    }
+                }
+
+                KalendarDTO kalendarDTO = new KalendarDTO(t.getPocetak().toString(),t.getKraj().toString(),
+                        naslov, jbo);
+                kalendarDTOS.add(kalendarDTO);
+            }
+        }
+
+        return new ResponseEntity<>(kalendarDTOS,HttpStatus.OK);
+    }
+
+
 }

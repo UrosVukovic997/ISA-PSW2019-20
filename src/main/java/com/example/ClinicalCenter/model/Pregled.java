@@ -94,6 +94,8 @@ public class Pregled {
 
 
 
+
+
     public Long getId() {
         return id;
     }
@@ -245,4 +247,6 @@ public class Pregled {
     public void setIzvestaj(Izvestaj izvestaj) {
         this.izvestaj = izvestaj;
     }
+
+
 }
