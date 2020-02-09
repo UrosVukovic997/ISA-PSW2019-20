@@ -9,6 +9,8 @@ import com.example.ClinicalCenter.repository.OdsustvoOdmorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OdsustvoOdmorService {
     @Autowired
@@ -24,4 +26,8 @@ public class OdsustvoOdmorService {
 
         return this.odsustvoOdmorRepositiry.save(odsustvoOdmor);
     }
+
+    public List<OdsustvoOdmor> findAll() { return odsustvoOdmorRepositiry.findAll(); }
+
+    public OdsustvoOdmor findById(long id) { return odsustvoOdmorRepositiry.findById(id); }
 }

@@ -1,6 +1,7 @@
 package com.example.ClinicalCenter.model;
 
 import com.example.ClinicalCenter.dto.ReceptDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -33,6 +34,7 @@ public class Recept {
 
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Lek> lekovi;
 
     public Recept(String imePacijenta, Integer jboPacijenta, String imeLekara, String klinika, Set<Lek> lekovi, boolean overen) {

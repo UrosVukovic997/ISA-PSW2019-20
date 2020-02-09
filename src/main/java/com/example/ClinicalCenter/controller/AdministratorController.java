@@ -1,5 +1,6 @@
 package com.example.ClinicalCenter.controller;
 
+import antlr.ASTNULLType;
 import com.example.ClinicalCenter.dto.AdministratorDTO;
 import com.example.ClinicalCenter.dto.LekarDTO;
 import com.example.ClinicalCenter.dto.SalaDTO;
@@ -35,6 +36,13 @@ public class AdministratorController {
     @Autowired
     private TerminService terminService;
 
+    @Autowired
+    private OdsustvoOdmorService odsustvoOdmorService;
+
+    @Autowired
+    private TipPregledaService tipPregledaService;
+
+
     @PostMapping(path = "/dodaj", consumes = "application/json")
     public ResponseEntity<Void> addAdmin(@RequestBody AdministratorDTO administratorDTO) {
 
@@ -68,15 +76,28 @@ public class AdministratorController {
         return new ResponseEntity<>(termini_Sa_Salom,HttpStatus.OK);
     }
 
+    @GetMapping(path = "/getAllOdOd", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity <List<OdsustvoOdmor>> getAllOdOd(){
+        List<OdsustvoOdmor> OdsustvoOdmor = odsustvoOdmorService.findAll();
+
+
+        return new ResponseEntity<>(OdsustvoOdmor,HttpStatus.OK);
+    }
+    /*
     @GetMapping(path = "/getAllTerminiOdOd", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <List<Termin>> getAllTerminiOdOd(){
+        List<OdsustvoOdmor> OdsustvoOdmor = odsustvoOdmorService.findAll();
         List<Termin> termini = terminService.findAll();
-        List<Termin> teminiOdOd = new ArrayList<>();
+        List<Termin> terminiOdOd = new ArrayList<>();
+        for(Termin t: termini){
+           if(t.getOdsustvoOdmor() != null) {
+               terminiOdOd.add(t);
+           }
+        }
 
-
-        return new ResponseEntity<>(teminiOdOd,HttpStatus.OK);
+        return new ResponseEntity<>(terminiOdOd,HttpStatus.OK);
     }
-
+    */
     @GetMapping(path = "/getAllSale", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <List<Sala>> getAllSale(){
         List<Sala> sale = salaService.findAll();
@@ -116,24 +137,35 @@ public class AdministratorController {
         return new ResponseEntity<>((HttpStatus.OK));
 
     }
-    /*
-    @GetMapping(value = "/getAllLekari")
-    public ResponseEntity <LekarDTO> getAllLekari(@PathVariable TipPregleda tipPregleda){
-        List<Lekar> lekari=lekarService.findAll();
-        List<LekarDTO> lekarDTOS= new ArrayList<>();
+    // id termina
+    @GetMapping(value = "/getMedOsoblje/{id}")
+    public ResponseEntity <?> getMedOsoblje(@PathVariable Long id){
+        OdsustvoOdmor odsOdmor = odsustvoOdmorService.findById(id);
+        Lekar lekar = new Lekar();
+        Sestra sestra = new Sestra();
+        lekar = odsOdmor.getLekar();
+        sestra = odsOdmor.getSestra();
+        if(lekar == null) {
+            return new ResponseEntity<>(sestra,HttpStatus.OK);
+        } else if(sestra == null) {
 
-        for (Lekar l: lekari) {
-            if(l.getSpecijalnost().equals(lekar) == )
-                administratorDTOS.add(new AdministratorDTO(a));
+            return new ResponseEntity<>(lekar, HttpStatus.OK);
         }
-
-
-        Set<Administrator> administrators = klinikaService.findByNazivKlinike(klinika).getAdministrators();
-        List<AdministratorDTO> administratorDTOS= new ArrayList<>();
-        for (Administrator a: administrators) {
-            administratorDTOS.add(new AdministratorDTO(a));
-        }
-        return new ResponseEntity<>(administratorDTOS,HttpStatus.OK);
+        return null;
     }
-    */
+
+    @GetMapping(value = "/allLekari")
+    public ResponseEntity<List<Lekar>> getAllLekari() {
+
+        List<Lekar> lekari = lekarService.findAll();
+
+        return new ResponseEntity<>(lekari, HttpStatus.OK);
+    }
+    @GetMapping(value = "/allTipovi")
+    public ResponseEntity<List<TipPregleda>> getAllTipoviPregleda() {
+
+        List<TipPregleda> tipPregledas = tipPregledaService.findAll();
+
+        return new ResponseEntity<>(tipPregledas, HttpStatus.OK);
+    }
 }

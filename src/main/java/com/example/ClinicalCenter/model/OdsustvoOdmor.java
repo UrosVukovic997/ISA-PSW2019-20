@@ -31,6 +31,13 @@ public class OdsustvoOdmor {
     @JsonIgnore
     private Lekar lekar;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Sestra sestra;
+
+    @OneToOne
+    private Termin termin;
+
     public OdsustvoOdmor() {
     }
 
@@ -98,4 +105,20 @@ public class OdsustvoOdmor {
     public String getObrazlozenje() { return obrazlozenje; }
 
     public void setObrazlozenje(String obrazlozenje) { this.obrazlozenje = obrazlozenje; }
+
+    public Sestra getSestra() {
+        return sestra;
+    }
+
+    public void setSestra(Sestra sestra) {
+        this.sestra = sestra;
+    }
+
+    public Termin getTermin() {
+        return termin;
+    }
+
+    public void setTermin(Termin termin) {
+        this.termin = termin;
+    }
 }
