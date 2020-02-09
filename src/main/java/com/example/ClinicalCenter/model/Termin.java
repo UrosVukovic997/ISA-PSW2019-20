@@ -1,7 +1,11 @@
 package com.example.ClinicalCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Termin {
@@ -29,6 +33,9 @@ public class Termin {
     private Pregled pregled;
 
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Sala sala;
+
     public Termin() {
     }
 
@@ -37,6 +44,7 @@ public class Termin {
         this.pocetak = pocetak;
         this.kraj = kraj;
     }
+
 
     public Termin(Date pocetak, Date kraj, String datum, boolean slobodan, boolean odsustvo, Pregled pregled) {
         this.pocetak = pocetak;
@@ -78,6 +86,13 @@ public class Termin {
     public void setPregled(Pregled pregled) {
         this.pregled = pregled;
     }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
 
     public String getDatum() {
         return datum;
