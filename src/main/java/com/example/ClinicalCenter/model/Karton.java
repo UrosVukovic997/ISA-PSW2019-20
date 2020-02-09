@@ -1,6 +1,7 @@
 package com.example.ClinicalCenter.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -31,6 +32,9 @@ public class Karton {
     private Pacijent pacijent;
 
     public Karton() {
+        this.pregledi = new HashSet<>();
+        this.dijagnoze = new HashSet<>();
+
     }
 
 
