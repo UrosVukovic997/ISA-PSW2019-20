@@ -29,10 +29,10 @@ INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, i
 VALUES ('Bulevar Evrope 6.', '066543189', 'Srbija', 'gara.nikola@gmail.com', 'Novi Sad', 'Marko', '7766890',0, 1, '123456', 1, 'Markovic', 'pacijent', 1, '1988-10-06');
 
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
-VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
+VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara.ne.vara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '123456', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
 
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
-VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
+VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '123456', 1, 'Zarkovic', 'Lepota', 1, '1991-10-06');
 
 /*INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
 VALUES (2,1);*/
@@ -135,6 +135,7 @@ INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,s
 VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null);
 */
 
+
 INSERT INTO klinika_lekari (klinika_id, lekari_id)
 VALUES (1,1);
 
@@ -184,6 +185,7 @@ VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 09:00:00',0,1,0);
 INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo)
 VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0);
 */
+
 INSERT INTO lekar_termin (lekar_id, termin_id)
 VALUES (1,1);
 

@@ -107,7 +107,7 @@ public class PacijentController {
 
         Pacijent p = pacijentService.findOneByEMail(pacijentDTO.getEmail());
         if (p != null) {
-           //throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 
         }

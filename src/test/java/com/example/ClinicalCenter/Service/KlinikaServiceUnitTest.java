@@ -67,4 +67,5 @@ public class KlinikaServiceUnitTest {
         assertEquals(result.getOcena(), klinika.getOcena());
     }
 
+
 }
