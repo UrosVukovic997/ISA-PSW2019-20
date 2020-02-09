@@ -31,21 +31,4 @@ public class KlinikaServiceUnitTest {
         );
 
     }
-
-    /*
-    @Test
-    public void addClinicTest() throws Exception {
-
-        Klinika klinika = new Klinika();
-        klinika.setNazivKlinike("Bolnica");
-        klinika.setGrad("Atenica 35 Cacak");
-        klinika.setOcena(3.7);
-
-        Klinika k = klinikaRepository.save(klinika);
-
-        assertEquals(1L, k.getId());
-
-    }
-
-     */
 }
