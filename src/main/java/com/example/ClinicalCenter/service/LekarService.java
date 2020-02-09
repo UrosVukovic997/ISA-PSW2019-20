@@ -53,4 +53,8 @@ public class LekarService {
     }
 
     public Lekar findByTermin(Termin t) { return lekarRepository.findByTermin(t);}
+
+    public Lekar save(Lekar lekar) {
+        return lekarRepository.save(lekar);
+    }
 }

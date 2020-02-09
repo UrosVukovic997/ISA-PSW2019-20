@@ -235,14 +235,14 @@ public class PacijentController {
         return new ResponseEntity<>(klinikaTipDTOs, HttpStatus.OK);
     }
     @GetMapping(value = "/getLekarOdTipa/{nazivTipa}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<LekarDTO>> getLekarOdTipa(@PathVariable String nazivTipa) {
+    public ResponseEntity<List<LekarPacDTO>> getLekarOdTipa(@PathVariable String nazivTipa) {
 
         String[] parsirano = nazivTipa.split(",");
         TipPregleda tp = tipPregledaService.findByNaziv(parsirano[0]);
         Set<Lekar> lekari = tp.getLekari();
-        List<LekarDTO> lekarDTOs =new ArrayList<>();
+        List<LekarPacDTO> lekarDTOs =new ArrayList<>();
         for (Lekar lekar : lekari){
-            lekarDTOs.add(new LekarDTO(lekar));
+            lekarDTOs.add(new LekarPacDTO(lekar));
         }
 
         return new ResponseEntity<>(lekarDTOs, HttpStatus.OK);
@@ -424,6 +424,39 @@ public class PacijentController {
         Karton karton = kartonService.findByPacijent(pacijent);
         KartonPacDTO kartonPacDTO = new KartonPacDTO(jbo,karton.getBroj(),karton.getKrvnaGrupa(),karton.getDioptrija());
         return new ResponseEntity<>(kartonPacDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getOcenaKlinike/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getKartonPac(@PathVariable String spojeno){
+        String[] splitovano = spojeno.split(",");
+        String ocena = splitovano[0];
+        String nazivKlinike = splitovano[1];
+
+        Klinika klinika = klinikaService.findByNazivKlinike(nazivKlinike);
+        double klinikaOcena = klinika.getOcena();
+        int pars = Integer.parseInt(ocena);
+        klinikaOcena = (klinikaOcena+pars)/2;
+        klinika.setOcena(klinikaOcena);
+        klinikaService.add(klinika);
+
+        return new ResponseEntity<>(klinikaOcena, HttpStatus.OK);
+    }
+
+
+    @GetMapping(path = "/getOceneLekara/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getOceneLekara(@PathVariable String spojeno){
+        String[] splitovano = spojeno.split(",");
+        String ocena = splitovano[0];
+        String emailLekara = splitovano[1];
+
+        Lekar lekar = lekarService.findByEmail(emailLekara);
+        double lekarOcena = lekar.getProsecna_ocena();
+        int pars = Integer.parseInt(ocena);
+        lekarOcena = (lekarOcena+pars)/2;
+        lekar.setProsecna_ocena(lekarOcena);
+        lekarService.save(lekar);
+
+        return new ResponseEntity<>(lekarOcena, HttpStatus.OK);
     }
 
 
