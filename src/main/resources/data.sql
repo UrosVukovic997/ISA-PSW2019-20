@@ -25,6 +25,9 @@ VALUES ('Igor', 'Igorevic', 'igy@gmail.com', 'otorinolaringolog', 'otorinolaring
 INSERT INTO sestra (ime, prezime, email, username, lozinka, klinika, adresa)
 VALUES ('Marina', 'Savic', 'ms@gmail.com', 'msavic', '1234', 'KBC', 'Cirpanova 10, Novi Sad');
 
+INSERT INTO sestra (ime, prezime, email, username, lozinka, klinika, adresa)
+VALUES ('Petra', 'Savic', 'ps@gmail.com', 'pssavic', '1234', 'NS_KLINIKA', 'Cirpanova 20, Novi Sad');
+
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
 VALUES ('Bulevar Evrope 6.', '066543189', 'Srbija', 'gara.nikola@gmail.com', 'Novi Sad', 'Marko', '7766890',0, 1, '123456', 1, 'Markovic', 'pacijent', 1, '1988-10-06');
 
