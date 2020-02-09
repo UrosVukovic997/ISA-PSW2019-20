@@ -88,23 +88,23 @@ INSERT INTO sala (name, number)
 VALUES ('pregled2',3);
 
 
-INSERT INTO termin (start_time, end_time, sala_id)
-VALUES ('2020-10-05','2020-10-06', 1);
+INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-10-05','2020-10-05','2020-10-06',1,2,0,1,null);
 
-INSERT INTO termin (start_time, end_time, sala_id)
-VALUES ('2020-10-07','2020-10-08', 2);
+INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-10-05','2020-10-07','2020-10-08',0,1,0,2,null);
 
-INSERT INTO termin (start_time, end_time, sala_id)
-VALUES ('2020-10-08','2020-10-09', 3);
+INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-10-05','2020-10-08','2020-10-09',1,2,0,3,null);
 
-INSERT INTO termin (start_time, end_time, sala_id)
-VALUES ('2021-10-07','2021-10-08', 3);
+INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo,sala_id, odsustvo_odmor_id)
+VALUES ('2020-10-05','2021-10-07','2021-10-08',1,2,0,2,null);
 
-INSERT INTO termin (start_time, end_time, sala_id)
-VALUES ('2021-10-08','2021-10-09', 2 );
+INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-10-07','2021-10-08','2021-10-09',1,2,0,2,null);
 
-INSERT INTO termin (start_time, end_time, sala_id)
-VALUES ('2021-10-07','2021-10-08', 1 );
+INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-10-05','2021-10-07','2021-10-08',1,2,0,3,null);
 
 
 
@@ -144,18 +144,15 @@ INSERT INTO tip_pregleda_lekari (tip_pregleda_id, lekari_id)
 VALUES (3,4);
 
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
-VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',0,1,0);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-02-13','2020-02-13 16:00:00','2020-02-13 07:00:00',0,1,0,null,1);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
-VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 08:00:00',0,1,0);
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-02-13','2020-02-13 13:00:00','2020-02-13 08:00:00',1,1,0,null,1);
 
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo, sala_id, odsustvo_odmor_id)
+VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null,1);
 
-
-
-INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo)
-VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0);
 
 INSERT INTO lekar_termin (lekar_id, termin_id)
 VALUES (1,1);
@@ -194,4 +191,17 @@ VALUES (1, 1);
 INSERT INTO recept_lekovi (recept_id, lekovi_id)
 VALUES (1, 2);
 */
+
+
+INSERT INTO odsustvo_odmor (begin, end, vacation, absence, reason, lekar_id, sestra_id, termin_id)
+VALUES ('2020-01-02','2020-01-03', 1, 0, 'HGGhasjd', 1, null, 1);
+
+INSERT INTO odsustvo_odmor (begin, end, vacation, absence, reason, lekar_id, sestra_id, termin_id)
+VALUES ('2020-01-02','2020-01-03', 0, 1, 'HGGhasjd', null, 1, 2);
+
+INSERT INTO odsustvo_odmor (begin, end, vacation, absence, reason, lekar_id, sestra_id, termin_id)
+VALUES ('2020-01-02','2020-01-03', 1, 0, 'HGGhasjd', null, 1, 3);
+
+INSERT INTO odsustvo_odmor (begin, end, vacation, absence, reason, lekar_id, sestra_id, termin_id)
+VALUES ('2020-01-02','2020-01-03', 1, 0, 'HGGhasjd', 2, null, 4);
 

@@ -41,8 +41,8 @@ public class Lekar {
     private Double prosecna_ocena;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Termin> termin;
-
 
     @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -52,10 +52,8 @@ public class Lekar {
     @JsonIgnore
     private Set<OdsustvoOdmor> odsustvoOdmori = new HashSet<OdsustvoOdmor>();
 
-
-
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Klinika klinika;
 
     public Lekar() {

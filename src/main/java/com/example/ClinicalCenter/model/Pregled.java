@@ -1,5 +1,7 @@
 package com.example.ClinicalCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -51,10 +53,10 @@ public class Pregled {
     private int jbo;
 
     @OneToOne
+    @JsonIgnore
     private Termin termin;
 
     @OneToOne
-
     private TipPregleda tipPregleda;
 
     @OneToOne

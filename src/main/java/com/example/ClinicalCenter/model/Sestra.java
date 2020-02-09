@@ -1,6 +1,10 @@
 package com.example.ClinicalCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Sestra {
@@ -29,6 +33,11 @@ public class Sestra {
 
     @Column(name = "klinika", nullable = false)
     private String klinika;
+
+    @OneToMany(mappedBy = "sestra", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<OdsustvoOdmor> odsustvoOdmori = new HashSet<OdsustvoOdmor>();
+
 
     public Sestra() {
     }
@@ -102,7 +111,17 @@ public class Sestra {
         return adresa;
     }
 
+    public Set<OdsustvoOdmor> getOdsustvoOdmori() {
+        return odsustvoOdmori;
+    }
+
+    public void setOdsustvoOdmori(Set<OdsustvoOdmor> odsustvoOdmori) {
+        this.odsustvoOdmori = odsustvoOdmori;
+    }
+
     public void setAdresa(String adresa) {
         this.adresa = adresa;
     }
+
+
 }

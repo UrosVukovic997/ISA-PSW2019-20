@@ -22,5 +22,8 @@ public class TerminService {
     public Termin save(Termin termin) {
         return terminRepository.save(termin);
     }
+
     public Termin getById(Long id) {return terminRepository.findById(id).orElseGet(null);}
+
+    public Termin findById(long id) { return terminRepository.findById(id); }
 }

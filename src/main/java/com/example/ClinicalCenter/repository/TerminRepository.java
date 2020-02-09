@@ -13,9 +13,8 @@ public interface TerminRepository extends JpaRepository<Termin, Long> {
 
     List<Termin> findAllById(long id);
 
-import java.util.Optional;
-
-public interface TerminRepository extends JpaRepository<Termin, Long> {
-
     Termin save(Termin termin);
+
+    Termin findById(long id);
+
 }

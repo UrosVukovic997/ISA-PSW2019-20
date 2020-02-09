@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 
 public interface OdsustvoOdmorRepository extends JpaRepository<OdsustvoOdmor, Long> {
 
+    OdsustvoOdmor findById(long id);
 }

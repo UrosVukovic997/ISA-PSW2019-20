@@ -11,7 +11,7 @@ import java.util.Set;
 public class Termin {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "startTime", nullable = false)
@@ -24,16 +24,21 @@ public class Termin {
     private String datum;
 
     @Column(name = "Slobodan", nullable = false)
-    private boolean slobodan=true;
+    private boolean slobodan = true;
 
     @Column(name = "odsustvo", nullable = false)
-    private boolean odsustvo=false;
+    private boolean odsustvo = false;
 
     @OneToOne
+    @JsonIgnore
     private Pregled pregled;
+
+    @OneToOne
+    private OdsustvoOdmor odsustvoOdmor;
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Sala sala;
 
     public Termin() {
@@ -93,6 +98,7 @@ public class Termin {
 
     public void setSala(Sala sala) {
         this.sala = sala;
+    }
 
     public String getDatum() {
         return datum;
@@ -116,5 +122,13 @@ public class Termin {
 
     public void setOdsustvo(boolean odsustvo) {
         this.odsustvo = odsustvo;
+    }
+
+    public OdsustvoOdmor getOdsustvoOdmor() {
+        return odsustvoOdmor;
+    }
+
+    public void setOdsustvoOdmor(OdsustvoOdmor odsustvoOdmor) {
+        this.odsustvoOdmor = odsustvoOdmor;
     }
 }
