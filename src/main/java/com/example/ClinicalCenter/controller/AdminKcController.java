@@ -1,13 +1,10 @@
 package com.example.ClinicalCenter.controller;
 
-import com.example.ClinicalCenter.dto.AdminKcDTO;
-import com.example.ClinicalCenter.dto.AdministratorDTO;
-import com.example.ClinicalCenter.dto.ChangepasswordDTO;
-import com.example.ClinicalCenter.dto.SestraDTO;
-import com.example.ClinicalCenter.model.AdminKC;
-import com.example.ClinicalCenter.model.Administrator;
-import com.example.ClinicalCenter.model.Sestra;
+import com.example.ClinicalCenter.dto.*;
+import com.example.ClinicalCenter.model.*;
 import com.example.ClinicalCenter.service.AdminKcService;
+import com.example.ClinicalCenter.service.KartonService;
+import com.example.ClinicalCenter.service.PacijentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +21,10 @@ public class AdminKcController {
 
     @Autowired
     private AdminKcService adminKcService;
+    @Autowired
+    private PacijentService pacijentService;
+    @Autowired
+    private KartonService kartonService;
 
     @PostMapping(path = "/dodaj", consumes = "application/json")
     public ResponseEntity<Void> addAdminKC(@RequestBody AdminKcDTO adminKcDTO) {
@@ -88,6 +89,7 @@ public class AdminKcController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if(adminKC.getLozinka().equals(changepasswordDTO.getOldPassword())){
             adminKC.setLozinka(changepasswordDTO.getNewPassword());
+            adminKC.setPrvoPrijavljivanje(false);
             AdminKC a =adminKcService.save(adminKC);
             if(a != null){
                 return  new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -133,4 +135,39 @@ public class AdminKcController {
         return new ResponseEntity<>((HttpStatus.OK));
 
     }
-}
+    @GetMapping(path = "/getBezKartona")
+    public ResponseEntity<List<PacijentSestraDTO>> getBezKartona(){
+        List<PacijentSestraDTO> pacijentSestraDTOS = new ArrayList<>();
+        for(Pacijent p : pacijentService.findAll()){
+            Karton k = kartonService.findByPacijent(p);
+            if(k == null){
+                PacijentSestraDTO pacijentSestraDTO = new PacijentSestraDTO(p);
+                pacijentSestraDTOS.add(pacijentSestraDTO);
+            }
+        }
+
+        return new ResponseEntity<>(pacijentSestraDTOS, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/kreirajKarton/{jbo}")
+    public ResponseEntity<Void> kreirajKarton(@PathVariable Integer jbo) {
+        Pacijent p = pacijentService.findByJbo(jbo);
+        Karton k = new Karton();
+        k.setBroj(100+ Integer.parseInt(p.getId().toString()));
+        k.setPacijent(p);
+        k.setDioptrija("");
+        k.setKrvnaGrupa("");
+        kartonService.save(k);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/prvoPrij/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> getPrvoPrijavljivanje(@PathVariable String username) {
+        AdminKC a = adminKcService.getByUsername(username);
+        Boolean ft = a.getPrvoPrijavljivanje();
+        return new ResponseEntity<>(ft,HttpStatus.OK);
+    }
+
+
+    }

@@ -28,6 +28,10 @@ public class Recept {
     @Column(name = "overen", nullable = false)
     private boolean overen;
 
+    @Column(name = "overila", nullable = true)
+    private String overila;
+
+
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Lek> lekovi;
 
@@ -39,6 +43,8 @@ public class Recept {
         this.lekovi = lekovi;
         this.overen = overen;
     }
+
+
 
     public Recept(ReceptDTO recept) {
         this.imePacijenta = recept.getImePacijenta();
@@ -107,5 +113,13 @@ public class Recept {
 
     public void setOveren(boolean overen) {
         this.overen = overen;
+    }
+
+    public String getOverila() {
+        return overila;
+    }
+
+    public void setOverila(String overila) {
+        this.overila = overila;
     }
 }
