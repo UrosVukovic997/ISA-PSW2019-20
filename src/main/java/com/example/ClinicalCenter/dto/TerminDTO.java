@@ -58,4 +58,5 @@ public class TerminDTO {
     public void setPregled(Pregled pregled) {
         this.pregled = pregled;
     }
+
 }
