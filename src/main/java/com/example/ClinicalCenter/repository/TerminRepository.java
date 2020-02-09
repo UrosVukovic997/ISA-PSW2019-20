@@ -8,16 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface TerminRepository extends JpaRepository<Termin, Long> {
-
-    List<Termin> findAllById(long id);
-
-import java.util.List;
-import java.util.Optional;
 
 public interface TerminRepository extends JpaRepository<Termin, Long> {
 
     Termin save(Termin termin);
     List<Termin> findAll();
+    List<Termin> findAllById(long id);
+
 }
