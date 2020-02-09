@@ -56,6 +56,9 @@ public class PacijentController {
     @Autowired
     private TipPregledaService tipPregledaService;
 
+    @Autowired
+    private KartonService kartonService;
+
 
 
     @GetMapping(value = "/zahtev", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -400,6 +403,27 @@ public class PacijentController {
 
 
         return new ResponseEntity<>(searchLekarPacDTOS, HttpStatus.OK);
+    }
+
+
+    @GetMapping(path = "/getPregledPac/{jbo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PregledPacDTO>> getTerminPac(@PathVariable int jbo){
+        List<Pregled> pregledi=pregledService.findByJbo(jbo);
+        List<PregledPacDTO> pregledPacDTOS = new ArrayList<>();
+        for( Pregled p : pregledi) {
+            Lekar l = p.getLekar();
+
+            pregledPacDTOS.add(new PregledPacDTO(p.getPocetak(),p.getKraj(),l.getIme(),l.getPrezime()));
+        }
+        return new ResponseEntity<>(pregledPacDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getKartonPac/{jbo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KartonPacDTO> getKartonPac(@PathVariable int jbo){
+        Pacijent pacijent = pacijentService.findByJbo(jbo);
+        Karton karton = kartonService.findByPacijent(pacijent);
+        KartonPacDTO kartonPacDTO = new KartonPacDTO(jbo,karton.getBroj(),karton.getKrvnaGrupa(),karton.getDioptrija());
+        return new ResponseEntity<>(kartonPacDTO, HttpStatus.OK);
     }
 
 

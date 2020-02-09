@@ -18,5 +18,7 @@ public interface PregledRepository extends JpaRepository<Pregled,Long> {
     @Override
     void deleteById(Long id);
 
+    List<Pregled> findByJbo(int jbo);
+
 
 }
