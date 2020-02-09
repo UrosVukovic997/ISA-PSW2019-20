@@ -93,7 +93,7 @@ public class Termin {
 
     public void setSala(Sala sala) {
         this.sala = sala;
-
+    }
     public String getDatum() {
         return datum;
     }
