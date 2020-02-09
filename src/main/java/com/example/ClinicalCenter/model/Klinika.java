@@ -31,7 +31,7 @@ public class Klinika {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Sestra> sestre;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany( fetch = FetchType.EAGER)
     private Set<Pacijent> pacijents;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

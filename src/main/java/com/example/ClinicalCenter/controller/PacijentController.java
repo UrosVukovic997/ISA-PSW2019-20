@@ -257,6 +257,7 @@ public class PacijentController {
 
         System.out.println(vreme + " " + emailLekara);
 
+
         Lekar lekar = lekarService.findByEmail(emailLekara);
         Set<Termin> termins = lekar.getTermin();
         List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
@@ -290,9 +291,12 @@ public class PacijentController {
         String sat = parsirano[0];
         String datum = parsirano[1];
         String emailLekara = parsirano[2];
+        String usernamePac = parsirano[3];
 
         System.out.println(sat + " " + datum + " " + emailLekara);
 
+        List<Klinika> klinikas = klinikaService.findAll();
+        Pacijent pacijent = pacijentService.findByUsername(usernamePac);
         Lekar lekar = lekarService.findByEmail(emailLekara);
         Set<Termin> termins = lekar.getTermin();
         List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
@@ -307,6 +311,30 @@ public class PacijentController {
                     t.setSlobodan(false);
                     System.out.println(t.isSlobodan());
                     terminService.save(t);
+
+                    Set<Pacijent> pacijents = lekar.getPacijenti();
+                    pacijents.add(pacijent);
+                    lekarService.save(lekar);
+
+                    for (Klinika k : klinikas){
+                        Set<Lekar> lekari = k.getLekari();
+                        System.out.println("nasao lekare");
+                        for( Lekar l : lekari)
+                        {
+                            //System.out.println("nasao lekara");
+
+                            //System.out.println(pacijents);
+
+                            Set<Pacijent> pacijents1 = k.getPacijents();
+                            //System.out.println(pacijents1);
+                            pacijents1.add(pacijent);
+                            //System.out.println(pacijent.getId());
+                           // System.out.println(k.getId());
+                           // System.out.println(l.getId());
+
+                            klinikaService.add(k);
+                        }
+                    }
                 }
 
             }
@@ -431,13 +459,27 @@ public class PacijentController {
         String[] splitovano = spojeno.split(",");
         String ocena = splitovano[0];
         String nazivKlinike = splitovano[1];
+        String userNamePac = splitovano[2];
+
+
+
+        Pacijent pacijent = pacijentService.findByUsername(userNamePac);
 
         Klinika klinika = klinikaService.findByNazivKlinike(nazivKlinike);
         double klinikaOcena = klinika.getOcena();
-        int pars = Integer.parseInt(ocena);
-        klinikaOcena = (klinikaOcena+pars)/2;
-        klinika.setOcena(klinikaOcena);
-        klinikaService.add(klinika);
+        for( Pacijent p : klinika.getPacijents())
+        {
+            if(p.getId() == pacijent.getId()){
+                int pars = Integer.parseInt(ocena);
+                klinikaOcena = (klinikaOcena+pars)/2;
+                klinika.setOcena(klinikaOcena);
+                klinikaService.add(klinika);
+            }
+            else{
+                klinikaOcena = klinika.getOcena();
+            }
+        }
+
 
         return new ResponseEntity<>(klinikaOcena, HttpStatus.OK);
     }
