@@ -41,12 +41,14 @@ public class AdministratorController {
         Administrator administrator = new Administrator(administratorDTO);
         Administrator a=administratorService.add(administrator);
         Klinika klinika = klinikaService.findByNazivKlinike(administratorDTO.getKlinika());
-
+        System.out.println(klinika.getNazivKlinike());
         if(a == null){
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
         klinika.addAdministrator(a);
-        klinikaService.add(klinika);
+        Klinika k = klinikaService.add(klinika);
+        if(k==null)
+            System.out.println("sranjeeee");
         return new ResponseEntity<>((HttpStatus.CREATED));
 
     }
@@ -98,7 +100,9 @@ public class AdministratorController {
         }
 
          */
-        Set<Administrator> administrators = klinikaService.findByNazivKlinike(klinika).getAdministrators();
+       // Set<Administrator> administrators = klinikaService.findByNazivKlinike(klinika).getAdministrators();
+        List<Administrator> administrators = administratorService.findAllByKlinika(klinika);
+
         List<AdministratorDTO> administratorDTOS= new ArrayList<>();
         for (Administrator a: administrators) {
             administratorDTOS.add(new AdministratorDTO(a));

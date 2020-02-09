@@ -9,10 +9,10 @@ public class Lek {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nazivDijagnoze", nullable = false)
+    @Column(name = "nazivLeka", nullable = false)
     private String nazivLeka;
 
-    @Column(name = "opisDijagnoze", nullable = true)
+    @Column(name = "opisLeka", nullable = true)
     private String opisLeka;
 
     public Lek() {

@@ -20,5 +20,7 @@ public interface TipPregledaRepository extends JpaRepository<TipPregleda, Long> 
     @Override
     void deleteById(Long id);
 
+    TipPregleda findByNaziv(String naziv);
+
 
 }

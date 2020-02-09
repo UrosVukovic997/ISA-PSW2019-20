@@ -26,4 +26,6 @@ public class KartonService {
         kartonRepository.deleteById(id);
     }
 
+    public Karton findByBroj(Integer broj) {return kartonRepository.findByBroj(broj);}
+
 }

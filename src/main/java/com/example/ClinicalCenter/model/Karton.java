@@ -13,7 +13,13 @@ public class Karton {
     private long id;
 
     @Column(name = "broj", nullable = false)
-    private  Integer broj;    /*zbog baze*/
+    private  Integer broj;
+
+    @Column(name = "krvna_grupa", nullable = false)
+    private  String krvnaGrupa;
+
+    @Column(name = "dioptrija", nullable = false)
+    private  String dioptrija;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Dijagnoza> dijagnoze;
@@ -23,6 +29,10 @@ public class Karton {
 
     @OneToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
     private Pacijent pacijent;
+
+    public Karton() {
+    }
+
 
 
     public long getId() {
@@ -65,4 +75,19 @@ public class Karton {
         this.pacijent = pacijent;
     }
 
+    public String getKrvnaGrupa() {
+        return krvnaGrupa;
+    }
+
+    public void setKrvnaGrupa(String krvnaGrupa) {
+        this.krvnaGrupa = krvnaGrupa;
+    }
+
+    public String getDioptrija() {
+        return dioptrija;
+    }
+
+    public void setDioptrija(String dioptrija) {
+        this.dioptrija = dioptrija;
+    }
 }

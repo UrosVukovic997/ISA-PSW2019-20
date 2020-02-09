@@ -1,14 +1,8 @@
 package com.example.ClinicalCenter.controller;
 
 import com.example.ClinicalCenter.dto.*;
-import com.example.ClinicalCenter.model.Kalendar;
-import com.example.ClinicalCenter.model.Karton;
-import com.example.ClinicalCenter.model.Pacijent;
-import com.example.ClinicalCenter.model.Sestra;
-import com.example.ClinicalCenter.service.KartonService;
-import com.example.ClinicalCenter.service.KlinikaService;
-import com.example.ClinicalCenter.service.PacijentService;
-import com.example.ClinicalCenter.service.SestraService;
+import com.example.ClinicalCenter.model.*;
+import com.example.ClinicalCenter.service.*;
 import org.hibernate.mapping.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +28,8 @@ public class SestraController {
     private KlinikaService klinikaService;
     @Autowired
     private KartonService kartonService;
+    @Autowired
+    private ReceptService receptService;
 
     @GetMapping(path = "/getAll/{username}")
     public ResponseEntity<List<PacijentSestraDTO>> getAll(@PathVariable String username){
@@ -106,4 +103,42 @@ public class SestraController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
+
+    @GetMapping(path = "/recepti/{username}")
+    public ResponseEntity<List<ReceptDTO>> getRecepte(@PathVariable String username){
+        String klinika = sestraService.FindByUsername(username).getKlinika();
+        List<Recept> recepts = receptService.findByKlinika(klinika);
+        if(recepts == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        List<ReceptDTO> receptDTOS = new ArrayList<>();
+        for(Recept recept : recepts){
+            if(!recept.isOveren()){
+                receptDTOS.add(new ReceptDTO(recept));
+            }
+        }
+
+        return new ResponseEntity<>(receptDTOS, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/overi/{id}")
+    public ResponseEntity<Void> overiRecept(@PathVariable Long id){
+        Recept recept = receptService.findById(id);
+        if(recept == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        recept.setOveren(true);
+        receptService.save(recept);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/editKarton")
+    public ResponseEntity<Void> izmeniKarton(@RequestBody KartonDTO kartonDTO) {
+        Karton karton = kartonService.findByBroj(kartonDTO.getBroj());
+        karton.setKrvnaGrupa(kartonDTO.getKrvnaGrupa());
+        karton.setDioptrija(kartonDTO.getDioptrija());
+        kartonService.save(karton);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

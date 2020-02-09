@@ -17,4 +17,8 @@ public class TipPregledaService {
         return tipPregledaRepository.findAll();
     }
 
+    public TipPregleda findByNaziv(String naziv) {
+        return tipPregledaRepository.findByNaziv(naziv);
+    }
+
 }

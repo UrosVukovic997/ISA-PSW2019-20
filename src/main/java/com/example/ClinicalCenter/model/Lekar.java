@@ -37,6 +37,12 @@ public class Lekar {
     @Column(name = "description", nullable = false)
     private String opis;
 
+    @Column(name = "prosecna_ocena", nullable = false)
+    private Double prosecna_ocena;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Termin> termin;
+
 
     @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -45,6 +51,8 @@ public class Lekar {
     @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<OdsustvoOdmor> odsustvoOdmori = new HashSet<OdsustvoOdmor>();
+
+
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -65,6 +73,22 @@ public class Lekar {
         this.lozinka = lozinka;
         this.adresa = adresa;
         this.opis = opis;
+    }
+
+    public Lekar(String ime, String prezime, String email, String specijalnost, String korIme, String lozinka, String adresa, String opis, Double prosecna_ocena, Set<Termin> termin, Set<Pacijent> pacijenti, Set<OdsustvoOdmor> odsustvoOdmori, Klinika klinika) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.specijalnost = specijalnost;
+        this.korIme = korIme;
+        this.lozinka = lozinka;
+        this.adresa = adresa;
+        this.opis = opis;
+        this.prosecna_ocena = prosecna_ocena;
+        this.termin = termin;
+        this.pacijenti = pacijenti;
+        this.odsustvoOdmori = odsustvoOdmori;
+        this.klinika = klinika;
     }
 
     public long getId() {
@@ -132,4 +156,20 @@ public class Lekar {
     public Set<OdsustvoOdmor> getOdsustvoOdmori() { return odsustvoOdmori; }
 
     public void setOdsustvoOdmori(Set<OdsustvoOdmor> odsustvoOdmori) { this.odsustvoOdmori = odsustvoOdmori; }
+
+    public Set<Termin> getTermin() {
+        return termin;
+    }
+
+    public void setTermin(Set<Termin> termin) {
+        this.termin = termin;
+    }
+
+    public Double getProsecna_ocena() {
+        return prosecna_ocena;
+    }
+
+    public void setProsecna_ocena(Double prosecna_ocena) {
+        this.prosecna_ocena = prosecna_ocena;
+    }
 }

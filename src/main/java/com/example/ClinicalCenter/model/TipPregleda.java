@@ -1,6 +1,7 @@
 package com.example.ClinicalCenter.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class TipPregleda {
@@ -18,8 +19,8 @@ public class TipPregleda {
     @Column(name = "price", nullable = false)
     private Double cena;
 
-    @OneToOne
-    private Pregled pregled;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Lekar> lekari;
 
     public TipPregleda() {
     }
@@ -63,11 +64,11 @@ public class TipPregleda {
         this.cena = cena;
     }
 
-    public Pregled getPregled() {
-        return pregled;
+    public Set<Lekar> getLekari() {
+        return lekari;
     }
 
-    public void setPregled(Pregled pregled) {
-        this.pregled = pregled;
+    public void setLekari(Set<Lekar> lekari) {
+        this.lekari = lekari;
     }
 }

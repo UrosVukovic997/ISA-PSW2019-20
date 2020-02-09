@@ -20,6 +20,14 @@ public class Termin {
     @Column(name = "endTime", nullable = false)
     private Date kraj;
 
+    @Column(name = "Datum", nullable = false)
+    private String datum;
+
+    @Column(name = "Slobodan", nullable = false)
+    private boolean slobodan=true;
+
+    @Column(name = "odsustvo", nullable = false)
+    private boolean odsustvo=false;
 
     @OneToOne
     private Pregled pregled;
@@ -37,6 +45,15 @@ public class Termin {
         this.kraj = kraj;
     }
 
+
+    public Termin(Date pocetak, Date kraj, String datum, boolean slobodan, boolean odsustvo, Pregled pregled) {
+        this.pocetak = pocetak;
+        this.kraj = kraj;
+        this.datum = datum;
+        this.slobodan = slobodan;
+        this.odsustvo = odsustvo;
+        this.pregled = pregled;
+    }
 
     public Long getId() {
         return id;
@@ -76,5 +93,28 @@ public class Termin {
 
     public void setSala(Sala sala) {
         this.sala = sala;
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public boolean isSlobodan() {
+        return slobodan;
+    }
+
+    public void setSlobodan(boolean slobodan) {
+        this.slobodan = slobodan;
+    }
+
+    public boolean isOdsustvo() {
+        return odsustvo;
+    }
+
+    public void setOdsustvo(boolean odsustvo) {
+        this.odsustvo = odsustvo;
     }
 }

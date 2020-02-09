@@ -2,6 +2,7 @@ package com.example.ClinicalCenter.service;
 
 import com.example.ClinicalCenter.dto.LekarDTO;
 import com.example.ClinicalCenter.model.Lekar;
+import com.example.ClinicalCenter.model.Termin;
 import com.example.ClinicalCenter.repository.LekarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -47,5 +48,9 @@ public class LekarService {
         return lekarRepository.findByEmail(email);
     }
 
+    public Lekar findByKlinika(String email) {
+        return lekarRepository.findByEmail(email);
+    }
 
+    public Lekar findByTermin(Termin t) { return lekarRepository.findByTermin(t);}
 }

@@ -40,7 +40,7 @@ public class Kalendar {
         this.pacijent = pacijent;
         this.tip = tip;
     }
-
+/*
     public Kalendar(KalendarDTO kalendarDTO) {
         this.datum =DateTime.parse(kalendarDTO.getDatum());
         this.naslov = kalendarDTO.getNaslov();
@@ -48,7 +48,7 @@ public class Kalendar {
         this.pacijent = kalendarDTO.getPacijent();
         this.tip = kalendarDTO.getTip();
     }
-
+*/
 
     public Long getId() {
         return id;
