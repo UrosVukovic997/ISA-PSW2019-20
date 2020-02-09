@@ -26,4 +26,5 @@ public class TerminService {
     public Termin getById(Long id) {return terminRepository.findById(id).orElseGet(null);}
 
     public Termin findById(long id) { return terminRepository.findById(id); }
+
 }

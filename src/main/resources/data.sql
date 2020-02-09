@@ -1,4 +1,3 @@
-
 INSERT INTO klinika (naziv, grad, ocena)
 VALUES ('NS_KLINIKA', 'Novi Sad', '7');
 
@@ -30,15 +29,22 @@ INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, i
 VALUES ('Bulevar Evrope 6.', '066543189', 'Srbija', 'gara.nikola@gmail.com', 'Novi Sad', 'Marko', '7766890',0, 1, '123456', 1, 'Markovic', 'pacijent', 1, '1988-10-06');
 
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
-VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
+VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara.ne.vara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '123456', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
 
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
-VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
-INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
-VALUES (2,1);
+VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '123456', 1, 'Zarkovic', 'Lepota', 1, '1991-10-06');
+
+/*INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
+VALUES (2,1);*/
 
 INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
-VALUES (1549,'AB+','+0.5',1);
+VALUES (1549,'AB+','-0.5',1);
+
+INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
+VALUES (1550,'A+','+2.5',2);
+
+INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
+VALUES (1551,'B+','+1.5',3);
 
 INSERT INTO dijagnoza (id, naziv_dijagnoze, opis_dijagnoze)
 VALUES (1, 'Tahikardija', 'Nepravilan rad srca');
@@ -87,6 +93,17 @@ VALUES ("pregled1",2);
 INSERT INTO sala (name, number)
 VALUES ('pregled2',3);
 
+/*
+INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
+VALUES ('2020-10-05','2020-10-06', 1,'2020-10-05',0,1);
+
+INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
+VALUES ('2020-10-07','2020-10-08', 2,'2020-10-07',0,1);
+
+INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
+VALUES ('2020-10-08','2020-10-09', 3,'2020-10-08',0,1);
+
+
 
 INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
 VALUES ('2020-10-05','2020-10-05','2020-10-06',1,2,0,1,null);
@@ -106,6 +123,38 @@ VALUES ('2020-10-07','2021-10-08','2021-10-09',1,2,0,2,null);
 INSERT INTO termin (datum, start_time, end_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
 VALUES ('2020-10-05','2021-10-07','2021-10-08',1,2,0,3,null);
 
+INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
+VALUES ('2021-10-07','2021-10-08', 3,'2021-10-07',0,1);
+
+INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
+VALUES ('2021-10-08','2021-10-09', 2 ,'2021-10-08',0 ,1);
+
+INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
+VALUES ('2021-10-07','2021-10-08', 1 ,'2021-10-07',0,1);
+*/
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 16:00:00','2020-02-13 07:00:00',0,1,0,null);
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 13:00:00','2020-02-13 08:00:00',1,1,0,null);
+
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null);
+
+
+/*
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',0,1,0,null);
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 08:00:00',0,1,0,null);
+
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null);
+*/
 
 
 INSERT INTO klinika_lekari (klinika_id, lekari_id)
@@ -143,15 +192,30 @@ VALUES (2,3);
 INSERT INTO tip_pregleda_lekari (tip_pregleda_id, lekari_id)
 VALUES (3,4);
 
-
+/*
 INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
 VALUES ('2020-02-13','2020-02-13 16:00:00','2020-02-13 07:00:00',0,1,0,null,1);
+
+
 
 INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo, sala_id, odsustvo_odmor_id)
 VALUES ('2020-02-13','2020-02-13 13:00:00','2020-02-13 08:00:00',1,1,0,null,1);
 
+
 INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo, sala_id, odsustvo_odmor_id)
 VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null,1);
+*/
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
+VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',0,1,0);
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
+VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 09:00:00',0,1,0);
+
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo)
+VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0);
+
 
 
 INSERT INTO lekar_termin (lekar_id, termin_id)
@@ -167,10 +231,12 @@ INSERT INTO izvestaj (id, text, recept_id)
 VALUES (1,'',1);
 */
 INSERT INTO pregled (nationality, email,town,emergency, first_name,jbo,kraj,done,deleted,operation,pocetak,visit,last_name,lekar_id,pacijent_id,termin_id,tip_pregleda_id)
-VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-02-08 13:20:00',0,0,0,'2020-02-08 13:20:00',1,'intelidzeja',1,1,1,1);
+VALUES ('Srb','nekimail@gmail.com','Novi Sad','hitno','Marko',7766890,'2020-02-08 12:20:00',0,0,0,'2020-02-08 13:21:00',0,'Markovic',1,1,1,1);
 
 INSERT INTO pregled (nationality, email,town,emergency, first_name,jbo,kraj,done,deleted,operation,pocetak,visit,last_name,lekar_id,pacijent_id,termin_id,tip_pregleda_id)
-VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-03-08 16:20:00',0,0,1,'2020-03-08 16:00:00',0,'intelidzeja',1,1,1,1);
+VALUES ('Srb','nekimail@gmail.com','Novi Sad','hitno','Marko',7766890,'2020-03-08 17:55:00',0,0,0,'2020-03-08 18:55:00',0,'Markovic',1,1,1,1);
+
+
 
 /*
 INSERT INTO recept (ime_pacijenta, jbo_pacijenta, ime_lekara, klinika, overen)
@@ -193,6 +259,7 @@ VALUES (1, 2);
 */
 
 
+/*
 INSERT INTO odsustvo_odmor (begin, end, vacation, absence, reason, lekar_id, sestra_id, termin_id)
 VALUES ('2020-01-02','2020-01-03', 1, 0, 'HGGhasjd', 1, null, 1);
 
@@ -204,4 +271,5 @@ VALUES ('2020-01-02','2020-01-03', 1, 0, 'HGGhasjd', null, 1, 3);
 
 INSERT INTO odsustvo_odmor (begin, end, vacation, absence, reason, lekar_id, sestra_id, termin_id)
 VALUES ('2020-01-02','2020-01-03', 1, 0, 'HGGhasjd', 2, null, 4);
+*/
 

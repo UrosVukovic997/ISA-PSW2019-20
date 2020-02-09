@@ -17,22 +17,22 @@ public class Pregled {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = true)
     private String email;
 
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "firstName", nullable = true)
     private String ime_pacijenta;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "lastName", nullable = true)
     private String prezime_pacijenta;
 
     @Column(name = "town", nullable = true)
     private String grad;
 
-    @Column(name = "nationality", nullable = false)
+    @Column(name = "nationality", nullable = true)
     private String drzavljanstvo;
 
-    @Column(name = "emergency", nullable = false)
+    @Column(name = "emergency", nullable = true)
     private String hitnost;
 
     @Column(name = "done", nullable = false)
@@ -94,7 +94,18 @@ public class Pregled {
         this.izvestaj = izvestaj;
     }
 
-
+    public Pregled(boolean obavljen, boolean obrisan, boolean pregled, boolean operacija,
+                   int jbo, Termin termin, Lekar lekar, Pacijent pacijent) {
+        this.obavljen = obavljen;
+        this.obrisan = obrisan;
+        this.pregled = pregled;
+        this.operacija = operacija;
+        this.jbo = jbo;
+        this.termin = termin;
+        this.tipPregleda = tipPregleda;
+        this.lekar = lekar;
+        this.pacijent = pacijent;
+    }
 
 
 

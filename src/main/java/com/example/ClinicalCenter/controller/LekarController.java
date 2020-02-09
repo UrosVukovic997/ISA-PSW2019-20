@@ -212,4 +212,50 @@ public class LekarController {
     }
 
 
+    @PostMapping(value = "/slobodniTermini",consumes=MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminPacDTO>> getVremeOdLekaraFTDatuma(@RequestBody StringStringDTO stringStringDTO) {
+
+        Lekar lekar = lekarService.findByEmail(stringStringDTO.getString1());
+        Set<Termin> termins = lekar.getTermin();
+        List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
+        for (Termin t : termins) {
+            if(t.isSlobodan() && t.getDatum().equals(stringStringDTO.getString2()))
+            {
+                String[] parsirano1 = t.getPocetak().toString().split(" ");
+                terminPacDTOs.add(new TerminPacDTO(parsirano1[1]));
+
+            }
+        }
+
+        return new ResponseEntity<>(terminPacDTOs, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/zakaziDodatniPregled", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminPacDTO>> getZakaziPregledPac(@RequestBody SssiDTO ssssDTO) {
+        Lekar lekar = lekarService.findByEmail(ssssDTO.getString1());
+        Pacijent p = pacijentService.findByJbo(ssssDTO.getInteger());
+        Set<Termin> termins = lekar.getTermin();
+        System.out.println("uslo");
+        for (Termin t : termins) {
+            if(t.isSlobodan() && !t.isOdsustvo())
+            {
+                System.out.println(t.getDatum());
+
+                String[] parsirano1 = t.getPocetak().toString().split(" ");
+                if(parsirano1[0].equals(ssssDTO.getString2()) && parsirano1[1].equals(ssssDTO.getString3()))
+                {
+                    t.setSlobodan(false);
+                    System.out.println(t.isSlobodan());
+                    Pregled pr = new Pregled(false, false, true, false, p.getJbo(), t, lekar, p);
+                    Pregled pregled = pregledService.save(pr);
+                    t.setPregled(pregled);
+                    terminService.save(t);
+                }
+
+            }
+        }
+
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
 }

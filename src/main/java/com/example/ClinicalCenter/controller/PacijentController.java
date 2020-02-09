@@ -56,6 +56,9 @@ public class PacijentController {
     @Autowired
     private TipPregledaService tipPregledaService;
 
+    @Autowired
+    private KartonService kartonService;
+
 
 
     @GetMapping(value = "/zahtev", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -104,7 +107,7 @@ public class PacijentController {
 
         Pacijent p = pacijentService.findOneByEMail(pacijentDTO.getEmail());
         if (p != null) {
-           //throw new ResourceConflictException(pacijentDTO.getId(), "Korisnicko ime je zauzeto.");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 
         }
@@ -232,14 +235,14 @@ public class PacijentController {
         return new ResponseEntity<>(klinikaTipDTOs, HttpStatus.OK);
     }
     @GetMapping(value = "/getLekarOdTipa/{nazivTipa}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<LekarDTO>> getLekarOdTipa(@PathVariable String nazivTipa) {
+    public ResponseEntity<List<LekarPacDTO>> getLekarOdTipa(@PathVariable String nazivTipa) {
 
         String[] parsirano = nazivTipa.split(",");
         TipPregleda tp = tipPregledaService.findByNaziv(parsirano[0]);
         Set<Lekar> lekari = tp.getLekari();
-        List<LekarDTO> lekarDTOs =new ArrayList<>();
+        List<LekarPacDTO> lekarDTOs =new ArrayList<>();
         for (Lekar lekar : lekari){
-            lekarDTOs.add(new LekarDTO(lekar));
+            lekarDTOs.add(new LekarPacDTO(lekar));
         }
 
         return new ResponseEntity<>(lekarDTOs, HttpStatus.OK);
@@ -253,6 +256,7 @@ public class PacijentController {
         String emailLekara = parsirano[1];
 
         System.out.println(vreme + " " + emailLekara);
+
 
         Lekar lekar = lekarService.findByEmail(emailLekara);
         Set<Termin> termins = lekar.getTermin();
@@ -287,9 +291,12 @@ public class PacijentController {
         String sat = parsirano[0];
         String datum = parsirano[1];
         String emailLekara = parsirano[2];
+        String usernamePac = parsirano[3];
 
         System.out.println(sat + " " + datum + " " + emailLekara);
 
+        List<Klinika> klinikas = klinikaService.findAll();
+        Pacijent pacijent = pacijentService.findByUsername(usernamePac);
         Lekar lekar = lekarService.findByEmail(emailLekara);
         Set<Termin> termins = lekar.getTermin();
         List<TerminPacDTO> terminPacDTOs =new ArrayList<>();
@@ -304,6 +311,30 @@ public class PacijentController {
                     t.setSlobodan(false);
                     System.out.println(t.isSlobodan());
                     terminService.save(t);
+
+                    Set<Pacijent> pacijents = lekar.getPacijenti();
+                    pacijents.add(pacijent);
+                    lekarService.save(lekar);
+
+                    for (Klinika k : klinikas){
+                        Set<Lekar> lekari = k.getLekari();
+                        System.out.println("nasao lekare");
+                        for( Lekar l : lekari)
+                        {
+                            //System.out.println("nasao lekara");
+
+                            //System.out.println(pacijents);
+
+                            Set<Pacijent> pacijents1 = k.getPacijents();
+                            //System.out.println(pacijents1);
+                            pacijents1.add(pacijent);
+                            //System.out.println(pacijent.getId());
+                           // System.out.println(k.getId());
+                           // System.out.println(l.getId());
+
+                            klinikaService.add(k);
+                        }
+                    }
                 }
 
             }
@@ -400,6 +431,74 @@ public class PacijentController {
 
 
         return new ResponseEntity<>(searchLekarPacDTOS, HttpStatus.OK);
+    }
+
+
+    @GetMapping(path = "/getPregledPac/{jbo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PregledPacDTO>> getTerminPac(@PathVariable int jbo){
+        List<Pregled> pregledi=pregledService.findByJbo(jbo);
+        List<PregledPacDTO> pregledPacDTOS = new ArrayList<>();
+        for( Pregled p : pregledi) {
+            Lekar l = p.getLekar();
+
+            pregledPacDTOS.add(new PregledPacDTO(p.getPocetak(),p.getKraj(),l.getIme(),l.getPrezime()));
+        }
+        return new ResponseEntity<>(pregledPacDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getKartonPac/{jbo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KartonPacDTO> getKartonPac(@PathVariable int jbo){
+        Pacijent pacijent = pacijentService.findByJbo(jbo);
+        Karton karton = kartonService.findByPacijent(pacijent);
+        KartonPacDTO kartonPacDTO = new KartonPacDTO(jbo,karton.getBroj(),karton.getKrvnaGrupa(),karton.getDioptrija());
+        return new ResponseEntity<>(kartonPacDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getOcenaKlinike/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getKartonPac(@PathVariable String spojeno){
+        String[] splitovano = spojeno.split(",");
+        String ocena = splitovano[0];
+        String nazivKlinike = splitovano[1];
+        String userNamePac = splitovano[2];
+
+
+
+        Pacijent pacijent = pacijentService.findByUsername(userNamePac);
+
+        Klinika klinika = klinikaService.findByNazivKlinike(nazivKlinike);
+        double klinikaOcena = klinika.getOcena();
+        for( Pacijent p : klinika.getPacijents())
+        {
+            if(p.getId() == pacijent.getId()){
+                int pars = Integer.parseInt(ocena);
+                klinikaOcena = (klinikaOcena+pars)/2;
+                klinika.setOcena(klinikaOcena);
+                klinikaService.add(klinika);
+            }
+            else{
+                klinikaOcena = klinika.getOcena();
+            }
+        }
+
+
+        return new ResponseEntity<>(klinikaOcena, HttpStatus.OK);
+    }
+
+
+    @GetMapping(path = "/getOceneLekara/{spojeno}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getOceneLekara(@PathVariable String spojeno){
+        String[] splitovano = spojeno.split(",");
+        String ocena = splitovano[0];
+        String emailLekara = splitovano[1];
+
+        Lekar lekar = lekarService.findByEmail(emailLekara);
+        double lekarOcena = lekar.getProsecna_ocena();
+        int pars = Integer.parseInt(ocena);
+        lekarOcena = (lekarOcena+pars)/2;
+        lekar.setProsecna_ocena(lekarOcena);
+        lekarService.save(lekar);
+
+        return new ResponseEntity<>(lekarOcena, HttpStatus.OK);
     }
 
 

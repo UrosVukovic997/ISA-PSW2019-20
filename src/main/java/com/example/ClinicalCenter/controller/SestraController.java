@@ -121,13 +121,15 @@ public class SestraController {
         return new ResponseEntity<>(receptDTOS, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/overi/{id}")
-    public ResponseEntity<Void> overiRecept(@PathVariable Long id){
-        Recept recept = receptService.findById(id);
+    @PostMapping(path = "/overi", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> overiRecept(@RequestBody IdStringDTO idStringDTO){
+        Recept recept = receptService.findById(idStringDTO.getId());
         if(recept == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        System.out.println(idStringDTO.getString1());
         recept.setOveren(true);
+        recept.setOverila(idStringDTO.getString1());
         receptService.save(recept);
         return new ResponseEntity<>(HttpStatus.OK);
     }
