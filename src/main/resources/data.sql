@@ -93,7 +93,7 @@ VALUES ("pregled1",2);
 INSERT INTO sala (name, number)
 VALUES ('pregled2',3);
 
-
+/*
 INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
 VALUES ('2020-10-05','2020-10-06', 1,'2020-10-05',0,1);
 
@@ -111,8 +111,29 @@ VALUES ('2021-10-08','2021-10-09', 2 ,'2021-10-08',0 ,1);
 
 INSERT INTO termin (start_time, end_time, sala_id,datum,odsustvo,slobodan)
 VALUES ('2021-10-07','2021-10-08', 1 ,'2021-10-07',0,1);
+*/
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 16:00:00','2020-02-13 07:00:00',0,1,0,null);
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 13:00:00','2020-02-13 08:00:00',1,1,0,null);
 
 
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null);
+
+/*
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',0,1,0,null);
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo,sala_id)
+VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 08:00:00',0,1,0,null);
+
+
+INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo,sala_id)
+VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0,null);
+*/
 
 INSERT INTO klinika_lekari (klinika_id, lekari_id)
 VALUES (1,1);
@@ -149,7 +170,7 @@ VALUES (2,3);
 INSERT INTO tip_pregleda_lekari (tip_pregleda_id, lekari_id)
 VALUES (3,4);
 
-
+/*
 INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id, odsustvo)
 VALUES ('2020-02-13','2020-02-13 07:40:00','2020-02-13 07:00:00',0,1,0);
 
@@ -162,7 +183,7 @@ VALUES ('2020-02-13','2020-02-13 08:20:00','2020-02-13 09:00:00',0,1,0);
 
 INSERT INTO termin (datum, end_time, start_time, slobodan, pregled_id,odsustvo)
 VALUES ('2020-02-08','2020-02-08 19:00:00','2020-02-08 17:30:00',1,2,0);
-
+*/
 INSERT INTO lekar_termin (lekar_id, termin_id)
 VALUES (1,1);
 
