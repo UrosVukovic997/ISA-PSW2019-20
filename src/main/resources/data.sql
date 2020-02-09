@@ -34,11 +34,18 @@ VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad
 
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
 VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '$2a$10$e.g6dKlg/9jbUZFp4IcdnOAFJZbydpsge2ODaRY4b3uvDN9eNsjZK', 1, 'Zarkovic', 'Sipanza', 1, '1991-10-06');
-INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
-VALUES (2,1);
+
+/*INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
+VALUES (2,1);*/
 
 INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
-VALUES (1549,'AB+','+0.5',1);
+VALUES (1549,'AB+','-0.5',1);
+
+INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
+VALUES (1550,'A+','+2.5',2);
+
+INSERT INTO karton (broj,krvna_grupa,dioptrija, pacijent_id)
+VALUES (1551,'B+','+1.5',3);
 
 INSERT INTO dijagnoza (id, naziv_dijagnoze, opis_dijagnoze)
 VALUES (1, 'Tahikardija', 'Nepravilan rad srca');
@@ -170,10 +177,12 @@ INSERT INTO izvestaj (id, text, recept_id)
 VALUES (1,'',1);
 */
 INSERT INTO pregled (nationality, email,town,emergency, first_name,jbo,kraj,done,deleted,operation,pocetak,visit,last_name,lekar_id,pacijent_id,termin_id,tip_pregleda_id)
-VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-02-08 13:20:00',0,0,0,'2020-02-08 13:20:00',1,'intelidzeja',1,1,1,1);
+VALUES ('Srb','nekimail@gmail.com','Novi Sad','hitno','Marko',7766890,'2020-02-08 12:20:00',0,0,0,'2020-02-08 13:21:00',0,'Markovic',1,1,1,1);
 
 INSERT INTO pregled (nationality, email,town,emergency, first_name,jbo,kraj,done,deleted,operation,pocetak,visit,last_name,lekar_id,pacijent_id,termin_id,tip_pregleda_id)
-VALUES ('','intelidzeja','intelidzeja','intelidzeja','intelidzeja',123,'2020-03-08 16:20:00',0,0,1,'2020-03-08 16:00:00',0,'intelidzeja',1,1,1,1);
+VALUES ('Srb','nekimail@gmail.com','Novi Sad','hitno','Marko',7766890,'2020-03-08 17:55:00',0,0,0,'2020-03-08 18:55:00',0,'Markovic',1,1,1,1);
+
+
 
 /*
 INSERT INTO recept (ime_pacijenta, jbo_pacijenta, ime_lekara, klinika, overen)

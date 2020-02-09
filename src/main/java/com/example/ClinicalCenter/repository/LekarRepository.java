@@ -12,4 +12,6 @@ public interface LekarRepository extends JpaRepository<Lekar, Long> {
     Lekar findByEmail(String email);
 
     Lekar findByTermin(Termin t);
+
+    Lekar save(Lekar lekar);
 }

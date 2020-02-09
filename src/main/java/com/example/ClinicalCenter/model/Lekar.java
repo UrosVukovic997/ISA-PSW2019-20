@@ -44,9 +44,9 @@ public class Lekar {
     private Set<Termin> termin;
 
 
-    @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lekar", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Pacijent> pacijenti = new HashSet<Pacijent>();
+    private Set<Pacijent> pacijenti;
 
     @OneToMany(mappedBy = "lekar", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
