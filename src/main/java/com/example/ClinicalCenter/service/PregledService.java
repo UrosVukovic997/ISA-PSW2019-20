@@ -54,4 +54,6 @@ public class PregledService {
         return pregledRepository.save(pregled);
     }
 
+    public List<Pregled> findByJbo( int jbo ){return pregledRepository.findByJbo( jbo );}
+
 }
