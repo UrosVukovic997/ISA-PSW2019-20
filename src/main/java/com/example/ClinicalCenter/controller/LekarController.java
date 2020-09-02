@@ -45,7 +45,6 @@ public class LekarController {
 
         List<Lekar> lekari = lekarService.findAll();
 
-        // convert students to DTOs
         List<LekarDTO> lekariDTO = new ArrayList<>();
         for (Lekar l : lekari) {
             lekariDTO.add(new LekarDTO(l));
@@ -86,8 +85,8 @@ public class LekarController {
         System.out.println(noviLekar.getKorIme());
 
         Lekar lekar = lekarService.save(noviLekar);
-
-        return new ResponseEntity<>(new LekarDTO(lekar), HttpStatus.OK);
+        return new ResponseEntity<>(noviLekar, HttpStatus.OK);
+        //return new ResponseEntity<>(new LekarDTO(lekar), HttpStatus.OK);
     }
 
     @PostMapping(path = "/zakaziPregled/{id}")

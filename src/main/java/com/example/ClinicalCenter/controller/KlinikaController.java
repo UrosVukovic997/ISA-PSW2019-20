@@ -26,9 +26,9 @@ public class KlinikaController {
 
         Klinika klinika = new Klinika(klinikaDTO.getNazivKlinike(), klinikaDTO.getGrad());
         Klinika k=klinikaService.add(klinika);
-        if(k == null){
+        /*if(k == null){
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-        }
+        }*/
         return new ResponseEntity<>((HttpStatus.CREATED));
 
     }
@@ -47,6 +47,13 @@ public class KlinikaController {
     public ResponseEntity<List<String>> getAllNames(){
         List<String> klinike=klinikaService.findAllNames();
         return new ResponseEntity<>(klinike,HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/findByName/{naziv}")
+
+    public ResponseEntity<Klinika> getByName(@PathVariable String naziv){
+        Klinika klinika=klinikaService.findByNazivKlinike(naziv);
+        return new ResponseEntity<Klinika>(klinika, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/obrisi{id}")

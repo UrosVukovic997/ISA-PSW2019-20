@@ -1,49 +1,31 @@
-package com.example.ClinicalCenter.controller;
+package com.example.ClinicalCenter.controllerNikola;
 
 import com.example.ClinicalCenter.constants.KlinikaConstants;
 import com.example.ClinicalCenter.dto.KlinikaDTO;
-import com.example.ClinicalCenter.dto.LekarPacDTO;
 import com.example.ClinicalCenter.model.Klinika;
 import com.example.ClinicalCenter.service.KlinikaService;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
-
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.fail;
+import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.List;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -114,14 +96,22 @@ public class KlinikaControllerTest<ExaminationService, PatientService> {
 
         String json = new ObjectMapper().writeValueAsString(klinikaDTO);
 
-        MvcResult result = this.mockMvc.perform(post(KlinikaConstants.URL_PREFIX + KlinikaConstants.ADD_CLINIC_URL)
+        this.mockMvc.perform(post(KlinikaConstants.URL_PREFIX + KlinikaConstants.ADD_CLINIC_URL)
                 .contentType(contentTypePost)
                 .content(json))
-                .andDo(print()).andReturn();
-                //.andExpect(status().isCreated());
-        System.out.println(result.getResponse().getStatus());
-        assertEquals(1, 1);
+                .andDo(print())
+                .andExpect(status().isCreated());
 
     }
+
+    /*@Test
+    void getAlltest() {
+        ResponseEntity<List> responseEntity =
+                testRestTemplate.getForEntity("/api/klinika/getAll", List.class);
+
+        List<Klinika> tmp = responseEntity.getBody();
+        assertEquals(tmp.size(), 2);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }*/
 
 }
