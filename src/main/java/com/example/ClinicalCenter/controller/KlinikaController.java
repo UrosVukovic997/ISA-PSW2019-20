@@ -50,9 +50,10 @@ public class KlinikaController {
     }
 
     @GetMapping(path = "/findByName/{naziv}")
+
     public ResponseEntity<Klinika> getByName(@PathVariable String naziv){
         Klinika klinika=klinikaService.findByNazivKlinike(naziv);
-        return new ResponseEntity<>(klinika,HttpStatus.OK);
+        return new ResponseEntity<Klinika>(klinika, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/obrisi{id}")

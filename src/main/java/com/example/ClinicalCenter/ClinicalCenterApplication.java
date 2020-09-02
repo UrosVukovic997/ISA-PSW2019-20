@@ -3,6 +3,7 @@ package com.example.ClinicalCenter;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @SpringBootApplication
