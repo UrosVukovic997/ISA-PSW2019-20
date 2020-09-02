@@ -24,7 +24,8 @@ public class LekarDTO {
 
     public LekarDTO(Lekar lekar) {
         this(lekar.getId(),lekar.getIme(),lekar.getPrezime(),
-            lekar.getPacijenti(),lekar.getEmail(),lekar.getSpecijalnost(),lekar.getKorIme(),lekar.getLozinka(),lekar.getAdresa(),lekar.getOpis());
+            lekar.getPacijenti(),lekar.getEmail(),lekar.getSpecijalnost(),
+                lekar.getKorIme(),lekar.getLozinka(),lekar.getAdresa(),lekar.getOpis());
     }
 
     public LekarDTO(long id, String ime, String prezime, Set<Pacijent> pacijenti,  String email, String specijalnost, String korIme, String lozinka, String adresa, String opis) {

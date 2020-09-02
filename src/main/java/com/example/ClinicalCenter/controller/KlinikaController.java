@@ -26,9 +26,9 @@ public class KlinikaController {
 
         Klinika klinika = new Klinika(klinikaDTO.getNazivKlinike(), klinikaDTO.getGrad());
         Klinika k=klinikaService.add(klinika);
-        if(k == null){
+        /*if(k == null){
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-        }
+        }*/
         return new ResponseEntity<>((HttpStatus.CREATED));
 
     }

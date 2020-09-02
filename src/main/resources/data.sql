@@ -37,6 +37,9 @@ VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara.ne.vara@gmail.com', '
 INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
 VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Zarko', '226220',0,  1, '123456', 1, 'Zarkovic', 'Lepota', 1, '1991-10-06');
 
+INSERT INTO pacijent (adresa_prebivalista, broj_telefona, drzava, email, grad, ime, jbo,deleted, odobren, password, potvrdio, prezime, username, lekar_id, datum_rodj )
+VALUES ('Bulevar Evrope 21.', '066543189', 'Srbija', 'gara@gmail.com', 'Novi Sad', 'Darko', '226220',0,  1, '123456', 1, 'Darkovic', 'daky', 1, '1991-10-06');
+
 /*INSERT INTO klinika_pacijents (klinika_id, pacijents_id)
 VALUES (2,1);*/
 

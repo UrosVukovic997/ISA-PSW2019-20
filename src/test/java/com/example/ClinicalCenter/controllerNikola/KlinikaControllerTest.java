@@ -94,16 +94,13 @@ public class KlinikaControllerTest<ExaminationService, PatientService> {
         klinikaDTO.setGrad("Novi Sad");
         klinikaDTO.setOcena(6);
 
-
         String json = new ObjectMapper().writeValueAsString(klinikaDTO);
 
-        MvcResult result = this.mockMvc.perform(post(KlinikaConstants.URL_PREFIX + KlinikaConstants.ADD_CLINIC_URL)
+        this.mockMvc.perform(post(KlinikaConstants.URL_PREFIX + KlinikaConstants.ADD_CLINIC_URL)
                 .contentType(contentTypePost)
                 .content(json))
-                .andDo(print()).andReturn();
-                //.andExpect(status().isCreated());
-        System.out.println(result.getResponse().getStatus());
-        assertEquals(1, 1);
+                .andDo(print())
+                .andExpect(status().isCreated());
 
     }
 

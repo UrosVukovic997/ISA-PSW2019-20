@@ -5,6 +5,7 @@ import com.example.ClinicalCenter.dto.KlinikaDTO;
 import com.example.ClinicalCenter.dto.LekarPacDTO;
 import com.example.ClinicalCenter.model.Klinika;
 import com.example.ClinicalCenter.service.KlinikaService;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -40,6 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -110,7 +112,6 @@ public class KlinikaControllerTest<ExaminationService, PatientService> {
         klinikaDTO.setGrad("Novi Sad");
         klinikaDTO.setOcena(6);
 
-
         String json = new ObjectMapper().writeValueAsString(klinikaDTO);
 
         MvcResult result = this.mockMvc.perform(post(KlinikaConstants.URL_PREFIX + KlinikaConstants.ADD_CLINIC_URL)
@@ -122,15 +123,5 @@ public class KlinikaControllerTest<ExaminationService, PatientService> {
         assertEquals(1, 1);
 
     }
-
-    /*@Test
-    void getAlltest() {
-        ResponseEntity<List> responseEntity =
-                testRestTemplate.getForEntity("/api/klinika/getAll", List.class);
-
-        List<Klinika> tmp = responseEntity.getBody();
-        assertEquals(tmp.size(), 2);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    }*/
 
 }
