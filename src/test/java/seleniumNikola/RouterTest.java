@@ -32,7 +32,7 @@ public class RouterTest {
     }
 
     @Test
-    public void test2() {
+    public void testLogin() {
         setUp();
         WebElement element = this.browser.findElement(By.xpath("//*[@id=\"email\"]"));
         assertNotNull(element);
@@ -52,6 +52,41 @@ public class RouterTest {
         WebElement button3 = this.browser.findElement(By.id("button"));
         button3.click();
         */
+    }
+
+    @Test
+    public void testReg() {
+        setUp();
+        browser.navigate().to("http://localhost:4200/registracija");
+        WebElement element = this.browser.findElement(By.xpath("//*[@id=\"ime\"]"));
+        assertNotNull(element);
+        element.sendKeys("Nikola");
+        WebElement element2 = this.browser.findElement(By.xpath("//*[@id=\"prezime\"]"));
+        element2.sendKeys("Kekic");
+        WebElement element3 = this.browser.findElement(By.xpath("//*[@id=\"email\"]"));
+        element3.sendKeys("nikola.get@gmail.com");
+        WebElement element4 = this.browser.findElement(By.xpath("//*[@id=\"lozinka\"]"));
+        element4.sendKeys("123456");
+        WebElement element5 = this.browser.findElement(By.xpath("//*[@id=\"adresa\"]"));
+        element5.sendKeys("Bulevar Osl. 72.");
+        WebElement element6 = this.browser.findElement(By.xpath("//*[@id=\"grad\"]"));
+        element6.sendKeys("NS");
+        WebElement element7 = this.browser.findElement(By.xpath("//*[@id=\"drzava\"]"));
+        element7.sendKeys("Bulevar Osl. 72.");
+        WebElement element8 = this.browser.findElement(By.xpath("//*[@id=\"tel\"]"));
+        element8.sendKeys("NS");
+        WebElement element9 = this.browser.findElement(By.xpath("//*[@id=\"jbo\"]"));
+        element9.sendKeys("Bulevar Osl. 72.");
+        WebElement element10 = this.browser.findElement(By.xpath("//*[@id=\"korIme\"]"));
+        element10.sendKeys("NS");
+        WebElement element11 = this.browser.findElement(By.xpath("//*[@id=\"datum\"]"));
+        element11.sendKeys("Bulevar Osl. 72.");
+
+
+        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement button2 = this.browser.findElement(By.xpath("//*[@id=\"reg\"]"));
+        button2.click();
+
     }
     /*
     @AfterMethod
